@@ -1,0 +1,86 @@
+{
+  "executed_at": "2026-11-24T10:05:11.376857+00:00",
+  "kernel": "quantcore-py312",
+  "notebook": "notebooks/QuantCore_Backtest.ipynb",
+  "data_mode": "synthetic",
+  "scenarios": [
+    {
+      "scenario": "default",
+      "rows": 4680,
+      "assets": 6,
+      "strategy_comparisons": 18,
+      "config": {
+        "initial_cash": 100000.0,
+        "commission_bps": 1.0,
+        "slippage_bps": 2.0,
+        "spread_bps": 2.0,
+        "impact_bps": 5.0,
+        "max_participation": 0.01,
+        "max_weight": 1,
+        "evaluation_bars": 252
+      },
+      "symbol": "QALPHA",
+      "strategy": "momentum",
+      "reference_check": "matched 12 saved strategy results; max return difference=0.000e+00",
+      "input_origin": "local Parquet (read only)",
+      "input_sha256": "65982c3e823485f747d4e75fe403246392eb7f7c7d9f7f9cd8f7c489c0ef9ea2",
+      "selected_net_return": 0.07345436335596567,
+      "evaluation_rows": 252,
+      "code_cells": 9,
+      "png_outputs": 5,
+      "errors": 0
+    },
+    {
+      "scenario": "fallback",
+      "rows": 4680,
+      "assets": 6,
+      "strategy_comparisons": 18,
+      "config": {
+        "initial_cash": 100000.0,
+        "commission_bps": 1.0,
+        "slippage_bps": 2.0,
+        "spread_bps": 2.0,
+        "impact_bps": 5.0,
+        "max_participation": 0.01,
+        "max_weight": 1,
+        "evaluation_bars": 252
+      },
+      "symbol": "QALPHA",
+      "strategy": "momentum",
+      "reference_check": "not compared: input/config differs or saved report absent",
+      "input_origin": "in-memory seeded DemoProvider",
+      "input_sha256": "16bb8ceb5ce23b182dcd070ac8f4bf1100db25145462cba9a80ff7f60f540b49",
+      "selected_net_return": 0.07345436335596567,
+      "evaluation_rows": 252,
+      "code_cells": 9,
+      "png_outputs": 5,
+      "errors": 0
+    },
+    {
+      "scenario": "custom",
+      "rows": 4680,
+      "assets": 6,
+      "strategy_comparisons": 18,
+      "config": {
+        "initial_cash": 100000.0,
+        "commission_bps": 2.0,
+        "slippage_bps": 2.0,
+        "spread_bps": 2.0,
+        "impact_bps": 5.0,
+        "max_participation": 0.01,
+        "max_weight": 1,
+        "evaluation_bars": 126
+      },
+      "symbol": "QBETA",
+      "strategy": "mean_reversion",
+      "reference_check": "not compared: input/config differs or saved report absent",
+      "input_origin": "local Parquet (read only)",
+      "input_sha256": "65982c3e823485f747d4e75fe403246392eb7f7c7d9f7f9cd8f7c489c0ef9ea2",
+      "selected_net_return": -0.09768125444781772,
+      "evaluation_rows": 126,
+      "code_cells": 9,
+      "png_outputs": 5,
+      "errors": 0
+    }
+  ]
+}

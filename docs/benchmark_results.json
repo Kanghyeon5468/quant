@@ -1,0 +1,75 @@
+{
+  "environment": {
+    "os": "macOS-15.6.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "logical_cpus": 12,
+    "python": "3.12.12",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.3.3",
+      "scipy": "1.18.1",
+      "fastapi": "0.165.0",
+      "sqlalchemy": "2.1.9",
+      "duckdb": "1.5.6"
+    },
+    "hardware_model": "Apple M3 Pro",
+    "hardware_source": "sysctl -n machdep.cpu.brand_string; read on development host"
+  },
+  "dag": {
+    "assets": 100,
+    "history_per_asset": 2000,
+    "nodes": 301,
+    "changed_inputs_per_batch": 1,
+    "full": {
+      "n": 150,
+      "p50_ms": 1.903542026411742,
+      "p95_ms": 1.9966062740422785,
+      "p99_ms": 2.0585217571351677,
+      "p99_9_ms": 2.074220199137926
+    },
+    "incremental": {
+      "n": 150,
+      "p50_ms": 0.2637914731167257,
+      "p95_ms": 0.2972646441776303,
+      "p99_ms": 0.5184202978853127,
+      "p99_9_ms": 1.0085501634748648
+    },
+    "median_speedup": 7.216086266630155,
+    "max_absolute_output_error": 0.0,
+    "derived_computations_per_update": {
+      "full": 201,
+      "incremental": 3
+    }
+  },
+  "api_testclient": {
+    "n": 100,
+    "p50_ms": 19.68374999705702,
+    "p95_ms": 20.650027034571394,
+    "p99_ms": 26.431630916195015,
+    "p99_9_ms": 30.47142590780275
+  },
+  "database_query_780_rows": {
+    "n": 100,
+    "p50_ms": 6.507645943202078,
+    "p95_ms": 7.706910086562856,
+    "p99_ms": 8.410193342715518,
+    "p99_9_ms": 11.10041894391178
+  },
+  "ingestion": {
+    "rows": 4680,
+    "seconds_including_export_and_initialization": 0.6502834160346538,
+    "rows_per_second": 7196.861990634868
+  },
+  "process": {
+    "cpu_seconds": 4.264172,
+    "wall_seconds": 4.343991250032559,
+    "peak_rss_mb": 247.25
+  },
+  "limitations": [
+    "local single-process microbenchmark; not production load or network SLO",
+    "p99.9 interpolated from 100/150 samples; insufficient for tail guarantees",
+    "DAG workload recomputes NumPy volatility; performance depends on graph and workload",
+    "CPU seconds and peak RSS cover entire benchmark process; no hardware optimization claim"
+  ]
+}

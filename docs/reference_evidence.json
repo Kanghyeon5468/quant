@@ -1,0 +1,1127 @@
+[
+  {
+    "repository": "base",
+    "url": "https://github.com/janestreet/base",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.097975+00:00",
+    "archive_sha256": "af54b24e30b3d8eab318b2b43756f09684557aff02b9c632197673ef782d6b05",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "2f687783284971e4c1b59bb2dc5ba13903dc23cd6ecba586ace8058fd7fe10ef",
+        "bytes": 1126
+      },
+      {
+        "path": "README.org",
+        "sha256": "35820cdadea9ea1c342cae7c36b363ff1c2772af8daa9ee11851d28e317055dd",
+        "bytes": 7144
+      },
+      {
+        "path": "ppx/README.md",
+        "sha256": "618722070438971c5357aa983165a9c361398475e1f1738e0294da980be08549",
+        "bytes": 305
+      },
+      {
+        "path": "composition_infix/README.md",
+        "sha256": "5705c5018b6b380a7b50a4bf089c4974f99fa0ff2e9540b2492a9bfee940683a",
+        "bytes": 80
+      },
+      {
+        "path": "base.opam",
+        "sha256": "e40415259cbce45d4206983882fd94dce8a5cc68f731d55eac886c4703ba3879",
+        "bytes": 1287
+      },
+      {
+        "path": "src/t.ml",
+        "sha256": "48a7b4e0ad64e568f3ea3ace906142e1b5c99915f3a91eeae5cb60cf0f57e4cb",
+        "bytes": 433
+      },
+      {
+        "path": "src/fn.ml",
+        "sha256": "0a487e3172d0bfc3271921f177cca3f086a09435d9cfbbdc90afe21d318c4682",
+        "bytes": 726
+      },
+      {
+        "path": "src/exn.ml",
+        "sha256": "f5bd01db97b030038b022aa05cd164da4220c340dae30a5ce989f134be260151",
+        "bytes": 5212
+      }
+    ],
+    "source_files": 294
+  },
+  {
+    "repository": "core",
+    "url": "https://github.com/janestreet/core",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.121419+00:00",
+    "archive_sha256": "dd624639c496ab9d5c4a87e9bdf1a83f1a7f82008a99ab74b21c8b7916bf2a17",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "efa5671286fb24d8fb2dc2e46bb987600b9b433148b8a3eadfafc7601476c787",
+        "bytes": 1126
+      },
+      {
+        "path": "core/README.md",
+        "sha256": "7e2a8315693372a087179ab7c1f57127cdf478b3b6786d6772a5e8a9cb671c42",
+        "bytes": 1326
+      },
+      {
+        "path": "base_for_tests/README.org",
+        "sha256": "748f0124531a8745fd3a350fa95e4fb250baf3e2bd01cb4a9418e47afccbfa9b",
+        "bytes": 191
+      },
+      {
+        "path": "core.opam",
+        "sha256": "17eb2e7bf841165f48f44c6208679a21ffd33c30a40c85c747a99840e132e651",
+        "bytes": 1378
+      },
+      {
+        "path": "core/src/t.ml",
+        "sha256": "19f163eaa8af46abb9fe02503e70d76ebe20e2076f9162c64504f79883def577",
+        "bytes": 169
+      },
+      {
+        "path": "core/src/fn.ml",
+        "sha256": "ec6d141e83504b4a8a4353cdd08f724c59739067fe0412b1082ad3cd10b46439",
+        "bytes": 98
+      },
+      {
+        "path": "core/src/gc.ml",
+        "sha256": "74a78a37d7dbe3462e11c2e84b58358c4bd971e8d5531bb361f9c78195eaec23",
+        "bytes": 19419
+      },
+      {
+        "path": "validate/test/test_validate.ml",
+        "sha256": "253e1f3dea4e2168fc725a90be2cf9892b718791b4d2120d5cb147abb6be27ce",
+        "bytes": 6642
+      },
+      {
+        "path": "validate/test/validate_test.ml",
+        "sha256": "4a4fb88b2d86c7603367cd9fef3c306c8a353ef4ab63571cf1dcd0a4a165af2c",
+        "bytes": 37
+      }
+    ],
+    "source_files": 361
+  },
+  {
+    "repository": "async",
+    "url": "https://github.com/janestreet/async",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.095450+00:00",
+    "archive_sha256": "945bfb64f336066e200794c04741a81899b69c9bb132cd434a7e352709c121c3",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "cb748e11688bbf77e71fb29fb76c370ff68bd9a1ca5e10d7618bb076c3a5cc00",
+        "bytes": 603
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "efa5671286fb24d8fb2dc2e46bb987600b9b433148b8a3eadfafc7601476c787",
+        "bytes": 1126
+      },
+      {
+        "path": "src/README.txt",
+        "sha256": "2259c9e708546f3de7405ae09e8ecb366b6b8fdf50c0bf42e8d4c261132a2392",
+        "bytes": 79
+      },
+      {
+        "path": "async_rpc/README.md",
+        "sha256": "c4bbb124a1ce2c67bca3412cd9c8126175aeb9e24aa48e11018abbb9f5236a61",
+        "bytes": 220
+      },
+      {
+        "path": "async.opam",
+        "sha256": "b5e5a52a86622af76b3d35507b2e281066594093fa8130a3604852a0e3787877",
+        "bytes": 936
+      },
+      {
+        "path": "src/async.ml",
+        "sha256": "4336b9e7797837abf3181ec7a6b411d59810c8ff34b0c37712ddab73fa6acdbd",
+        "bytes": 1359
+      },
+      {
+        "path": "src/expect_test_config.ml",
+        "sha256": "e24503c85ea1c43a1b11b5ad7323ae8654d196aad89f5e13d0e68c67879917af",
+        "bytes": 287
+      },
+      {
+        "path": "src/expect_test_config.mli",
+        "sha256": "e643f0289ffc0f325ac334180b0e9041434dd03e50f812d4e7d5beea7c2fc2bd",
+        "bytes": 470
+      },
+      {
+        "path": "bench/tco.ml",
+        "sha256": "9d59b9814cbbe968ea74d8ca77e0c057c168b36ab420536c94029dd947be242a",
+        "bytes": 1626
+      },
+      {
+        "path": "bench/loop.ml",
+        "sha256": "28eca3916daedeb1c341100cbb93d2749193a9152d2bd0916786a8d5bd3199ff",
+        "bytes": 365
+      }
+    ],
+    "source_files": 148
+  },
+  {
+    "repository": "incremental",
+    "url": "https://github.com/janestreet/incremental",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.108073+00:00",
+    "archive_sha256": "92da032c1aee4d1fd93afeb1f8cc656ca9a11b8ae085e9f5ae879bcae13ac7e1",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "efa5671286fb24d8fb2dc2e46bb987600b9b433148b8a3eadfafc7601476c787",
+        "bytes": 1126
+      },
+      {
+        "path": "README.org",
+        "sha256": "5d7b237aa5eb7728cd468aac100c36932f4a5589d897c8e45e7152d7bf4de787",
+        "bytes": 1100
+      },
+      {
+        "path": "memoize/README.md",
+        "sha256": "feca6a5e353406aef4cda36cb25ad299b1231a60d2f6e78352344b07c82aa7a3",
+        "bytes": 1433
+      },
+      {
+        "path": "incremental.opam",
+        "sha256": "a2fadaedd9d77b98bec67bf3904c8f0a939280c3a9fe78e72ef931360b83bbdc",
+        "bytes": 925
+      },
+      {
+        "path": "src/at.ml",
+        "sha256": "f3b3f26308be1f3c39981c46ece48a643f8862148f437b15c13fe07faa10aeee",
+        "bytes": 761
+      },
+      {
+        "path": "src/at.mli",
+        "sha256": "7096abbd73ecf768415fdcaeaad753c104715b993844929235fc1db842090591",
+        "bytes": 376
+      },
+      {
+        "path": "src/var.ml",
+        "sha256": "f9069704584065e6f72872e656774effbfa87bb04937b3452beb9f36a951df87",
+        "bytes": 1785
+      },
+      {
+        "path": "test/import.ml",
+        "sha256": "b7bd79afa1378e5f570f892edb6897d2a3d5b55b96ca4e99c3e8c2219b6367ba",
+        "bytes": 74
+      },
+      {
+        "path": "test/test_config.ml",
+        "sha256": "8cf3aeaf079ab2640f23795ea1be80ba080483a6cbf533e7fa98f17041b9cefb",
+        "bytes": 1474
+      }
+    ],
+    "source_files": 112
+  },
+  {
+    "repository": "bin_prot",
+    "url": "https://github.com/janestreet/bin_prot",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.158425+00:00",
+    "archive_sha256": "a9b00f92b741fa59a5558de159abab97e98c95916bb1c0f67b268fd9cdaf96e1",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "833070eb2ab461182a92d00cff9ae082becc4dc7d05c3301747c87c9af35bdbf",
+        "bytes": 15203
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "efa5671286fb24d8fb2dc2e46bb987600b9b433148b8a3eadfafc7601476c787",
+        "bytes": 1126
+      },
+      {
+        "path": "LICENSE-Tywith.txt",
+        "sha256": "9dbfe0446ea6a55bfc806a80978e50feabc36de479e7604570e40aab82f6b6e8",
+        "bytes": 1544
+      },
+      {
+        "path": "shape/README.md",
+        "sha256": "759f6acc602040f26319136cf0f163f539fa0ef7fa58ccc0fe3c0455c6b4dedf",
+        "bytes": 14761
+      },
+      {
+        "path": "bin_prot.opam",
+        "sha256": "0da394b632300f6a5330b25a53d03fd4f186c5e4bdc0267f2cd88110ceef6531",
+        "bytes": 996
+      },
+      {
+        "path": "src/md5.ml",
+        "sha256": "1548f6d42186825a49275f2bfe38167d26ccb3dec48821dee886361482b9d601",
+        "bytes": 592
+      },
+      {
+        "path": "src/std.ml",
+        "sha256": "5bcfa93ed012c8023b6b9dd5cb5f9fe9ed641ddf437add7996709d367bb3a032",
+        "bytes": 10250
+      },
+      {
+        "path": "src/blob.ml",
+        "sha256": "1a3b45e927c44f50507921b3272cf7b080f1f0a98c54a29ef253fb8495f83b3a",
+        "bytes": 5533
+      },
+      {
+        "path": "test/import.ml",
+        "sha256": "a5dc743e8bdaaa1857535d898cb772f6f724a30f560f92a8dc2f449c70cfdba7",
+        "bytes": 745
+      },
+      {
+        "path": "test/test_std.ml",
+        "sha256": "b8f468dc6256c171707a180940979905d19fc355992d0cf2e218d7234be305ea",
+        "bytes": 21669
+      }
+    ],
+    "source_files": 64
+  },
+  {
+    "repository": "torch",
+    "url": "https://github.com/janestreet/torch",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.915556+00:00",
+    "archive_sha256": "5f5dbf5589d4334488209027070c9b4f3e069f836da227ff50fc48777549b3df",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "cf67261f9c97f965e8ae3becbbea67291bde9f08ce694cca95117f6b1b72abff",
+        "bytes": 6524
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "e4747060e1e647ca26f724a5c9fea2eb9a96887441970d6031a30698210bf9fa",
+        "bytes": 1126
+      },
+      {
+        "path": "LICENSE_NOTES",
+        "sha256": "e11cced3b875d7dd1c949c988b52f09955d6c1c8917aa527ff295bf182382a7a",
+        "bytes": 230
+      },
+      {
+        "path": "examples/gan/README.md",
+        "sha256": "48c2cc0fbc2a45462ce088d2e0f57c8621c4291d54d5c4a4e415150874bb5323",
+        "bytes": 8809
+      },
+      {
+        "path": "torch.opam",
+        "sha256": "a693ddf78e87026a7276b2cae7d94b6dc986e336b9b63f7768d6e17f5d615716",
+        "bytes": 1110
+      },
+      {
+        "path": "src/torch/cuda.ml",
+        "sha256": "71c36cdf6e1092083742df5f7032d4fc326e517c63741666b1598c31a7c43024",
+        "bytes": 32
+      },
+      {
+        "path": "src/vision/vgg.ml",
+        "sha256": "1ae1c130d5a78ac9a28379519162434d0ff5f5eda26a6a14f3e73de345290305",
+        "bytes": 3729
+      },
+      {
+        "path": "src/torch/cuda.mli",
+        "sha256": "ea41d0801b106657f159fb6b8e68f2f9bc9ed67e45573772913359c57dfd9e62",
+        "bytes": 140
+      },
+      {
+        "path": "src/tests/jit_tests.ml",
+        "sha256": "82e0e6e1986f5870e88ed5f591700f24b64b2db64fcbc4aef6219cd9c52c436b",
+        "bytes": 3752
+      },
+      {
+        "path": "src/tests/rnn_tests.ml",
+        "sha256": "8610fd2c31a4897326f497cbec31e1b43c2d7fe92209852849e0fedd33ebc167",
+        "bytes": 1365
+      }
+    ],
+    "source_files": 208
+  },
+  {
+    "repository": "hardcaml",
+    "url": "https://github.com/janestreet/hardcaml",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:23.741205+00:00",
+    "archive_sha256": "42856e60cdab6949afcdd0ae6cedeaa4e97c9cd79cd01bd207fe584628ae70f2",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "71add19db5d3c2b3cb1903ed43f07d6176befa4bf66a08748d8d2ee6f45a0490",
+        "bytes": 7391
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "9d905f2b38126b1758f3fbe85f384fcc1f78e3e4232c1f5230e8288da96f0ec9",
+        "bytes": 1126
+      },
+      {
+        "path": "test/rtl/README",
+        "sha256": "98d59fee3b5e137ec3796a1aacf32892080e375f8159ce07416f2256c6cee26c",
+        "bytes": 360
+      },
+      {
+        "path": "test/rtl_gen/README.md",
+        "sha256": "7f050fe9ed6e8d456d42f7cd3a408d96ae26b4a85574b821a1002ca43dda1d45",
+        "bytes": 827
+      },
+      {
+        "path": "hardcaml.opam",
+        "sha256": "32c4782f161ba09750f8f1e36be9d8ac7c292fdbc16dea827499a30243c03680",
+        "bytes": 1118
+      },
+      {
+        "path": "src/ram.ml",
+        "sha256": "c801a046c277e9ad46d3aae374ded9dd82d8d2791e90674f02e4d8f2777b0228",
+        "bytes": 3814
+      },
+      {
+        "path": "src/rtl.ml",
+        "sha256": "0c6d256548c4ed1f98b505b07f2270908e927026f54589c24871cc5f353476f8",
+        "bytes": 6484
+      },
+      {
+        "path": "src/vcd.ml",
+        "sha256": "019f800d5551c5fb694a4c965fb347e279b37175b45b3ab5680ee38ee2bc1ee4",
+        "bytes": 33156
+      },
+      {
+        "path": "test/lib/import.ml",
+        "sha256": "35f59bad82eb5f4b2d39726fafb3f6c8db49c4affb6deda6522e8eb693e9c45d",
+        "bytes": 722
+      },
+      {
+        "path": "test/bench/import.ml",
+        "sha256": "f21def9041bdb29b3947285cbec63b19d7788c336b08a97fa07e960dcab22f82",
+        "bytes": 30
+      }
+    ],
+    "source_files": 555
+  },
+  {
+    "repository": "magic-trace",
+    "url": "https://github.com/janestreet/magic-trace",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.056107+00:00",
+    "archive_sha256": "1948dc869ebc7b0cdf0622da9868e11269672e44b9c60ed591d0c8f97c9ba73c",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "cefd1d7f9e35c248ef57c3fbfce42ad44199c63349d479228ad1037b266203e5",
+        "bytes": 10581
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "60e234848f051eea8252a0831531577a5f3ecce6c0882a285ed9f607cf213a1a",
+        "bytes": 1111
+      },
+      {
+        "path": "demo/README.md",
+        "sha256": "2da97c051c97fa243c2149b0358f1ffcc54e4abd09d5d94cf07e2a99605a70a8",
+        "bytes": 206
+      },
+      {
+        "path": "direct_backend/README.md",
+        "sha256": "6a4ac18a870b36edae72533808c5b84fa855ff44a61d8cdfc64f660f28a6f20c",
+        "bytes": 4706
+      },
+      {
+        "path": "magic-trace.opam",
+        "sha256": "6c803c9b3b63f1926b053445be570ca75cc6306587a55601faff44139f4c763e",
+        "bytes": 863
+      },
+      {
+        "path": "vendor/fzf/fzf.opam",
+        "sha256": "0aa13e713c70e40edd44e8b285ec90a9fc89059039f351f98f742ef6cbc2e3d7",
+        "bytes": 626
+      },
+      {
+        "path": "src/elf.ml",
+        "sha256": "a330ac732a25c2b4c7a9a12d4f7d433568493274b2c9ec7bc7f1ffa5fd9ac2f2",
+        "bytes": 14013
+      },
+      {
+        "path": "src/elf.mli",
+        "sha256": "c003ad4489eaec8acd423de38e2f6e4c2069618db671499ecc0624c1c5a6c4b9",
+        "bytes": 1527
+      },
+      {
+        "path": "src/util.ml",
+        "sha256": "9decf174592a9eec142fbddd9fc6845ec77e21b28b5e13337b6f6f2b938ed665",
+        "bytes": 1961
+      },
+      {
+        "path": "test/test.ml",
+        "sha256": "6168bf7cdcb516ad7d63480c2f761d6914780aa79fd1adfab966adfd0b539fa2",
+        "bytes": 30976
+      },
+      {
+        "path": "test/test.mli",
+        "sha256": "33e32ddcdf55af8db7a74de56ffd261ad6985d87bcc693c2a6a5677161ecd953",
+        "bytes": 45
+      }
+    ],
+    "source_files": 165
+  },
+  {
+    "repository": "core_bench",
+    "url": "https://github.com/janestreet/core_bench",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.123436+00:00",
+    "archive_sha256": "295f585bed988487585cfa9940abffc7df32f878e42940ed89dbec3e8c3dd42a",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "2740e12a4031ee40196e448b9145a1e9550a856801d01a8c7ac88f9d46628f78",
+        "bytes": 564
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "ac4adadc475998c77d89cf0f0342abc4ec16f92d60ebad49d3203916c23470ce",
+        "bytes": 1126
+      },
+      {
+        "path": "js/README.md",
+        "sha256": "d2db60f04aa3a4a74142b19310de7a4de7dd9ae05d46b6f3bd457870d3cf5b7f",
+        "bytes": 72
+      },
+      {
+        "path": "core_bench.opam",
+        "sha256": "1509c8a817b9e1e99931c0393cc9ba381aed780bafc978219d8208fcdb2b045f",
+        "bytes": 904
+      },
+      {
+        "path": "src/bench.ml",
+        "sha256": "35ad5205d1fe7c2700a698397212ac90d831ce0caea107067f88001878675679",
+        "bytes": 1187
+      },
+      {
+        "path": "src/hooks.ml",
+        "sha256": "321d717f823226dbef71744705b62d07638824bfa321b174242a8c6e912f69eb",
+        "bytes": 40
+      },
+      {
+        "path": "src/bench.mli",
+        "sha256": "658ca2653b96efd27fe6f02d4d2236de745881f342a1ef3159573e8f7e2ab2e1",
+        "bytes": 12986
+      },
+      {
+        "path": "test/tsc.ml",
+        "sha256": "af79aa96b0df07a03e719083c9e4ff7f8891d8b540badd7685e72c2e7e069c07",
+        "bytes": 1189
+      }
+    ],
+    "source_files": 104
+  },
+  {
+    "repository": "memtrace",
+    "url": "https://github.com/janestreet/memtrace",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.383181+00:00",
+    "archive_sha256": "1ba0046107b0b8112b2ab044998b2543b0eea8bbaa954a273bbc115fe0ee2a8b",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "aef9c65de68eaa98f13f5d24c40c03f3f73d1a0ca68b0dd9bc17e837be3eb17a",
+        "bytes": 2234
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "f87eab8349ab27ecdac04dd6aff45d7f40884699ad8087e8e3ee36d28d2941a9",
+        "bytes": 1126
+      },
+      {
+        "path": "trace_ocamlopt/README.md",
+        "sha256": "26ca3744d867d0e0abaac1daacdb1d29ba946b10c9582303dd0fe3fbfe18ced7",
+        "bytes": 285
+      },
+      {
+        "path": "memtrace.opam",
+        "sha256": "d95eb6d9426217c19ab6de97a9ccd715e05ac99279f95324e9e6e8debe418253",
+        "bytes": 665
+      },
+      {
+        "path": "src/buf.ml",
+        "sha256": "0846a0f7e26e7b423f13d616463a56d7e6c47c915529b3246fe0e1eb0fd2d071",
+        "bytes": 8750
+      },
+      {
+        "path": "src/buf.mli",
+        "sha256": "4491dc99f77bd6edfec967c60ea1ad885b05b32986a683c862d1f501ea69599f",
+        "bytes": 4109
+      },
+      {
+        "path": "src/lock.ml",
+        "sha256": "0f544d658a94ff729c6c38a53b7920cb46f201fe3e8e6546f46b532b463c56b0",
+        "bytes": 3667
+      },
+      {
+        "path": "test/copy.ml",
+        "sha256": "d232a98cd896ffb4e23e4bcfabf322f4fd67967a4e44d9cbc5996275341d1f4b",
+        "bytes": 726
+      },
+      {
+        "path": "test/fork.ml",
+        "sha256": "076d5a7bf674ab6316fa4b59fc2804880f2df48629ee943c4720182142b3d436",
+        "bytes": 1483
+      }
+    ],
+    "source_files": 31
+  },
+  {
+    "repository": "bonsai",
+    "url": "https://github.com/janestreet/bonsai",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.507871+00:00",
+    "archive_sha256": "a36402ed55b91cc7b6b949d1b554fa70c80512c8e049919b909213ef46b57463",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "8f5bcef763f52c950d9ee56f3193c3f728bfc8c6a5444f523aafea8d56cc10ab",
+        "bytes": 8362
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "3820c1f3e1feb08bd98c8049c92e294cfc87e5562bbd3ba941f2e00e76db2b6f",
+        "bytes": 1126
+      },
+      {
+        "path": "ppx_bonsai/readme.md",
+        "sha256": "f636a21e5fc3c2705470e5ec3a2ab3af8c4fd364dd2c08c21e290941d096f17c",
+        "bytes": 6933
+      },
+      {
+        "path": "trampoline/README.md",
+        "sha256": "bf4a9c688e1e6e6fba226cd1880cfdc67f8c6b0064fe6499450ad84a036b78da",
+        "bytes": 653
+      },
+      {
+        "path": "bonsai.opam",
+        "sha256": "23aa115f6e2cc561d849126ebc4404f7009900707fc7a1d6842da2e1095917f5",
+        "bytes": 1055
+      },
+      {
+        "path": "src/var.ml",
+        "sha256": "95adf9c9d27e5e185330e65ec9bc515bee912caa824a2c58308a77c96345b179",
+        "bytes": 596
+      },
+      {
+        "path": "src/cont.ml",
+        "sha256": "942a1a9524634bda26256e0881e6c82a85239d516f7041565cc8af13a74eb9d6",
+        "bytes": 46410
+      },
+      {
+        "path": "src/proc.ml",
+        "sha256": "a570e0ff9e4528d2ce77a95d69efcffcd8e0667a0535e72f8eb8b04a3f1fbcdd",
+        "bytes": 52781
+      },
+      {
+        "path": "bench_scenario/bonsai_bench_scenario.ml",
+        "sha256": "c17f423f069501f1fa5cd395c64dc9d9a4692e7b604ecf616b0260c8ff1c913f",
+        "bytes": 3102
+      },
+      {
+        "path": "bench_scenario/bonsai_bench_scenario.mli",
+        "sha256": "b2e7b1157d2dcfe2cb62d6b6b4fd5f38e46740c4ae8f516a12300bb00a28b94b",
+        "bytes": 3700
+      }
+    ],
+    "source_files": 221
+  },
+  {
+    "repository": "rpc_parallel",
+    "url": "https://github.com/janestreet/rpc_parallel",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.536802+00:00",
+    "archive_sha256": "6691d765ba77b42bffad5e57d44137107728db4912b6c358e52a4d85ddafaea3",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "3a939a93e07593d2ab691cd502acd9a2fdd1cb45813dea18fc45863f4fc66e61",
+        "bytes": 1126
+      },
+      {
+        "path": "rpc_parallel.opam",
+        "sha256": "e9e80e1d2b43bb41d53aca4498af8dcbb1fcb1f128493594587a08d9c86ff9a7",
+        "bytes": 861
+      },
+      {
+        "path": "src/utils.ml",
+        "sha256": "50c58d9b89e2e8385f3524753ed1698078d40c90935a6d63ba1a72eecc3fb113",
+        "bytes": 2593
+      },
+      {
+        "path": "src/utils.mli",
+        "sha256": "999042dae5d75558568470c9acef46ed5c50b89303b039295621bb5f46e351ac",
+        "bytes": 2248
+      },
+      {
+        "path": "src/managed.ml",
+        "sha256": "36b65ecd41a312611e11b9addc86f528e65dd6711593536eacc1de524a0b9e8e",
+        "bytes": 5250
+      },
+      {
+        "path": "test/fd.ml",
+        "sha256": "de5392ba5a43cd195e58670a9e0d0d8316f2cb5b6d93cc922a7d5e94af9e92b7",
+        "bytes": 6262
+      },
+      {
+        "path": "test/fd.mli",
+        "sha256": "33e32ddcdf55af8db7a74de56ffd261ad6985d87bcc693c2a6a5677161ecd953",
+        "bytes": 45
+      }
+    ],
+    "source_files": 115
+  },
+  {
+    "repository": "parallel",
+    "url": "https://github.com/janestreet/parallel",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.707337+00:00",
+    "archive_sha256": "e78862f3a36bdeca10597bc3ee42b5654f23f2c7372d8119f989ea7b63d893c9",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "1a561cb94de8eca88915a1b5094c4a1004732d121384195b3469677e62d0e723",
+        "bytes": 30
+      }
+    ],
+    "source_files": 0
+  },
+  {
+    "repository": "bignum",
+    "url": "https://github.com/janestreet/bignum",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.319175+00:00",
+    "archive_sha256": "6953a9207069ac428eb5499687f4a9f8765dd08cbd7598c8b4327fb295ee729e",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "16d046cb2c000f970deff722f8dc69199312ee773176b58ba50f246b10a8068e",
+        "bytes": 1126
+      },
+      {
+        "path": "bignum.opam",
+        "sha256": "0b206e79a48cb24677df2c840f991a52eff656033cc995523ee701451e795f0e",
+        "bytes": 765
+      },
+      {
+        "path": "src/bignum.ml",
+        "sha256": "a188058d55e6943ecdf72be37081262eee3b3353784ddf6cde410b6ed4588469",
+        "bytes": 46771
+      },
+      {
+        "path": "src/zarith.ml",
+        "sha256": "1578065ff3ea25995841ddc730207d9a2aa35ed8c865ad199da1bdfb2631d896",
+        "bytes": 117
+      },
+      {
+        "path": "src/bignum.mli",
+        "sha256": "32e2bda57bd20f38243248b26c5bebe923e49f2a17c3ef65dbfac16fabb408d6",
+        "bytes": 13614
+      },
+      {
+        "path": "bench/bignum_bench.ml",
+        "sha256": "b7fda4cfe8c98de627dd4cd36611ba26f21453fedaa357db52c2392fdd63329b",
+        "bytes": 14675
+      },
+      {
+        "path": "bench/bignum_bench.mli",
+        "sha256": "2f44d4db90129107dca6d9d70b2a85da0c9bab48b32b6d82a0c081d47e11106c",
+        "bytes": 27
+      }
+    ],
+    "source_files": 20
+  },
+  {
+    "repository": "bigdecimal",
+    "url": "https://github.com/janestreet/bigdecimal",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:24.843964+00:00",
+    "archive_sha256": "27d6f65e9246eaf4de9561a3802df5a86a49564b0dca65d92846a257718260bc",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "f87eab8349ab27ecdac04dd6aff45d7f40884699ad8087e8e3ee36d28d2941a9",
+        "bytes": 1126
+      },
+      {
+        "path": "bigdecimal.opam",
+        "sha256": "b59e32c97d814076112815427f1e4a09064c6ee53cdb85ebb3888444a6d48a49",
+        "bytes": 871
+      },
+      {
+        "path": "src/zarith.ml",
+        "sha256": "1578065ff3ea25995841ddc730207d9a2aa35ed8c865ad199da1bdfb2631d896",
+        "bytes": 117
+      },
+      {
+        "path": "src/bigdecimal.ml",
+        "sha256": "b2950060958220e641a480c70c3f0a52c864d28ebcf6daca24ebaa77983a6bfb",
+        "bytes": 20062
+      },
+      {
+        "path": "src/bigdecimal.mli",
+        "sha256": "fba4a93acb1a87f9af9527530f010033f0bd764fcf17d66c01138c81e6dbc420",
+        "bytes": 4945
+      }
+    ],
+    "source_files": 3
+  },
+  {
+    "repository": "base_quickcheck",
+    "url": "https://github.com/janestreet/base_quickcheck",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.069959+00:00",
+    "archive_sha256": "f3091f9f981115589f64c974a930ac4e6dd954a350c5f84d253df456d4473bb2",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "9d905f2b38126b1758f3fbe85f384fcc1f78e3e4232c1f5230e8288da96f0ec9",
+        "bytes": 1126
+      },
+      {
+        "path": "ppx_quickcheck/README.md",
+        "sha256": "642004f61c012d1ba8455ad9302d0d368534154d6d805c28db9525cf593edef6",
+        "bytes": 4749
+      },
+      {
+        "path": "base_quickcheck.opam",
+        "sha256": "e2724e35624f020a58f4b7a8b96544319e1457748805f10333112791c7d9e08c",
+        "bytes": 1072
+      },
+      {
+        "path": "src/test.ml",
+        "sha256": "13763500e64d6ecc03185d3dd62edc80d473d7728e7204cfd8b91835cbfd6b9e",
+        "bytes": 4797
+      },
+      {
+        "path": "src/test.mli",
+        "sha256": "ddbae45b0b7bd7f59d0f0ed376ea5ff1f14816c223082440e60dafff8ec83f9d",
+        "bytes": 171
+      },
+      {
+        "path": "src/export.ml",
+        "sha256": "8ef885c170645da4e55a9603f4751b8aa151e245efdc5c6f40a856fb6f95ba1d",
+        "bytes": 2455
+      }
+    ],
+    "source_files": 78
+  },
+  {
+    "repository": "ppx_jane",
+    "url": "https://github.com/janestreet/ppx_jane",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.121086+00:00",
+    "archive_sha256": "5e9cb8620d6c9544b4c80298159cba91613fcdc6c2b35274e1af3c7f8ef1fe8f",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "208accd96fa38d68b9f3c1cbbc2f5092dfb879ef38682d1c1de84072e29d8340",
+        "bytes": 637
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "f549a18353bb011e8cf96e12711a245915ec91f531f5cca7734e3762ecf754b8",
+        "bytes": 1126
+      },
+      {
+        "path": "ppx_jane.opam",
+        "sha256": "f81a16dea43881bd1245ff10e726a4c2b537a2ae2dc49543ca1f88c4bcdbfa18",
+        "bytes": 1397
+      },
+      {
+        "path": "src/ppx_jane.ml",
+        "sha256": "b3dc529deabb67385800a0c197d4802a01f878cabda661ecc59326f0624ee1de",
+        "bytes": 113
+      },
+      {
+        "path": "test/alert_in_ml/ppx_jane_test_alert_in_ml.ml",
+        "sha256": "b5e031e4c8869eb710f50126e6e709a95dd338a0b132b557e315229ac3b3088c",
+        "bytes": 73
+      },
+      {
+        "path": "test/alert_in_mli/ppx_jane_test_alert_in_mli.ml",
+        "sha256": "47227c4689fcc6696d0c752a1c1d763bbe5cd6837537513559b8abb424e7c397",
+        "bytes": 10
+      }
+    ],
+    "source_files": 5
+  },
+  {
+    "repository": "async_rpc_kernel",
+    "url": "https://github.com/janestreet/async_rpc_kernel",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.434731+00:00",
+    "archive_sha256": "99f06bb086520536209535ae4906095ddf8e5844de533481d27a1d61e0d4877e",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "b7e9365d9b8617d37522a521fc8cddf3bddc98f7a02973938b111352089f5bb5",
+        "bytes": 177
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "f549a18353bb011e8cf96e12711a245915ec91f531f5cca7734e3762ecf754b8",
+        "bytes": 1126
+      },
+      {
+        "path": "async_rpc_kernel.opam",
+        "sha256": "9d056a0b12e0cae37afe96d384e10ed87ad19b42d2f43adb2e19185d72540abe",
+        "bytes": 1052
+      },
+      {
+        "path": "src/rpc.ml",
+        "sha256": "5617a439b6694eaa2e148fdfdda27e0b9e0a25ba442f1e1b8f46a394f7385f24",
+        "bytes": 64727
+      },
+      {
+        "path": "src/rpc.mli",
+        "sha256": "75813a9c8464b917bbfb4edbcb37f0643d5267a03889caa84ec93a1db092a1ec",
+        "bytes": 64528
+      },
+      {
+        "path": "src/util.ml",
+        "sha256": "61fa5c84bd4c05bdb33f4841a91838f3fa39cdd23816191dbd089da7664df6f3",
+        "bytes": 1575
+      },
+      {
+        "path": "bench/bench.ml",
+        "sha256": "c8590797142d6ece165f53cab73f8052b3f0b9ae0cdc6824ea3ed0f4166a5630",
+        "bytes": 14360
+      },
+      {
+        "path": "test/import.ml",
+        "sha256": "ba6ba8f99892d919b832efb273ae867b4242b627b653c2b5825d7e71346098f4",
+        "bytes": 403
+      }
+    ],
+    "source_files": 159
+  },
+  {
+    "repository": "ocaml_simd",
+    "url": "https://github.com/janestreet/ocaml_simd",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.593166+00:00",
+    "archive_sha256": "a06e48f6acb887e6619f28a81320c69b2129b8e1ca41949012ac860faa3a2656",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "d5f8d00e29e9e4c3f2c029dacc81d452a81d3d326341368afeaa939920d3473d",
+        "bytes": 63
+      }
+    ],
+    "source_files": 0
+  },
+  {
+    "repository": "ocaml_intrinsics",
+    "url": "https://github.com/janestreet/ocaml_intrinsics",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.424367+00:00",
+    "archive_sha256": "75db67beec33edc410660657028857a3497afdcd5d87ad36b35e25b52094f96f",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "83c83dda681498bd76cb6e855a2bf60f12c58aa769e98b5821287ba2110f74cf",
+        "bytes": 2682
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "f87eab8349ab27ecdac04dd6aff45d7f40884699ad8087e8e3ee36d28d2941a9",
+        "bytes": 1126
+      },
+      {
+        "path": "ocaml_intrinsics.opam",
+        "sha256": "137cf892f67100a93db08f962a56e7842a4391368013e007e4b11d0cf3126abf",
+        "bytes": 912
+      },
+      {
+        "path": "src/crc.ml",
+        "sha256": "73dbd4a9234145023d1e320461012c9418670ff03eb078a4c188b4749a80ec1d",
+        "bytes": 1079
+      },
+      {
+        "path": "src/int.ml",
+        "sha256": "ea9d1f8960f304d0c9e367a314116ba9cb3c55f66658ea8d82d5404e4630f084",
+        "bytes": 36
+      },
+      {
+        "path": "src/crc.mli",
+        "sha256": "d0d14b72872ddfabd770e975a15df214f0926aa741506a712467f3f7fdcda3ec",
+        "bytes": 606
+      },
+      {
+        "path": "bench/bench.ml",
+        "sha256": "dba4a81cb3e704387d463beb6499978064e8ffc00ce050b822938f0819dfb0a7",
+        "bytes": 2153
+      },
+      {
+        "path": "test/import.ml",
+        "sha256": "3dd30504bdc5c682b4fa6fe7c4b4b80ee939360c4699ec3145cb40339e6df6bd",
+        "bytes": 213
+      }
+    ],
+    "source_files": 56
+  },
+  {
+    "repository": "postgres_async",
+    "url": "https://github.com/janestreet/postgres_async",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.729609+00:00",
+    "archive_sha256": "5d9896225ce3290d6893717b9fbf94ecf724faa8809ef0b26ea9d6c1766d6b25",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "dc81fec688d3aa8b0fa14a22646140e1845336c9ea70c8972b198d2d2298a1f4",
+        "bytes": 521
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "3820c1f3e1feb08bd98c8049c92e294cfc87e5562bbd3ba941f2e00e76db2b6f",
+        "bytes": 1126
+      },
+      {
+        "path": "postgres_async.opam",
+        "sha256": "b7d39a5588eaca2b6921b2bdbca12cdeee7dbeeb0903b269834682dbc3bc9d47",
+        "bytes": 1244
+      },
+      {
+        "path": "src/crypto.ml",
+        "sha256": "b476b3ae82ab5fdef1efbbea867a390c8889005430f4e8224db23928b0b47687",
+        "bytes": 93
+      },
+      {
+        "path": "src/ssl_mode.ml",
+        "sha256": "5afe09fbad7649d55a840ea60da9e58e2964c2a98ae513224f0cf6465cec4b3e",
+        "bytes": 360
+      },
+      {
+        "path": "src/ssl_mode.mli",
+        "sha256": "423e409ab26201227c28b8a2e78d96c83ad3d274666f443e2b07f196caedbff4",
+        "bytes": 1191
+      },
+      {
+        "path": "test/utils.ml",
+        "sha256": "66bc9e877cad10bc23a466e19899a6d6d67f28563e55a5b4984b1f1f14822d94",
+        "bytes": 1850
+      },
+      {
+        "path": "test/utils.mli",
+        "sha256": "a98fe0c3cb63a709db2cbfa4d610d691f2ff79bbd6fb3942a2cd3085e4b8799b",
+        "bytes": 187
+      }
+    ],
+    "source_files": 68
+  },
+  {
+    "repository": "redis-async",
+    "url": "https://github.com/janestreet/redis-async",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.772565+00:00",
+    "archive_sha256": "291febd2508de9064642883c26e3a016d96310ccf10115fe3b8c2d294b1dbb45",
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "78d4e63c9e27a5819d0d697e8148f117fc98a4cb046e826167b82ed0d2928a4d",
+        "bytes": 2084
+      },
+      {
+        "path": "LICENSE.md",
+        "sha256": "4e93dbcab04f4f46af5c4292b13943e193d28c7df8fd592f402f241a37fb9a2e",
+        "bytes": 1126
+      },
+      {
+        "path": "redis-async.opam",
+        "sha256": "21e2cc76d19be9bda6fbcd010ff1d1b2295eaf70f287ab87a7fad0d2d55b4c02",
+        "bytes": 886
+      },
+      {
+        "path": "src/auth.ml",
+        "sha256": "84d5472276a7a33ee196c25a0fd15aceaf3fa561699278cc1865bf51d15002db",
+        "bytes": 69
+      },
+      {
+        "path": "src/role.ml",
+        "sha256": "73f2383a7f545d7c2e9467087ad7424c31fc032044b619dee307957b4313734a",
+        "bytes": 5382
+      },
+      {
+        "path": "src/sha1.ml",
+        "sha256": "dbe08f17a4c361f5f530d055043b8c3d710a6854c36f72a62a2254c11f5d2204",
+        "bytes": 128
+      },
+      {
+        "path": "test/leak.ml",
+        "sha256": "fd20b87f1919bd23de957b852175526ae0aac212b6d9147b268ac073f27c222c",
+        "bytes": 651
+      },
+      {
+        "path": "test/sandbox.ml",
+        "sha256": "0284162e312ee58f794ad0fafdf10b5ef6a90e57cb89491884b372b0bed279df",
+        "bytes": 8828
+      }
+    ],
+    "source_files": 49
+  },
+  {
+    "repository": "incr_map",
+    "url": "https://github.com/janestreet/incr_map",
+    "status": "retrieved",
+    "retrieved_at": "2026-11-24T08:05:25.782673+00:00",
+    "archive_sha256": "e4416611a7a847a1cf48189aea9a5a69de8b56a8d2e02cf33b4a6b68a248ca49",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "2f687783284971e4c1b59bb2dc5ba13903dc23cd6ecba586ace8058fd7fe10ef",
+        "bytes": 1126
+      },
+      {
+        "path": "README.org",
+        "sha256": "241aa0778a81dcab12858e27b273fc317eb23ae079b9e4e64bebc73a44d65f43",
+        "bytes": 252
+      },
+      {
+        "path": "collate/README.md",
+        "sha256": "dcfae088e76aee08489fa8a5c2a7fb3661adbb9085cc1366086a685971982009",
+        "bytes": 222
+      },
+      {
+        "path": "erase_key/README.md",
+        "sha256": "55967df34f4abffba465f7559dce2674d81e4ea7ab9261e99a1fd1c0bf03ff42",
+        "bytes": 108
+      },
+      {
+        "path": "incr_map.opam",
+        "sha256": "7fa6961f1e5c20ff16e8c007aa815d6a1cc4ec706cd24eaf748f50e2d05fa69a",
+        "bytes": 1029
+      },
+      {
+        "path": "src/incr_map.ml",
+        "sha256": "2c937250b8884ddec09609c7aa5f0b8fab5badcf58bc8bab1dcae56d6b84b3d6",
+        "bytes": 86070
+      },
+      {
+        "path": "src/incr_map.mli",
+        "sha256": "2e93cacad8b442b97b2a0ab789a6bbd3f1a0b38450bc462850b5235e19be1afb",
+        "bytes": 31
+      },
+      {
+        "path": "src/incr_map_intf.ml",
+        "sha256": "316fad3e199c850fd4152f7a7b52105e2dcdba71fe6865b490fe4e8b95f9f714",
+        "bytes": 51424
+      },
+      {
+        "path": "test/import.ml",
+        "sha256": "95f71faf1292231f75a1da33880a132266348d94fc11179169e541b5eaa78cbf",
+        "bytes": 192
+      },
+      {
+        "path": "test/test_sum.ml",
+        "sha256": "af3e400b60d759d4564ba5858209c20706c7c7529129375f51ac9e757afc322e",
+        "bytes": 586
+      }
+    ],
+    "source_files": 154
+  }
+]

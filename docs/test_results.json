@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-24",
+  "python": "3.12.12",
+  "passed": 71,
+  "warnings": 1,
+  "duration_seconds": 5.52,
+  "statement_coverage_percent": 98.40336134453781,
+  "covered_statements": 1171,
+  "total_statements": 1190,
+  "coverage_scope": [
+    "quantcore",
+    "apps/api"
+  ],
+  "property_examples": {
+    "dag_equivalence_max_examples": 80,
+    "put_call_parity_max_examples": 30
+  },
+  "static_checks": {
+    "ruff": "passed",
+    "mypy": "passed; core/events/incremental/security subset (8 files)"
+  },
+  "frontend_build": "passed in Docker; Next.js TypeScript build; browser verification separately recorded",
+  "note": "No GitHub-hosted CI execution or real-market performance validation claimed."
+}

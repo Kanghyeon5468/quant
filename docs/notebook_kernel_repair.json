@@ -1,0 +1,19 @@
+{
+  "python": "/Users/kanghyeon/Desktop/Project/.venv312/bin/python",
+  "preserved_existing_versions": 71,
+  "changed_existing_versions": [],
+  "missing_notebook_dependencies": [],
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.8",
+    "ipywidgets": "8.1.9",
+    "sqlalchemy": "2.1.9",
+    "pyarrow": "23.0.1",
+    "jinja2": "3.1.6"
+  },
+  "new_pip_check_issues": [],
+  "preexisting_pip_check_diagnostics": [
+    "mediapipe 0.10.21 is not supported on this platform"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "container_api_status": {
+    "status": "ok",
+    "execution_mode": "research",
+    "data_mode": "synthetic"
+  },
+  "local_snapshot_sha256": "65982c3e823485f747d4e75fe403246392eb7f7c7d9f7f9cd8f7c489c0ef9ea2",
+  "docker_snapshot_version": "b2fa5c5e2ab6",
+  "cross_platform_max_close_absolute_error": 9.947598300641403e-14,
+  "qalpha_momentum_net_return_difference": 2.220446049250313e-16,
+  "historical_var_difference": 1.1822977145914404e-10,
+  "note": "Parquet bytes may differ by platform; numerical agreement measured independently."
+}

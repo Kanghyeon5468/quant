@@ -1,0 +1,18 @@
+{
+  "checks_passed": 10,
+  "checks": [
+    "overview_price_chart_and_websocket",
+    "asset_selection",
+    "valuation_compute",
+    "technical_indicators",
+    "factor_weights",
+    "two_strategy_views",
+    "portfolio_optimization",
+    "ml_baseline_and_split_audit",
+    "language_and_keyboard_navigation",
+    "mobile_layout"
+  ],
+  "browser_errors": [],
+  "target": "actual local services",
+  "data_mode": "synthetic"
+}

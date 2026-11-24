@@ -1,0 +1,14 @@
+.git
+.venv
+**/__pycache__
+**/node_modules
+**/.next
+datasets
+artifacts
+.env
+.env.*
+.coverage
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
