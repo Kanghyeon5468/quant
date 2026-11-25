@@ -1,0 +1,13 @@
+{
+  "warmup_sessions": 90,
+  "minimum_training_sessions": 96,
+  "validation_sessions": 42,
+  "test_sessions": 42,
+  "final_holdout_sessions": 42,
+  "candidates": ["momentum", "momentum_40", "momentum_90", "mean_reversion"],
+  "selection_rule": "maximum prior validation Sharpe, rf=0; fixed candidate order breaks ties",
+  "budget_usd": 100000,
+  "seed": 20261125,
+  "holdout_status": "retrospectively reserved; this archive was already used in earlier whole-period reports",
+  "deployment": "research only; never changes the live paper strategy automatically"
+}

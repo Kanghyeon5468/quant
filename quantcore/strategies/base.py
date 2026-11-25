@@ -10,8 +10,9 @@ class Strategy(Protocol):
 
 class Momentum:
     name = 'momentum'
+    lookback = 60
     def targets(self, frame):
-        return (frame.close > frame.close.rolling(60).mean()).astype(float)*.95
+        return (frame.close > frame.close.rolling(self.lookback).mean()).astype(float)*.95
 
 
 class MeanReversion:
@@ -37,3 +38,16 @@ class BuyHold:
 
 
 STRATEGIES = {'momentum': Momentum, 'mean_reversion': MeanReversion, 'buy_hold': BuyHold}
+
+
+class Momentum40(Momentum):
+    name = 'momentum_40'
+    lookback = 40
+
+
+class Momentum90(Momentum):
+    name = 'momentum_90'
+    lookback = 90
+
+
+STRATEGIES.update(momentum_40=Momentum40, momentum_90=Momentum90)

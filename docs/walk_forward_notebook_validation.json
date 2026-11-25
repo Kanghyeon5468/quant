@@ -1,0 +1,9 @@
+{
+  "executed_at": "2026-11-25T06:32:07.927475+00:00",
+  "kernel": "quantcore-py312",
+  "code_cells": 4,
+  "png_outputs": 2,
+  "cell_errors": 0,
+  "folds": 3,
+  "oos_sessions": 126
+}

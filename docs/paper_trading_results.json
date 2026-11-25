@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-11-25T02:18:55.362702+00:00",
+  "mode": "paper",
+  "endpoint": "https://paper-api.alpaca.markets",
+  "strategy": "momentum",
+  "budget_usd": "5000",
+  "initial_max_buy_limit_notional_usd": "1493.20",
+  "signal_session": "2026-11-24",
+  "execution_session": "2026-11-25",
+  "next_open_utc": "2026-11-25 14:30:00+00:00",
+  "next_open_kst": "2026-11-25T23:30:00+09:00",
+  "market_is_open": false,
+  "positions_count": 0,
+  "snapshot_id": "20261125T013853Z",
+  "snapshot_hashes": {
+    "prices.parquet": "6585746b9e19f8adcc07e3a4573549c0a312d3875593ef614581445c78a277cd",
+    "actions.json": "67bea62ca0697790ff972830b049bfc3bc66d9b8117192abda8967aa4b6b78ce",
+    "calendar.csv": "bcf70b71a66bda40d5f998ed32921003a33e2496230167b525bdf63d0e57ee2d"
+  },
+  "orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "2",
+      "type": "limit",
+      "time_in_force": "day",
+      "extended_hours": false,
+      "status": "accepted",
+      "filled_qty": "0",
+      "filled_at": null
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "2",
+      "type": "limit",
+      "time_in_force": "day",
+      "extended_hours": false,
+      "status": "accepted",
+      "filled_qty": "0",
+      "filled_at": null
+    }
+  ],
+  "duplicate_check": {
+    "checked_at": "2026-11-25T02:18:55.362702+00:00",
+    "repeat_run_new_orders": 0,
+    "repeat_run_post_calls": 0,
+    "existing_orders": 2
+  },
+  "tests": {
+    "passed": 115,
+    "new_paper_tests": 33,
+    "warnings": 1,
+    "duration_seconds": 19.51,
+    "statement_coverage_percent": 96.2451684152402
+  },
+  "operation": "single strategy run; broker retains accepted DAY orders; no local recurring worker started",
+  "performance": "no filled positions or measured paper return at this check; accepted is not filled",
+  "execution_source_sha256": {
+    "quantcore/paper/client.py": "a3f94fc85f6d44987406c9a72d8dc8b295d8cc2e11b578c7f0fa50338b9a4877",
+    "quantcore/paper/runner.py": "229c532d36c8ec2ef4da05beec6b71f6e9df1676c324015789e8566dffd83353",
+    "quantcore/strategies/base.py": "22c094ca85f35466461607e5e6b06012245e2635a523f23c3c51b93a8b29338f",
+    "quantcore/data/calendar.py": "8f36869a5cc6ff78d643d5705efca8a2827e82ae6a02b6ea812df18ba33b0604",
+    "scripts/run_paper_trading.py": "b7a2c9d19bb5691c6eca88ec738aa2637330003015f9336109e24bd45d16ccac"
+  }
+}

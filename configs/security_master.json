@@ -1,0 +1,7 @@
+{
+  "taxonomy": "quantcore-sic-groups-v1",
+  "description": "Project risk groups derived from SEC SIC; not licensed GICS sectors",
+  "sic_groups": {"3571": "TECHNOLOGY", "7372": "TECHNOLOGY", "3674": "TECHNOLOGY", "3711": "AUTOMOTIVE"},
+  "companies": {"AAPL": 320193, "MSFT": 789019, "NVDA": 1045810, "TSLA": 1318605, "SPY": 884394},
+  "funds": {"SPY": {"group": "EQUITY_ETF", "source_url": "https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy", "basis": "issuer identifies SPY as SPDR S&P 500 ETF Trust; verified 2026-11-25"}}
+}

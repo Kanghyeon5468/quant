@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-11-25T04:53:45.267409+00:00",
+  "source": "actual Alpaca paper GET endpoints and own journal",
+  "account_equity_usd": 100000.0,
+  "cash_usd": 100000.0,
+  "realized_gross_usd": 0.0,
+  "unrealized_gross_usd": 0.0,
+  "pnl_ledger_status": "reconciled",
+  "raw_daily_points": 62,
+  "funded_daily_points": 7,
+  "unfunded_points_excluded": 55,
+  "observations_saved": 2,
+  "history_base_value_asof": "2026-11-13",
+  "nontrade_activity_count": 1,
+  "active_budget_execution": {
+    "orders": 2,
+    "requested_shares": 101,
+    "filled_shares": 0,
+    "filled_orders": 0,
+    "partial_orders": 0,
+    "share_fill_rate": 0.0,
+    "order_fill_rate": 0.0,
+    "reference_change_bps": null,
+    "modeled_cost_estimate": 0,
+    "cost_estimate_missing_orders": 0
+  },
+  "current_orders": [
+    {
+      "symbol": "AAPL",
+      "qty": 53,
+      "filled_qty": 0,
+      "status": "accepted",
+      "evidence_status": "reconstructed_after_submission"
+    },
+    {
+      "symbol": "TSLA",
+      "qty": 48,
+      "filled_qty": 0,
+      "status": "accepted",
+      "evidence_status": "reconstructed_after_submission"
+    }
+  ],
+  "comparison": {
+    "status": "unavailable",
+    "reason": "\ub3d9\uc77c \uae30\uac04\uc758 \uc644\ub8cc \uc77c\ubcc4 \uc790\ub8cc\uac00 \uc544\uc9c1 \uc5c6\uc2b5\ub2c8\ub2e4."
+  },
+  "api_stale": false,
+  "background": {
+    "parent_process_id": 1,
+    "phase": "session_already_evaluated",
+    "performance": {
+      "status": "ok",
+      "checked_at": "2026-11-25T04:53:45.267409+00:00",
+      "sections": {
+        "history": "ok",
+        "activities": "ok"
+      }
+    },
+    "launchd_last_exit_code": 0,
+    "budget_usd": "100000",
+    "budget_revision": 1
+  },
+  "tests": {
+    "passed": 182,
+    "duration_seconds": 44.49,
+    "statement_coverage_percent": 94.3482224247949,
+    "ruff": "passed",
+    "production_build": "passed; final Docker Next/TypeScript build"
+  },
+  "collector_scope": "GET only; no new or canceled orders; no forward profit claim",
+  "files": [
+    "quantcore/paper/performance.py",
+    "quantcore/paper/client.py",
+    "quantcore/paper/runner.py",
+    "quantcore/paper/automation.py",
+    "quantcore/paper/reports.py",
+    "scripts/collect_paper_performance.py",
+    "apps/api/main.py",
+    "apps/web/app/page.tsx",
+    "apps/web/components/PaperPerformance.tsx",
+    "docker-compose.alpaca.yml",
+    "tests/integration/test_paper_performance.py",
+    "tests/integration/test_paper_trading.py",
+    "tests/integration/test_actual_api.py",
+    "tests/end_to_end/actual_market_browser.py"
+  ],
+  "browser": {
+    "actual_checks_passed": 17,
+    "demo_ui_checks_passed": 5,
+    "browser_errors": [],
+    "scope": "running localhost actual paper UI + isolated demo regression; final production build"
+  },
+  "code_sha256": "b38dd213ec352cf6a653d0d6b9dcac65c9f281541a5455e442d1ac2c50d4eb40",
+  "code_files": [
+    "quantcore/paper/performance.py",
+    "quantcore/paper/client.py",
+    "quantcore/paper/runner.py",
+    "quantcore/paper/automation.py",
+    "quantcore/paper/reports.py",
+    "apps/api/main.py",
+    "apps/web/components/PaperPerformance.tsx",
+    "apps/web/app/page.tsx"
+  ]
+}

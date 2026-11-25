@@ -6,7 +6,7 @@ COPY quantcore ./quantcore
 COPY apps/__init__.py ./apps/__init__.py
 COPY apps/api ./apps/api
 COPY apps/worker ./apps/worker
-RUN pip install --no-cache-dir . -c requirements.lock && useradd -u 10001 -m quantcore && mkdir /data && chown quantcore /data
+RUN pip install --no-cache-dir '.[realdata]' -c requirements.lock && useradd -u 10001 -m quantcore && mkdir /data && chown quantcore /data
 USER quantcore
 EXPOSE 8000
 CMD ["uvicorn", "apps.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

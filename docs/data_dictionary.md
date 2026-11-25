@@ -22,3 +22,7 @@
 | VaR/ES | one synthetic business-day loss fraction at specified confidence |
 
 Risk and technical numbers use IEEE float64; cash bookkeeping uses Decimal with 0.0001 USD rounding and integer inventory. Float equivalence tests use 1e-10/1e-12 tolerances where applicable. Rounding artifacts are not counted as economic alpha.
+
+## Actual API fields · 2026-11-25
+
+`mode=historical`, `feed=iex`, `timeframe=1Day`, `source=alpaca-iex-regular-1min`. Actual volume is regular-session shares and timestamp is the XNYS close; available_at uses the existing close+1minute assumption, not measured original historical collection latency. `lineage` lists source snapshot IDs/hashes and collection times; `dataset_version` hashes portable lineage. `paper_snapshot_id` identifies the rolling input also used by the paper runner. Raw prices remain raw; signal_close is causal split-neutral, while indicator price levels use the latest visible share units. Actual risk horizon is one XNYS session and price-return statistics exclude cash dividends. Actual sector/market_cap are null and financial/factor statuses are missing/unavailable. `stale` compares the final session with the latest completed XNYS session. An explicit source error returns503, not a sample price.

@@ -1,0 +1,127 @@
+{
+  "checked_at": "2026-11-25T05:52:34.102371+00:00",
+  "securities_verified": 5,
+  "risk_groups": {
+    "AAPL": "TECHNOLOGY",
+    "MSFT": "TECHNOLOGY",
+    "NVDA": "TECHNOLOGY",
+    "SPY": "EQUITY_ETF",
+    "TSLA": "AUTOMOTIVE"
+  },
+  "corporate_counts": {
+    "split": 5,
+    "dividend": 111,
+    "rename": 0,
+    "unsupported": 2
+  },
+  "owned_events_applied": 0,
+  "cash_credit_created": 0,
+  "corporate_cancellations": 0,
+  "corporate_status": "reconciled",
+  "new_orders_during_activation": 0,
+  "budget_usd": "100000",
+  "budget_revision": 1,
+  "orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "53",
+      "status": "accepted",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "48",
+      "status": "accepted",
+      "filled_qty": "0"
+    }
+  ],
+  "phase": "session_already_evaluated",
+  "risk_status": "ok",
+  "current_projected_groups": {
+    "TECHNOLOGY": 0.18962870000000004,
+    "AUTOMOTIVE": 0.1866288,
+    "EQUITY_ETF": 0.0
+  },
+  "live_risk_policy": "05e32c47ba1b8bb8",
+  "historical_classification_basis": "UNCLASSIFIED: current groups unavailable during historical evaluation",
+  "tests": {
+    "passed": 201,
+    "seconds": 45.28,
+    "statement_coverage": 92.42544206914754,
+    "ruff": "passed",
+    "production_build": "passed"
+  },
+  "original_portfolio_metrics_max_difference": 0,
+  "notebook": {
+    "executed_at": "2026-11-25T05:39:31.094272+00:00",
+    "kernel": "quantcore-py312",
+    "code_cells": 4,
+    "png_outputs": 2,
+    "cell_errors": 0,
+    "folds": 3,
+    "oos_sessions": 126
+  },
+  "browser": {
+    "actual_checks_passed": 19,
+    "actual_checks": [
+      "actual_source_universe_chart_and_websocket",
+      "actual_asset_selection",
+      "missing_actual_financials_no_demo_dcf",
+      "actual_indicators_and_paper_sma60",
+      "missing_factor_inputs_reported",
+      "chronological_validation_periods_and_oos_chart",
+      "whole_account_portfolio_replay",
+      "actual_two_strategy_backtests",
+      "actual_portfolio_and_risk",
+      "actual_ml_evaluation",
+      "independent_live_paper_risk_report",
+      "paper_actual_account_pnl_and_redacted_api",
+      "official_sic_groups_etf_and_corporate_reconciliation",
+      "paper_accepted_orders_not_claimed_as_fills",
+      "paper_order_signal_evidence_and_provenance",
+      "paper_history_revision_filter_and_honest_comparison",
+      "paper_mobile_layout",
+      "actual_monitor_language_and_keyboard",
+      "actual_mobile_layout"
+    ],
+    "demo_ui_checks_passed": 5,
+    "demo_ui_checks": [
+      "demo_source_and_asset_registry",
+      "demo_dcf_preserved",
+      "demo_factor_weights_preserved",
+      "demo_backtest_preserved",
+      "demo_does_not_expose_actual_paper_account"
+    ],
+    "demo_test_scope": "same built frontend; isolated DemoProvider TestClient and intercepted WS",
+    "actual_test_scope": "running localhost Compose services; Alpaca historical snapshots",
+    "browser_errors": []
+  },
+  "background_verification": {
+    "checked_at": "2026-11-25T05:52:36.061576+00:00",
+    "parent_process_id": 1,
+    "last_exit_code": 0,
+    "phase": "session_already_evaluated",
+    "corporate_status": "reconciled",
+    "performance_status": "ok",
+    "api_corporate_stale": false,
+    "account_equity": 100000.0,
+    "filled_shares": 0
+  },
+  "walk_forward_code_hash_matches": true
+}

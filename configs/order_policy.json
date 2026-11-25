@@ -1,0 +1,9 @@
+{
+  "target_fraction": 0.95,
+  "collar": 0.01,
+  "commission_bps": 1,
+  "slippage_bps": 2,
+  "spread_bps": 2,
+  "impact_bps": 5,
+  "minute_participation": 0.01
+}

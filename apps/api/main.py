@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, FiniteFloat
 
+from quantcore.data.errors import DataUnavailable
 from quantcore.derivatives.options import black_scholes
 from quantcore.research.service import ResearchService, json_safe
 from quantcore.security.access import AccessControl
@@ -31,8 +32,10 @@ class OptionRequest(BaseModel):
     kind: Literal['call', 'put'] = 'call'
 
 
-def create_app(directory=None, token=None):
+def create_app(directory=None, token=None, data_source=None, market_directory=None):
     directory = directory or os.getenv('QUANTCORE_DATA_DIR', 'datasets')
+    data_source = data_source or os.getenv('QUANTCORE_DATA_SOURCE', 'demo')
+    market_directory = market_directory or os.getenv('QUANTCORE_MARKET_DATA_DIR', 'datasets')
     access = AccessControl(os.getenv('QUANTCORE_API_TOKEN', '') if token is None else token)
     origins = os.getenv('QUANTCORE_ALLOWED_ORIGINS', 'http://localhost:3100,http://127.0.0.1:3100,http://localhost:3000,http://127.0.0.1:3000').split(',')
 
@@ -40,11 +43,20 @@ def create_app(directory=None, token=None):
     async def lifespan(app):
         if os.getenv('QUANTCORE_MODE', 'demo') not in ('demo', 'research'):
             raise RuntimeError('only demo/research modes are supported')
-        service = ResearchService(directory)
+        if data_source == 'alpaca':
+            from quantcore.research.actual import ActualResearchService
+            service = ActualResearchService(market_directory)
+        elif data_source == 'demo':
+            service = ResearchService(directory)
+        else:
+            raise RuntimeError('data source must be demo or alpaca')
         await service.bootstrap()
         app.state.service = service
         yield
-        service.store.engine.dispose()
+        if hasattr(service, 'close'):
+            service.close()
+        else:
+            service.store.engine.dispose()
 
     app = FastAPI(title='QuantCore', version='0.1.0', lifespan=lifespan)
     app.state.access = access
@@ -74,12 +86,20 @@ def create_app(directory=None, token=None):
     async def invalid(request, error):
         return JSONResponse({'detail': str(error)}, status_code=422)
 
+    @app.exception_handler(DataUnavailable)
+    async def unavailable(request, error):
+        return JSONResponse({'detail': str(error), 'mode': 'historical'}, status_code=503)
+
     def respond(value):
         return JSONResponse(json_safe(value))
 
     @app.get('/health')
     def health():
-        return {'status': 'ok', 'execution_mode': 'research', 'data_mode': 'synthetic'}
+        service = app.state.service
+        if data_source == 'alpaca':
+            service.view()
+        return {'status': 'ok', 'execution_mode': 'research',
+                'data_mode': getattr(service, 'mode', 'synthetic'), 'data_source': data_source}
 
     @app.get('/api/overview')
     def overview():
@@ -93,9 +113,24 @@ def create_app(directory=None, token=None):
     def indicators(symbol: str):
         return respond(app.state.service.indicators(symbol))
 
+    @app.get('/api/assets/{symbol}/signal')
+    def signal(symbol: str):
+        service = app.state.service
+        if not hasattr(service, 'signal'):
+            return respond({'mode': 'synthetic', 'status': 'unavailable',
+                            'reason': 'Actual paper-reference signals require Alpaca data mode.'})
+        return respond(service.signal(symbol))
+
     @app.get('/api/assets/{symbol}/fundamentals')
     def fundamentals(symbol: str, as_of: datetime | None = None):
         return respond(app.state.service.fundamentals(symbol, as_of))
+
+    @app.get('/api/information')
+    def information(symbol: str | None = None, as_of: datetime | None = None):
+        service = app.state.service
+        if not hasattr(service, 'information_report'):
+            return respond({'status':'unavailable','reason':'실제 자료 연결은 Alpaca 모드에서 제공합니다.'})
+        return respond(service.information_report(symbol, as_of))
 
     @app.get('/api/factors')
     def factors(sector_neutral: bool = False):
@@ -108,6 +143,41 @@ def create_app(directory=None, token=None):
     @app.get('/api/backtests/{symbol}')
     def strategy(symbol: str, strategy: Literal['momentum', 'mean_reversion', 'buy_hold'] = 'momentum'):
         return respond(app.state.service.backtest(symbol, strategy))
+
+    @app.get('/api/portfolio-backtest')
+    def portfolio_backtest():
+        from quantcore.paper.reports import read_report
+        if data_source != 'alpaca':
+            return respond({'status': 'unavailable', 'reason': 'actual portfolio replay requires Alpaca mode'})
+        return respond(read_report(os.getenv('QUANTCORE_PORTFOLIO_REPORT_DIR', 'docs'), 'portfolio'))
+
+    @app.get('/api/paper-risk')
+    def paper_risk():
+        from quantcore.paper.reports import read_report
+        if data_source != 'alpaca':
+            return respond({'status': 'unavailable', 'reason': 'paper risk requires Alpaca mode'})
+        return respond(read_report(os.getenv('QUANTCORE_PAPER_RISK_DIR', 'artifacts/paper_risk_public'), 'risk'))
+
+    @app.get('/api/paper-performance')
+    def paper_performance():
+        from quantcore.paper.reports import read_performance
+        if data_source != 'alpaca':
+            return respond({'status': 'unavailable', 'reason': 'paper 실적은 Alpaca 모드에서 제공합니다.'})
+        return respond(read_performance(os.getenv('QUANTCORE_PAPER_PERFORMANCE_DIR', 'artifacts/paper_performance_public')))
+
+    @app.get('/api/walk-forward')
+    def walk_forward():
+        from quantcore.paper.reports import read_report
+        if data_source != 'alpaca':
+            return respond({'status':'unavailable','reason':'실제 시세 기간 분리 검증은 Alpaca 모드에서 제공합니다.'})
+        return respond(read_report(os.getenv('QUANTCORE_PORTFOLIO_REPORT_DIR','docs'),'validation'))
+
+    @app.get('/api/corporate-actions')
+    def corporate_actions_status():
+        from quantcore.paper.reports import read_corporate
+        if data_source != 'alpaca':
+            return respond({'status':'unavailable','reason':'기업행사 계좌 대사는 Alpaca 모드에서 제공합니다.'})
+        return respond(read_corporate(os.getenv('QUANTCORE_CORPORATE_DIR','artifacts/corporate_public')))
 
     @app.get('/api/portfolio')
     def portfolio(method: Literal['equal_weight', 'minimum_variance', 'risk_parity'] = 'minimum_variance',
@@ -136,7 +206,8 @@ def create_app(directory=None, token=None):
 
     @app.get('/api/statistics')
     def statistics():
-        return respond(statistical_report(app.state.service.returns()))
+        service = app.state.service
+        return respond(service.statistics() if hasattr(service, 'statistics') else statistical_report(service.returns()))
 
     @app.post('/api/ws-ticket')
     def ticket():
@@ -151,7 +222,11 @@ def create_app(directory=None, token=None):
         try:
             while True:
                 start = time.perf_counter()
-                await websocket.send_json(json_safe({'kind': 'dataset_snapshot', **app.state.service.overview()}))
+                try:
+                    payload = {'kind': 'dataset_snapshot', **app.state.service.overview()}
+                except DataUnavailable as error:
+                    payload = {'kind': 'data_error', 'mode': 'historical', 'detail': str(error)}
+                await websocket.send_json(json_safe(payload))
                 app.state.service.metrics.samples['websocket_send'].append((time.perf_counter()-start)*1000)
                 await asyncio.sleep(5)
         except WebSocketDisconnect:

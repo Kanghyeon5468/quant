@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-25",
+  "timezone": "Asia/Seoul",
+  "mode": "paper",
+  "scheduler": {
+    "kind": "macOS LaunchAgent",
+    "label": "com.quantcore.paper-trading",
+    "registered": true,
+    "start_interval_seconds": 300,
+    "run_at_login": true,
+    "first_launchd_tick_verified": true,
+    "os_folder_access": "launchd-owned tick completed successfully",
+    "last_exit_code": 0,
+    "heartbeat_at": "2026-11-25T02:55:47.392252+00:00"
+  },
+  "strategy": "momentum",
+  "budget_usd": "100000",
+  "actual_manual_tick": {
+    "checked_at": "2026-11-25T02:36:08.828639+00:00",
+    "phase": "evaluated",
+    "last_evaluation": {
+      "signal_session": "2026-11-24",
+      "execution_session": "2026-11-25",
+      "new_orders": 0,
+      "snapshot_id": "20261125T023606Z-a33fc8",
+      "snapshot_hashes": {
+        "prices.parquet": "3fd19d40149b9935e214b1f8950131901e52bfe7ac326e290808dad2810247ac",
+        "calendar.csv": "0f1d598b492c426b6dba82be6f69bc8eebc5a1fffe6bca1688c512f3a5dc724e",
+        "actions.json": "0b5c8082c4f938c0ca38c48e1df3a2c506ce40923013b793cf71127e5611590b"
+      }
+    },
+    "post_requests": 0,
+    "broker_orders": 2,
+    "orders": [
+      {
+        "symbol": "AAPL",
+        "side": "buy",
+        "qty": "2",
+        "status": "accepted",
+        "filled_qty": "0"
+      },
+      {
+        "symbol": "TSLA",
+        "side": "buy",
+        "qty": "2",
+        "status": "accepted",
+        "filled_qty": "0"
+      }
+    ]
+  },
+  "rolling_input": {
+    "sessions": 100,
+    "daily_rows": 500,
+    "downloaded_minutes_this_update": 0,
+    "basis": "verified existing real IEX cache plus freshly fetched corporate actions"
+  },
+  "tests": {
+    "passed": 139,
+    "paper_cases": 57,
+    "new_budget_cases": 6,
+    "duration_seconds": 29.66,
+    "warnings": 1,
+    "statement_coverage_percent": 96.21141253507952
+  },
+  "checks": [
+    "next-session exits",
+    "holiday/DST/early close",
+    "persistent session deduplication",
+    "pause/resume and ambiguous intent latch",
+    "bounded data/GET retries",
+    "funds deferral preserves exits",
+    "incremental merge/split basis",
+    "partial failure preserves pointer",
+    "research snapshot unchanged"
+  ],
+  "source_sha256": {
+    "quantcore/paper/__init__.py": "5f4d89f790b98205af20318d051382527573e96ca501685c0383b1fd7f1ea971",
+    "quantcore/paper/automation.py": "a54bb97c2f0f9890742c842b04bcddd8d2d2a21533960b0191f08ef8090da8d4",
+    "quantcore/paper/budget.py": "14ea550d06edae30678bd51899a821be61f2d74467015ad8ce650fc68dc37032",
+    "quantcore/paper/client.py": "9a400cc9167fdcf9d1953feae8bf90983cd9c54cebdcf395e8e729cfe1bba6b4",
+    "quantcore/paper/market.py": "979779c23efee59eebce86b9163ca40c221849e399fc43309ae4cfe734d0ff72",
+    "quantcore/paper/policy.py": "cbb1f117afca8e3edf94947ce2aa794053cea5588ab89b9bbc5f2d52c1246330",
+    "quantcore/paper/runner.py": "36261d016de29504ee36a61d9e63dca1bb78af3393fa2035642ab015a046f35a"
+  },
+  "limitations": [
+    "Mac must be awake, logged in and online with OS folder access granted",
+    "no regular-session fills or multi-day actual operation observed yet",
+    "first actual cache update reused already-current minute data; next-session incremental fetch tested with controlled data"
+  ],
+  "current_budget_revision": 1,
+  "latest_budget_check": "paper_budget_validation.json",
+  "current_active_orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "53",
+      "status": "accepted",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "48",
+      "status": "accepted",
+      "filled_qty": "0"
+    }
+  ],
+  "initial_order_snapshot": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "2",
+      "status": "accepted",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "2",
+      "status": "accepted",
+      "filled_qty": "0"
+    }
+  ]
+}

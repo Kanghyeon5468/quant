@@ -1,4 +1,4 @@
-.PHONY: setup demo api web test check benchmark report notebook-setup notebook-check real-setup real-backtest real-notebook-check
+.PHONY: setup demo api web test check benchmark report notebook-setup notebook-check real-setup real-backtest real-notebook-check real-dashboard portfolio-backtest portfolio-notebook-check
 setup:
 	python3.12 -m venv .venv
 	.venv/bin/pip install -e '.[dev]' -c requirements.lock
@@ -33,3 +33,20 @@ real-backtest:
 	.venv/bin/python scripts/run_real_backtest.py
 real-notebook-check:
 	.venv/bin/python scripts/execute_real_notebook.py
+real-dashboard:
+	QUANTCORE_MARKET_UID=$$(id -u) QUANTCORE_MARKET_GID=$$(id -g) docker compose -f docker-compose.yml -f docker-compose.alpaca.yml up -d --build
+
+portfolio-backtest:
+	.venv/bin/python scripts/run_portfolio_backtest.py
+portfolio-notebook-check:
+	.venv/bin/python scripts/execute_portfolio_notebook.py
+
+reference-data:
+	.venv/bin/python scripts/collect_reference_data.py
+walk-forward:
+	.venv/bin/python scripts/run_walk_forward.py
+
+information-refresh:
+	.venv/bin/python scripts/collect_information.py
+information-check:
+	.venv/bin/python scripts/validate_actual_information.py

@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-11-25T03:28:17.057302+00:00",
+  "health": {
+    "status": "ok",
+    "execution_mode": "research",
+    "data_mode": "historical",
+    "data_source": "alpaca"
+  },
+  "data_mode": "historical",
+  "source": "alpaca-iex-regular-1min",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "SPY",
+    "TSLA"
+  ],
+  "rows": 1770,
+  "sessions": 354,
+  "dataset_version": "a607fc3d57521830",
+  "lineage": [
+    {
+      "kind": "real_equities",
+      "snapshot_id": "20261125T013853Z",
+      "hashes": {
+        "prices.parquet": "6585746b9e19f8adcc07e3a4573549c0a312d3875593ef614581445c78a277cd",
+        "actions.json": "67bea62ca0697790ff972830b049bfc3bc66d9b8117192abda8967aa4b6b78ce",
+        "calendar.csv": "bcf70b71a66bda40d5f998ed32921003a33e2496230167b525bdf63d0e57ee2d"
+      },
+      "collected_at": "2026-11-25T01:40:39.039381+00:00"
+    },
+    {
+      "kind": "paper_equities",
+      "snapshot_id": "20261125T023606Z-a33fc8",
+      "hashes": {
+        "prices.parquet": "3fd19d40149b9935e214b1f8950131901e52bfe7ac326e290808dad2810247ac",
+        "calendar.csv": "0f1d598b492c426b6dba82be6f69bc8eebc5a1fffe6bca1688c512f3a5dc724e",
+        "actions.json": "0b5c8082c4f938c0ca38c48e1df3a2c506ce40923013b793cf71127e5611590b"
+      },
+      "collected_at": "2026-11-25T02:36:07.823576+00:00"
+    }
+  ],
+  "direct_alpaca_check": {
+    "endpoint": "data.alpaca.markets/v2/stocks/bars",
+    "feed": "iex",
+    "timeframe": "1Min",
+    "reference_minute": "2026-11-24T20:59:00Z",
+    "api_reference_close_matches_alpaca": true
+  },
+  "backtest_comparisons": 15,
+  "maximum_return_difference": 0.0,
+  "web_proxy_dataset_matches": true,
+  "host_container_dataset_matches": true,
+  "actual_fundamentals_status": "missing",
+  "mount_validation": {
+    "unprivileged_uid": 501,
+    "private_cache_readable": true,
+    "market_mount_read_only": true,
+    "broker_keys_in_api_environment": false
+  },
+  "actual_ml_evaluation": {
+    "symbol": "AAPL",
+    "horizon_sessions": 5,
+    "folds": 1,
+    "metrics": [
+      {
+        "model": "baseline_mean",
+        "mse": 0.0004370703853882645,
+        "direction_accuracy": 0.6551724137931034,
+        "samples": 29
+      },
+      {
+        "model": "ridge",
+        "mse": 0.0003719827829014914,
+        "direction_accuracy": 0.6896551724137931,
+        "samples": 29
+      }
+    ],
+    "scope": "small-sample research validation; not paper order inputs"
+  },
+  "tests": {
+    "passed": 156,
+    "new_actual_api_cases": 17,
+    "duration_seconds": 37.3,
+    "warnings": 1,
+    "statement_coverage_percent": 95.74822842851188
+  },
+  "paper_code_unchanged": true,
+  "paper_heartbeat_check": {
+    "budget_usd": "100000",
+    "revision": 1,
+    "phase": "session_already_evaluated",
+    "checked_at": "2026-11-25T03:31:21.720272+00:00"
+  }
+}

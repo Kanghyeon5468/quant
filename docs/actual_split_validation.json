@@ -1,0 +1,203 @@
+{
+  "executed_at": "2026-11-25T06:20:22.189869+00:00",
+  "source": "Alpaca IEX actual raw minute bars",
+  "period": [
+    "2024-06-03",
+    "2024-06-14"
+  ],
+  "warmup_sessions": 84,
+  "minute_rows": 33946,
+  "raw_pages": 4,
+  "snapshot_hashes": {
+    "prices.parquet": "0151b7483e2bc553e4f6b8e9b8402a19187553d12aeacac0b4212ee0a32aabb9",
+    "calendar.csv": "f1d66a4fd590e725bca57ddd2dd624919de077b84dfb416b3fa76f6925f9dca7",
+    "actions.json": "3a57e979d63128112d5a1487cca0c663936d95a0fc8d81cfdbf15af423c182d0"
+  },
+  "corporate_actions": [
+    {
+      "symbol": "NVDA",
+      "session": "2024-06-10",
+      "ratio": "10.0",
+      "action_id": "50199fac-0af8-43ef-9846-eaf64c6d322d",
+      "timestamp": "2024-06-10 13:30:00+00:00",
+      "quantity_delta": 693,
+      "quantity_after": 770,
+      "cash_delta": "0",
+      "basis": "mechanical effective split; not a pre-publication signal"
+    }
+  ],
+  "metrics": {
+    "total_return": 0.12726719772209782,
+    "final_equity": 112726.71977220978,
+    "max_drawdown": -0.010910896044124652,
+    "annualized_volatility": 0.3015143267593803,
+    "sharpe": 10.205641386435971,
+    "filled_shares": 146,
+    "fill_events": 9,
+    "orders": 10,
+    "expired_orders": 2,
+    "risk_canceled_orders": 0,
+    "risk_events": 0,
+    "commission": 10.85999166,
+    "modeled_execution_cost": 33.08023613022186,
+    "average_gross_weight": 0.8061396558790204
+  },
+  "audit": {
+    "min_cash": "6249.232014903840158139706",
+    "min_inventory": 0,
+    "signal_before_fill": true,
+    "limit_respected": true,
+    "sessions": 10,
+    "cash_inventory_nav_reconciled": true,
+    "split_events": 1
+  },
+  "scope": "NVDA single-slot buy_hold mechanical split verification; no risk filter; no paper strategy change",
+  "limitations": [
+    "IEX regular sessions only",
+    "fractional settlement and ticker migration have no verified actual cases and remain review-blocked"
+  ],
+  "curve": [
+    {
+      "session": "2024-06-03",
+      "timestamp": "2024-06-03 20:00:00+00:00",
+      "equity": 100000.0,
+      "cash": "100000",
+      "gross_weight": 0.0,
+      "holdings": {
+        "NVDA": 0
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-04",
+      "timestamp": "2024-06-04 20:00:00+00:00",
+      "equity": 100561.58201490383,
+      "cash": "6249.232014903840158139706",
+      "gross_weight": 0.9378566656401879,
+      "holdings": {
+        "NVDA": 81
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-05",
+      "timestamp": "2024-06-05 20:00:00+00:00",
+      "equity": 105391.16780105991,
+      "cash": "7431.9678010599124017127205",
+      "gross_weight": 0.9294820623385751,
+      "holdings": {
+        "NVDA": 80
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-06",
+      "timestamp": "2024-06-06 20:00:00+00:00",
+      "equity": 104418.53551121365,
+      "cash": "12390.8955112136448242789989",
+      "gross_weight": 0.8813343296709714,
+      "holdings": {
+        "NVDA": 76
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-07",
+      "timestamp": "2024-06-07 20:00:00+00:00",
+      "equity": 104241.25572521365,
+      "cash": "11192.9157252136448242789989",
+      "gross_weight": 0.8926248955143167,
+      "holdings": {
+        "NVDA": 77
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-10",
+      "timestamp": "2024-06-10 20:00:00+00:00",
+      "equity": 105091.349924917,
+      "cash": "10229.8099249169920062913349",
+      "gross_weight": 0.9026579263447874,
+      "holdings": {
+        "NVDA": 778
+      },
+      "corporate_quantity_deltas": {
+        "NVDA": 693
+      },
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-11",
+      "timestamp": "2024-06-11 20:00:00+00:00",
+      "equity": 104311.2483998865,
+      "cash": "11081.9283998865096524335647",
+      "gross_weight": 0.8937609455367369,
+      "holdings": {
+        "NVDA": 771
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-12",
+      "timestamp": "2024-06-12 20:00:00+00:00",
+      "equity": 107672.8083998865,
+      "cash": "11081.9283998865096524335647",
+      "gross_weight": 0.8970777435401398,
+      "holdings": {
+        "NVDA": 771
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-13",
+      "timestamp": "2024-06-13 20:00:00+00:00",
+      "equity": 110825.5284536609,
+      "cash": "13798.0284536608900071785441",
+      "gross_weight": 0.87549774274769,
+      "holdings": {
+        "NVDA": 750
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    },
+    {
+      "session": "2024-06-14",
+      "timestamp": "2024-06-14 20:00:00+00:00",
+      "equity": 112726.71977220978,
+      "cash": "16784.5297722097781368397951",
+      "gross_weight": 0.8511042474567984,
+      "holdings": {
+        "NVDA": 727
+      },
+      "corporate_quantity_deltas": {},
+      "strategy": "buy_hold",
+      "daily_latched": false,
+      "drawdown_latched": false
+    }
+  ]
+}

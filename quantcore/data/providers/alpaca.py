@@ -31,7 +31,7 @@ class AlpacaData:
         self.next_request = 0.
 
     def pages(self, path, params):
-        if path not in ('/v2/stocks/bars', '/v1/corporate-actions'):
+        if path not in ('/v2/stocks/bars', '/v1/corporate-actions', '/v1beta1/news'):
             raise ValueError('only authorized market-data endpoints are allowed')
         seen = set()
         for _ in range(500):
@@ -97,7 +97,7 @@ def corporate_actions(payload, start, end):
     return {symbol: sorted(items, key=lambda a: (a.effective_at, a.kind != 'split')) for symbol, items in result.items()}
 
 
-def regular_daily(minutes, schedule, actions):
+def regular_daily(minutes, schedule, actions, symbols=SYMBOLS):
     data = minutes.copy()
     data['bar_at'] = pd.to_datetime(data['t'], utc=True)
     if data.duplicated(['symbol', 'bar_at']).any():
@@ -123,7 +123,7 @@ def regular_daily(minutes, schedule, actions):
     if not rows:
         raise ValueError('no regular-session observations')
     frame = pd.DataFrame(rows).sort_values(['symbol', 'timestamp'])
-    for symbol in SYMBOLS:
+    for symbol in symbols:
         group = frame[frame.symbol == symbol]
         if set(group.session) != set(schedule.index):
             raise ValueError(f'{symbol}: missing exchange sessions; do not fill prices')

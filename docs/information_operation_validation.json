@@ -1,0 +1,124 @@
+{
+  "checked_at": "2026-11-25T06:33:01.201351+00:00",
+  "tests": {
+    "passed": 220,
+    "seconds": 57.2,
+    "statement_coverage_percent": 91.2994093593821,
+    "ruff": "passed",
+    "scoped_mypy": "passed",
+    "frontend_build": "passed"
+  },
+  "browser": {
+    "actual_checks_passed": 20,
+    "actual_checks": [
+      "actual_source_universe_chart_and_websocket",
+      "actual_asset_selection",
+      "actual_sec_financials_no_demo_dcf",
+      "actual_indicators_and_paper_sma60",
+      "actual_factors_and_unavailable_gics_no_substitute",
+      "actual_news_13f_links_stale_manager_and_missing_earnings",
+      "chronological_validation_periods_and_oos_chart",
+      "whole_account_portfolio_replay",
+      "actual_two_strategy_backtests",
+      "actual_portfolio_and_risk",
+      "actual_ml_evaluation",
+      "independent_live_paper_risk_report",
+      "paper_actual_account_pnl_and_redacted_api",
+      "official_sic_groups_etf_and_corporate_reconciliation",
+      "paper_accepted_orders_not_claimed_as_fills",
+      "paper_order_signal_evidence_and_provenance",
+      "paper_history_revision_filter_and_honest_comparison",
+      "paper_mobile_layout",
+      "actual_monitor_language_and_keyboard",
+      "actual_mobile_layout"
+    ],
+    "demo_ui_checks_passed": 5,
+    "demo_ui_checks": [
+      "demo_source_and_asset_registry",
+      "demo_dcf_preserved",
+      "demo_factor_weights_preserved",
+      "demo_backtest_preserved",
+      "demo_does_not_expose_actual_paper_account"
+    ],
+    "demo_test_scope": "same built frontend; isolated DemoProvider TestClient and intercepted WS",
+    "actual_test_scope": "running localhost Compose services; Alpaca historical snapshots",
+    "browser_errors": []
+  },
+  "notebooks": {
+    "portfolio": {
+      "executed_at": "2026-11-25T06:32:08.244521+00:00",
+      "kernel": "quantcore-py312",
+      "code_cells": 5,
+      "png_outputs": 2,
+      "cell_errors": 0,
+      "actual_scenarios": 4,
+      "sessions_per_scenario": 252
+    },
+    "walk_forward": {
+      "executed_at": "2026-11-25T06:32:07.927475+00:00",
+      "kernel": "quantcore-py312",
+      "code_cells": 4,
+      "png_outputs": 2,
+      "cell_errors": 0,
+      "folds": 3,
+      "oos_sessions": 126
+    }
+  },
+  "automation": {
+    "phase": "session_already_evaluated",
+    "budget_usd": "100000",
+    "budget_revision": 1,
+    "risk": "ok",
+    "performance": "ok",
+    "information_status": {
+      "financials": "ok",
+      "institutions": "ok",
+      "news": "ok"
+    },
+    "paused": false,
+    "orders": [
+      {
+        "symbol": "AAPL",
+        "side": "buy",
+        "qty": "2",
+        "status": "canceled",
+        "filled_qty": "0"
+      },
+      {
+        "symbol": "AAPL",
+        "side": "buy",
+        "qty": "53",
+        "status": "accepted",
+        "filled_qty": "0"
+      },
+      {
+        "symbol": "TSLA",
+        "side": "buy",
+        "qty": "2",
+        "status": "canceled",
+        "filled_qty": "0"
+      },
+      {
+        "symbol": "TSLA",
+        "side": "buy",
+        "qty": "48",
+        "status": "accepted",
+        "filled_qty": "0"
+      }
+    ]
+  },
+  "main_returns": {
+    "portfolio252": {
+      "momentum_unrestricted_net": -0.05557720456528403,
+      "momentum_risk_net": -0.05754559358031697,
+      "momentum_risk_gross": -0.04791464999999995,
+      "buy_hold_slots_net": 0.07989862225201061
+    },
+    "oos126": {
+      "selected_oos": -0.03819482646696759,
+      "fixed_momentum_60": -0.035138326508084905,
+      "always_active_slots": 0.047276557852852674,
+      "selected_double_cost": -0.04014296206202461
+    }
+  }
+}

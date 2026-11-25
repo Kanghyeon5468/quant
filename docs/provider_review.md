@@ -2,6 +2,8 @@
 
 Updated2026-11-25: the original MVP used only DemoProvider. The user explicitly authorized reading the prior stock project's Alpaca settings for market-data GET requests. A new read-only Alpaca adapter collected a separate actual-data snapshot for the real-equity CLI/notebook. No old dataset, account endpoint, order call or paid subscription was used. Other providers remain disabled.
 
+Later on2026-11-25 the user explicitly requested paper trading with that connection. A separate paper-only client successfully queried the simulated account and submitted two simulated equity orders. This extends the original task scope; the data adapter remains GET-only. The trading host is fixed to paper-api.alpaca.markets, no live-money API or paid subscription is used, and all raw account/order data stays local. See PAPER_TRADING.md and paper_trading_results.json.
+
 | Candidate / official source | Observed access / contract concern | QuantCore status |
 |---|---|---|
 | [Yahoo terms](https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html) | retrieval returned999; unofficial scraping/API redistribution rights not established | disabled; no yfinance scrape |
@@ -20,3 +22,7 @@ Updated2026-11-25: the original MVP used only DemoProvider. The user explicitly 
 Provider-specific numeric pricing, exact current rate quotas and commercial redistribution licenses are **not fully verified** for these candidates; documentation links alone do not supply those permissions. They remain a prerequisite for enabling each real adapter, with source, feed delay, timezone, corporate actions, release/vintage, request limiter and retries recorded explicitly. Demo rate limiting (10ms scheduling gap / concurrency3) is a local workload setting, not an external provider entitlement.
 
 Actual Alpaca collection uses a0.6s minimum request gap, bounded retries for network/5xx and stops on401/403/429. Only data.alpaca.markets /v2/stocks/bars and /v1/corporate-actions GET paths are permitted. [Actual methodology/results](REAL_STOCK_BACKTEST.md). Public Alpha Vantage demo probes returned an Information message instead of a full actual series; no such response was treated as data. Yahoo/Stooq access restrictions were not bypassed.
+
+## Actual analysis API connection · 2026-11-25
+
+Alpaca historical and paper rolling snapshots now feed a read-only MarketRepository and ActualResearchService. The API/browser receive no Alpaca credentials; source collection remains on the host. A direct authorized GET of the last completed AAPL regular-session minute matched the deployed API reference price. All15 actual backtest returns matched saved results exactly; host/container/web dataset versions matched. See actual_api_validation.json. Actual fundamentals/news/filings remain disconnected; the app does not infer them from prices.

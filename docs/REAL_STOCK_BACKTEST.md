@@ -66,6 +66,6 @@ make real-notebook-check
 
 ## 적용 한계와 출처
 
-IEX는 단일 시장이며 consolidated SIP가 아니다. 최신 보관본의 정정/생존 편향, 현재 종목 선정 편향, 가정 체결·비용·현금 지급 시각이 남는다. 장외 전략·상폐 universe·실주문 성과·뉴스/SEC/ML 추가 효과는 이 실험에서 검증하지 않았다. 기본 웹 대시보드는 합성 데모이며 실제 자료와 합쳐 표시하지 않는다.
+IEX는 단일 시장이며 consolidated SIP가 아니다. 최신 보관본의 정정/생존 편향, 현재 종목 선정 편향, 가정 체결·비용·현금 지급 시각이 남는다. 장외 전략·상폐 universe·실주문 성과·뉴스/SEC/ML 추가 효과는 이 실험에서 검증하지 않았다. 현재 실제 API/웹 모드는 같은 검증 시세를 조회하며, 기본 keyless Compose의 합성 데모와 구분한다. 노트북의 과거 동결본은 보존한다.
 
 공식 문서: [Historical bars](https://docs.alpaca.markets/us/reference/stockbars), [Market Data FAQ](https://docs.alpaca.markets/us/docs/market-data-faq), [Corporate actions](https://docs.alpaca.markets/us/reference/corporateactions-1), [Daily processes](https://docs.alpaca.markets/us/docs/daily-processes-and-reconcilations), [exchange_calendars](https://github.com/gerrymanoim/exchange_calendars).

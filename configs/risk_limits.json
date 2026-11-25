@@ -1,0 +1,12 @@
+{
+  "daily_loss": 0.02,
+  "drawdown": 0.1,
+  "gross_weight": 0.95,
+  "position_weight": 0.2,
+  "sector_weight": 0.4,
+  "correlated_weight": 0.4,
+  "correlation_threshold": 0.8,
+  "portfolio_volatility": 0.25,
+  "adv_participation": 0.01,
+  "sectors": {}
+}

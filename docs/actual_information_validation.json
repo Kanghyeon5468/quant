@@ -1,0 +1,189 @@
+{
+  "executed_at": "2026-11-25T06:29:34.157024+00:00",
+  "mode": "actual cached observations",
+  "financials": {
+    "AAPL": {
+      "period_end": "2026-09-26",
+      "period_start": "2025-09-28",
+      "metrics_available": 13,
+      "metrics_total": 17,
+      "revenue_growth": 0.1505979656911628,
+      "free_cash_flow_usd": 136056000000.0,
+      "missing_metrics": [
+        "eps_growth",
+        "roic",
+        "debt_to_equity",
+        "interest_coverage"
+      ],
+      "collected_at": "2026-11-25T06:06:28.970804+00:00",
+      "available_at": "2026-11-25T06:23:58.945255+00:00",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+    },
+    "MSFT": {
+      "period_end": "2026-09-30",
+      "period_start": "2025-10-01",
+      "metrics_available": 12,
+      "metrics_total": 17,
+      "revenue_growth": 0.17913836058431923,
+      "free_cash_flow_usd": 59957000000.0,
+      "missing_metrics": [
+        "eps_growth",
+        "ebitda",
+        "roic",
+        "debt_to_equity",
+        "interest_coverage"
+      ],
+      "collected_at": "2026-11-25T06:06:28.970804+00:00",
+      "available_at": "2026-11-25T06:23:59.067729+00:00",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    "NVDA": {
+      "period_end": "2026-07-26",
+      "period_start": "2025-07-28",
+      "metrics_available": 12,
+      "metrics_total": 17,
+      "revenue_growth": 0.8337529809100703,
+      "free_cash_flow_usd": 127006000000.0,
+      "missing_metrics": [
+        "eps_growth",
+        "roic",
+        "debt_to_equity",
+        "interest_coverage",
+        "share_dilution"
+      ],
+      "collected_at": "2026-11-25T06:06:28.970804+00:00",
+      "available_at": "2026-11-25T06:23:59.181300+00:00",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+    },
+    "TSLA": {
+      "period_end": "2026-09-30",
+      "period_start": "2025-10-01",
+      "metrics_available": 12,
+      "metrics_total": 17,
+      "revenue_growth": 0.08299436387021217,
+      "free_cash_flow_usd": 3303000000.0,
+      "missing_metrics": [
+        "eps_growth",
+        "ebitda",
+        "roic",
+        "debt_to_equity",
+        "interest_coverage"
+      ],
+      "collected_at": "2026-11-25T06:06:28.970804+00:00",
+      "available_at": "2026-11-25T06:23:59.283322+00:00",
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json"
+    }
+  },
+  "checks": [
+    "four contiguous SEC quarters reconcile to TTM revenue/CFO/capex",
+    "financial observations absent before actual collection/analysis",
+    "no inferred total debt or invented missing EPS",
+    "four official 13F XML counts/value totals reconciled",
+    "13F/news absent before actual availability",
+    "news carries actual source links and no generated sentiment",
+    "stale Vanguard report not labeled current 2026 holdings",
+    "earnings calls and LLM stay unavailable"
+  ],
+  "institutions": [
+    {
+      "manager": "BERKSHIRE HATHAWAY INC",
+      "report_date": "2026-09-30",
+      "prior_report_date": "2026-06-30",
+      "status": "ok",
+      "entry_count": 89,
+      "reported_total_usd": "304196581325",
+      "available_at": "2026-11-25T06:24:01.477182+00:00",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526463399/0001193125-26-463399-index.html"
+    },
+    {
+      "manager": "VANGUARD GROUP INC",
+      "report_date": "2025-12-31",
+      "prior_report_date": "2025-09-30",
+      "status": "stale",
+      "entry_count": 17686,
+      "reported_total_usd": "6897676080637",
+      "available_at": "2026-11-25T06:24:04.161689+00:00",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/102909/000010290926000031/0000102909-26-000031-index.html"
+    }
+  ],
+  "13f_filings_verified": 4,
+  "news": {
+    "article_versions": 69,
+    "unique_articles": 69,
+    "content_present": 69,
+    "metadata_only": 0,
+    "llm_status": "unavailable",
+    "earnings_calls": "unavailable"
+  },
+  "factor_ranks": [
+    {
+      "symbol": "NVDA",
+      "rank": 1,
+      "score": 0.516474144419558
+    },
+    {
+      "symbol": "AAPL",
+      "rank": 2,
+      "score": 0.21513429133728662
+    },
+    {
+      "symbol": "MSFT",
+      "rank": 3,
+      "score": 0.11294291742300484
+    },
+    {
+      "symbol": "TSLA",
+      "rank": 4,
+      "score": -0.8445513531798515
+    }
+  ],
+  "api_checks": 9,
+  "input_hashes": {
+    "financials": {
+      "companyfacts_AAPL.json": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+      "submissions_AAPL.json": "f001022596bb110c821112a8b12f794e0d5c545475b7d5f0ccfb42d9b431e57b",
+      "normalized_AAPL.json": "812f2458256f0fa06fc074c1c87011cd300c19775a1327449cbf253c177dcc10",
+      "companyfacts_MSFT.json": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea",
+      "submissions_MSFT.json": "0c7415804bdda6f5daea74122223596eecc02ee5fe23de8e83cf4e2630ff03e0",
+      "normalized_MSFT.json": "b522620a830da8414f1771668d677c3bc6f04b7a0ff90f5bd234be20811d016f",
+      "companyfacts_NVDA.json": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "submissions_NVDA.json": "7c07b0a81346ce337884f26d353cd752ad7db6b380e980f73f7c60297a51ad63",
+      "normalized_NVDA.json": "9a3c39219512e9d86a2b25c1e402da5a7b3202c318a1157942ef6fc6e5822fa1",
+      "companyfacts_TSLA.json": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+      "submissions_TSLA.json": "53460bc0cd14afb1280e43073cab03dbfdc8612759ed8c646351aac53eb41656",
+      "normalized_TSLA.json": "3adb69415e334134e1c7305f94084e021e030c5d2e755f0016ce4a3c37e3d797"
+    },
+    "institutions": {
+      "manager_1067983.json": "a606a971fbcf45df3afa5175e865b09e375adb7bd3d1b39997b34aca05f0891e",
+      "000119312526463399_index.json": "fe45889c3baf82b76e020ae8e8a2e75829b98fcac597c31d800725a4f35249bf",
+      "000119312526463399_cover.xml": "a149b00f5875cb2eb9f230c7efd3804301d4d3e14cd23f834c15c362980e413f",
+      "000119312526463399_table.xml": "ad6b0f4d2cd9dc11492bad4f5ee2119a7a10e6b89aa4ce1c6a10e55999c6b7a6",
+      "000119312526352200_index.json": "55b791cd90a12c4fe10c0d13471853e3e53ccbede45157b4264092aa0f5674f9",
+      "000119312526352200_cover.xml": "7e7b3a8f87a290f56454b6ecaacd2cb4639af97a36d0c4064ee3d78be0d56723",
+      "000119312526352200_table.xml": "6a2798aa0fa9731c33b0f0b748229eaf7cdf118f9c46fd5a4a9a3de6979d4d95",
+      "manager_102909.json": "5dc9632c1fd50c526f3bdde681209626010f4ce190ce74e714a022d34949f802",
+      "000010290926000031_index.json": "c71eb65d82e820d84fd4b6967b147f21516847e83f3813b60a86de06b23d5252",
+      "000010290926000031_cover.xml": "3c80f60dda3c72dacae2ee4026e6ebadcfc347397043801e27c27bf18ad20c1c",
+      "000010290926000031_table.xml": "ff2c7578fad8985954faf32e20d33cdd4a5b39a371c8a1742b8c08c2dc8d3c86",
+      "000010290925000353_index.json": "e64a0ba0fd644650eca20f2754d7000a0947b607b156ce68a53dc08b0442957f",
+      "000010290925000353_cover.xml": "e8b7a5d8d771b71df8e433f8eccdc09486a87da9721aba1364fc216c68b3dc25",
+      "000010290925000353_table.xml": "19cd1622b61544b0685388cc697dc5f11cb8b790d9ceba44af9371714d639d8d",
+      "report.json": "c28ca0a79c13b8668688a177142b62b24fe102ef7ea4b00cf37df05e0dd4dedf"
+    },
+    "news": {
+      "raw_news_000.json": "33899052276fcfbdec4edf8e7cf9979453b637f95c5684cfff02baf1bbbca6bb",
+      "articles.json": "4f6ff7f71c4a2ad3ac0f5cdfeb0bbdbf615ae0033bd68ac2b1d6e60827085456"
+    }
+  },
+  "source_code_sha256": {
+    "quantcore/information/store.py": "4fa928dea7775eb51b503905e764eee217de805f9ed0156817e3d3390e594874",
+    "quantcore/information/service.py": "81bcf599c9d5b32bfb3034c2c20898812f94f88f178f5c7e0cea98f7a5274550",
+    "quantcore/information/collector.py": "b0c41947d1ad575a3ab89816192fe82683701f2f1e9e1f6a7e766ba8ecdea7eb",
+    "quantcore/information/__init__.py": "57d91bfaae6e02b696749371a83d13974216d29399d0569ddde52957b3d552d9",
+    "quantcore/information/institutions.py": "4b5cc76043b002216aa389e7e35115ffb8ffc1301f240069b05e35405c871d1a",
+    "quantcore/information/news.py": "a67fd6f3027b6ea48bfcf413865649a7f49641b7b269aaa0c11bf68570436497",
+    "quantcore/fundamentals/analysis.py": "0f2c4d658b1866541c874dc5c92864a5f5557069c119ff6c1ca0657aa6d9cdf7",
+    "quantcore/fundamentals/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "quantcore/fundamentals/sec_facts.py": "62fec5a254e7aea5a5b71b3676a757227573e59ca345aca8093dfd8a36383f6d"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "checked_at": "2026-11-25T02:58:02.639430+00:00",
+  "mode": "paper",
+  "budget_usd": "100000",
+  "old_budget_usd": "5000",
+  "budget_revision": 1,
+  "symbol_slot_usd": "20000",
+  "active_target_fraction": "0.95",
+  "cash_only": true,
+  "margin_buying_power_used": false,
+  "canceled_previous_orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    }
+  ],
+  "active_orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "53",
+      "status": "accepted",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "48",
+      "status": "accepted",
+      "filled_qty": "0"
+    }
+  ],
+  "positions_count": 0,
+  "max_buy_limit_notional_usd": "37625.75",
+  "next_open": "2026-11-25T09:30:00-05:00",
+  "repeat_execution": {
+    "post_requests": 0,
+    "new_orders": 0
+  },
+  "automation": {
+    "registered": true,
+    "label": "com.quantcore.paper-trading",
+    "interval_seconds": 300,
+    "last_exit_code": 0,
+    "heartbeat_at": "2026-11-25T02:55:47.392252+00:00",
+    "parent_process_id": 1,
+    "phase": "session_already_evaluated",
+    "budget_usd": "100000",
+    "budget_revision": 1,
+    "os_folder_access": "launchd-owned tick completed successfully",
+    "paused": false
+  },
+  "history_retained": true,
+  "tests": {
+    "passed": 139,
+    "paper_cases": 57,
+    "new_budget_cases": 6,
+    "duration_seconds": 29.66,
+    "warnings": 1,
+    "statement_coverage_percent": 96.21141253507952
+  },
+  "source_sha256": {
+    "quantcore/paper/__init__.py": "5f4d89f790b98205af20318d051382527573e96ca501685c0383b1fd7f1ea971",
+    "quantcore/paper/automation.py": "a54bb97c2f0f9890742c842b04bcddd8d2d2a21533960b0191f08ef8090da8d4",
+    "quantcore/paper/budget.py": "14ea550d06edae30678bd51899a821be61f2d74467015ad8ce650fc68dc37032",
+    "quantcore/paper/client.py": "9a400cc9167fdcf9d1953feae8bf90983cd9c54cebdcf395e8e729cfe1bba6b4",
+    "quantcore/paper/market.py": "979779c23efee59eebce86b9163ca40c221849e399fc43309ae4cfe734d0ff72",
+    "quantcore/paper/policy.py": "cbb1f117afca8e3edf94947ce2aa794053cea5588ab89b9bbc5f2d52c1246330",
+    "quantcore/paper/runner.py": "36261d016de29504ee36a61d9e63dca1bb78af3393fa2035642ab015a046f35a"
+  }
+}

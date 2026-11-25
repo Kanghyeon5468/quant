@@ -1,0 +1,117 @@
+{
+  "checked_at": "2026-11-25T04:21:01.639919+00:00",
+  "automation_phase": "session_already_evaluated",
+  "new_orders_during_activation": 0,
+  "budget_usd": "100000",
+  "budget_revision": 1,
+  "positions_count": 0,
+  "orders": [
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "AAPL",
+      "side": "buy",
+      "qty": "53",
+      "status": "accepted",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "2",
+      "status": "canceled",
+      "filled_qty": "0"
+    },
+    {
+      "symbol": "TSLA",
+      "side": "buy",
+      "qty": "48",
+      "status": "accepted",
+      "filled_qty": "0"
+    }
+  ],
+  "risk": {
+    "status": "ok",
+    "data_status": "ok",
+    "daily_return": 0.0,
+    "drawdown": 0.0,
+    "current": {
+      "gross_weight": 0.0,
+      "position_weights": {
+        "AAPL": 0.0,
+        "MSFT": 0.0,
+        "NVDA": 0.0,
+        "TSLA": 0.0,
+        "SPY": 0.0
+      },
+      "sector_weights": {
+        "UNCLASSIFIED": 0.0
+      },
+      "correlated_groups": [],
+      "portfolio_volatility": 0.0
+    },
+    "projected": {
+      "gross_weight": 0.3762575,
+      "position_weights": {
+        "AAPL": 0.18962870000000004,
+        "MSFT": 0.0,
+        "NVDA": 0.0,
+        "TSLA": 0.1866288,
+        "SPY": 0.0
+      },
+      "sector_weights": {
+        "UNCLASSIFIED": 0.3762575
+      },
+      "correlated_groups": [],
+      "portfolio_volatility": 0.15564601082899918
+    },
+    "risk_policy_version": "5d7bc1a512637b45",
+    "halt_rules": []
+  },
+  "order_policy_version": "814c736a623c72b6",
+  "tests": {
+    "passed": 171,
+    "duration_seconds": 42.34,
+    "statement_coverage_percent": 94.43513241702983,
+    "ruff": "passed",
+    "frontend_build": "passed",
+    "browser_actual": 12,
+    "browser_demo": 4,
+    "browser_errors": 0
+  },
+  "notebook": {
+    "executed_at": "2026-11-25T04:18:07.344908+00:00",
+    "kernel": "quantcore-py312",
+    "code_cells": 5,
+    "png_outputs": 2,
+    "cell_errors": 0,
+    "actual_scenarios": 4,
+    "sessions_per_scenario": 252
+  },
+  "scope": "Alpaca paper only; no live orders; no new or canceled orders in activation; losses and limitations retained",
+  "background_verification": {
+    "checked_at": "2026-11-25T04:21:07.486854+00:00",
+    "parent_process_id": 1,
+    "phase": "session_already_evaluated",
+    "risk_status": "ok",
+    "risk_stale": false,
+    "launchd": [
+      "state = not running",
+      "runs = 21",
+      "last exit code = 0"
+    ],
+    "api_health": {
+      "status": "ok",
+      "execution_mode": "research",
+      "data_mode": "historical",
+      "data_source": "alpaca"
+    },
+    "result_scenarios": 4,
+    "matched_risk_policy": "5d7bc1a512637b45"
+  }
+}

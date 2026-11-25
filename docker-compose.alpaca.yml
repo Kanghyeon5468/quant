@@ -1,0 +1,16 @@
+services:
+  api:
+    user: "${QUANTCORE_MARKET_UID:-501}:${QUANTCORE_MARKET_GID:-20}"
+    environment:
+      QUANTCORE_DATA_SOURCE: alpaca
+      QUANTCORE_MARKET_DATA_DIR: /market
+      QUANTCORE_PORTFOLIO_REPORT_DIR: /reports
+      QUANTCORE_PAPER_RISK_DIR: /paper-risk
+      QUANTCORE_PAPER_PERFORMANCE_DIR: /paper-performance
+      QUANTCORE_CORPORATE_DIR: /corporate
+    volumes:
+      - ./datasets:/market:ro
+      - ./docs:/reports:ro
+      - ./artifacts/paper_risk_public:/paper-risk:ro
+      - ./artifacts/paper_performance_public:/paper-performance:ro
+      - ./artifacts/corporate_public:/corporate:ro

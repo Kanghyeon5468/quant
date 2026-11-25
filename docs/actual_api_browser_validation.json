@@ -1,0 +1,36 @@
+{
+  "actual_checks_passed": 20,
+  "actual_checks": [
+    "actual_source_universe_chart_and_websocket",
+    "actual_asset_selection",
+    "actual_sec_financials_no_demo_dcf",
+    "actual_indicators_and_paper_sma60",
+    "actual_factors_and_unavailable_gics_no_substitute",
+    "actual_news_13f_links_stale_manager_and_missing_earnings",
+    "chronological_validation_periods_and_oos_chart",
+    "whole_account_portfolio_replay",
+    "actual_two_strategy_backtests",
+    "actual_portfolio_and_risk",
+    "actual_ml_evaluation",
+    "independent_live_paper_risk_report",
+    "paper_actual_account_pnl_and_redacted_api",
+    "official_sic_groups_etf_and_corporate_reconciliation",
+    "paper_accepted_orders_not_claimed_as_fills",
+    "paper_order_signal_evidence_and_provenance",
+    "paper_history_revision_filter_and_honest_comparison",
+    "paper_mobile_layout",
+    "actual_monitor_language_and_keyboard",
+    "actual_mobile_layout"
+  ],
+  "demo_ui_checks_passed": 5,
+  "demo_ui_checks": [
+    "demo_source_and_asset_registry",
+    "demo_dcf_preserved",
+    "demo_factor_weights_preserved",
+    "demo_backtest_preserved",
+    "demo_does_not_expose_actual_paper_account"
+  ],
+  "demo_test_scope": "same built frontend; isolated DemoProvider TestClient and intercepted WS",
+  "actual_test_scope": "running localhost Compose services; Alpaca historical snapshots",
+  "browser_errors": []
+}
