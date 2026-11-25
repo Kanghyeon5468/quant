@@ -1,8 +1,8 @@
 # Known issues and unimplemented scope
 
 ## Data and financial validity
-- Only deterministic synthetic USD daily equities are connected. Other asset classes are schema categories, not acquired datasets. No actual-market backtest is reported.
-- Weekday calendar has no exchange holidays/DST or intraday ticks. Daily volume is not a reconstructed order book. Real market impact, short borrow, funding and trading calendars require separate implementation.
+- The default web dashboard/old notebook use synthetic equities. A separate actual AAPL/MSFT/NVDA/TSLA/SPY IEX snapshot and notebook were added2026-11-25. Real fundamentals, additional markets and a full historical tradable universe remain absent.
+- Synthetic calendar remains weekdays. Actual equities use XNYS holidays/DST/early closes and regular-session1Min aggregation. IEX is not consolidated SIP; modeled fills, volume limits and costs do not reconstruct an order book. Short borrow/funding remain unsupported.
 - Financial data is annual, fictional and nonfinancial. No XBRL taxonomy reconciliation, TTM, revised-vintage financial backtest or real statement verification. CCC/Altman/Piotroski/Beneish remain explicitly unsupported.
 - DCF is an assumption calculator; WACC is supplied, not estimated. Only growth is randomized in Monte Carlo; it is not a calibrated joint distribution or company forecast.
 - Fixed synthetic reference market caps are used in factor value scores. Only 6 assets; cross-sectional results are too small for institutional factor validation.

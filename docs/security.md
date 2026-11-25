@@ -1,6 +1,6 @@
 # Security and operational boundary
 
-Default: local Demo/Research only. No exchange clients, broker credentials, order endpoints or live mode. API keys from previous projects are never read. `.env`, local databases, node_modules, generated browser artifacts are ignored.
+Default: local Demo/Research only. No order endpoints or live mode. On2026-11-25 the user explicitly authorized reading the existing stock project's Alpaca settings for market-data GET requests. Credentials are not copied or logged; the client allows only two HTTPS paths on data.alpaca.markets. No account endpoint is called and no prior dataset is reused. `.env`, local databases, raw real-market snapshots and generated execution files are ignored.
 
 `QUANTCORE_API_TOKEN` optionally protects `/api/*` with constant-time bearer comparison. Capability is a single researcher role: read data and request calculations; no administration or order submission API exists. This is not multi-user RBAC. `/health` is anonymous. Rate limit: 180 API requests per client/IP per minute, in-process memory. CORS restricts configured local dashboard origins.
 

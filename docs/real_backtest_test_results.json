@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-25",
+  "passed": 82,
+  "warnings": 1,
+  "duration_seconds": 12.74,
+  "statement_coverage_percent": 96.55172413793103,
+  "scope": [
+    "quantcore",
+    "apps/api"
+  ],
+  "actual_result_comparisons": 15,
+  "financial_checks": [
+    "actual session/DST/holiday/early close",
+    "dividend entitlement and cash availability",
+    "split share/volume/impact units",
+    "cash and inventory/NAV conservation",
+    "future bar and future split invariance",
+    "market-data GET-only endpoint restriction",
+    "partial collection failure",
+    "snapshot hash tampering"
+  ],
+  "raw_data_in_git": false
+}

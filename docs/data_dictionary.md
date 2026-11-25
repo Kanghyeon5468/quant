@@ -9,7 +9,7 @@
 | open/high/low/close | finite positive raw USD/share quotes, valid high/low envelope |
 | volume | nonnegative integer shares per synthetic daily bar |
 | currency | USD or KRW contract; current dataset USD only; no implicit FX conversion |
-| source / mode | `quantcore-synthetic-v1` / `synthetic`; not delayed/realtime/historical |
+| source / mode | demo:`quantcore-synthetic-v1` / `synthetic`; separate actual notebook:`alpaca-iex-regular-1min` / `historical`; no realtime claim |
 | period_end | annual accounting period, not availability time |
 | published_at | financial statement disclosure time |
 | financial available_at | disclosure/processing availability; normalized UTC |

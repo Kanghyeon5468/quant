@@ -1,5 +1,7 @@
 # Backtesting methodology
 
+2026-11-25 extension: [actual US-equity methodology and results](REAL_STOCK_BACKTEST.md) uses XNYS calendars, raw regular-session minute aggregates and dividend receivables/payment dates in the same engine. The following original synthetic experiment remains preserved separately.
+
 Data: deterministic synthetic daily OHLCV, seed 20261124, 6 fictional nonfinancial USD equities, 780 weekdays from 2023-01-02 to 2025-12-26. Evaluate the final 252 bars. This does not establish real-market profitability, survivorship robustness or exchange-specific execution quality.
 
 Strategies implement `targets(frame)` using information through each completed close:
