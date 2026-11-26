@@ -104,6 +104,15 @@ class Journal:
              json.dumps(response) if response is not None else None, datetime.now(timezone.utc).isoformat()))
         self.db.commit()
 
+    def external_records(self):
+        exists = self.db.execute("SELECT 1 FROM sqlite_master WHERE name='approved_external_orders'").fetchone()
+        return [json.loads(raw) for raw, in self.db.execute(
+            'SELECT data FROM approved_external_orders ORDER BY order_id')] if exists else []
+
+    def accounting_records(self):
+        # Approved manual closures affect inventory/P&L, never automated execution statistics.
+        return self.records()+self.external_records()
+
     def reconcile(self, client):
         for record in self.records():
             if record['state'] in TERMINAL | {'rejected_locally'}:
@@ -124,10 +133,12 @@ class Journal:
         self.db.execute('CREATE TABLE IF NOT EXISTS order_evidence (client_id TEXT PRIMARY KEY, data TEXT)')
         self.db.execute('CREATE TABLE IF NOT EXISTS decision_runs (session TEXT PRIMARY KEY, data TEXT)')
         self.db.execute('INSERT OR IGNORE INTO decision_runs VALUES (?, ?)',
-            (plan['execution_session']+':r'+str(plan.get('budget_revision', 0)), json.dumps({
+            (plan['execution_session']+':r'+str(plan.get('budget_revision', 0))+(':a'+plan['decision_policy_version'][:6] if plan.get('decision_policy_version') else '')+(':m'+plan['manual_request_id'] if plan.get('manual_request_id') else ''), json.dumps({
                 'captured_at': datetime.now(timezone.utc).isoformat(),
+                'manual_request_id': plan.get('manual_request_id'),
+                'execution_reference': plan.get('execution_reference'),
                 'execution_session': plan['execution_session'], 'signal_session': plan.get('signal_session'),
-                'decisions': plan.get('decisions', []), 'rejected': plan.get('risk', {}).get('rejected', [])})))
+                'decisions': plan.get('decisions', []), 'information_analysis': plan.get('information_analysis'), 'rejected': plan.get('risk', {}).get('rejected', [])})))
         candidates = plan['orders']+[r['payload'] for r in self.records() if r['state'] not in TERMINAL]
         policy = OrderPolicy.model_validate(plan['order_policy'])
         for order in candidates:

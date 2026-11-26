@@ -1,0 +1,219 @@
+.title {
+  font-size: 13px;
+  letter-spacing: .35px;
+  line-height: 1.5;
+}
+
+.body {
+  display: grid;
+  gap: 12px;
+  padding: 16px 20px 20px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.body > * {
+  min-width: 0;
+}
+
+.body h3 {
+  font-weight: 650;
+}
+
+.lead {
+  font-size: 15px;
+}
+
+.note, .metadata {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 3px 12px;
+}
+
+.source {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
+.source:focus-visible, .analysisCard summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.warning, .emptyFiling {
+  padding: 10px 12px;
+  background: #152131;
+  border-radius: 5px;
+  color: #bfccdf;
+}
+
+.table {
+  table-layout: fixed;
+  white-space: normal;
+}
+
+.table th, .table td {
+  padding: 10px;
+  vertical-align: top;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.table thead th {
+  color: #a0b0c8;
+}
+
+.table tbody th {
+  color: #c1cee1;
+  background: none;
+  border-top: 1px solid #1c293b;
+}
+
+.comparison {
+  display: grid;
+  gap: 7px;
+}
+
+.newsList {
+  display: grid;
+  border-top: 1px solid var(--border);
+}
+
+.newsList > li {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.newsList h3 {
+  font-size: 14px;
+}
+
+.body > button {
+  justify-self: start;
+}
+
+.cards, .filings {
+  display: grid;
+  gap: 10px;
+}
+
+.analysisCard, .filing {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #111b28;
+}
+
+.analysisCard summary {
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.analysisSummary {
+  display: inline-grid;
+  width: calc(100% - 1.5em);
+  gap: 3px;
+  vertical-align: top;
+}
+
+.analysisDetails {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.claims > li {
+  display: grid;
+  gap: 6px;
+}
+
+.claims > li + li {
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid var(--border);
+}
+
+.claims figure {
+  padding: 8px 12px;
+  border-left: 2px solid #36566a;
+  background: #0d1622;
+  color: #c1cee1;
+}
+
+.claims figcaption {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.filings {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr));
+  align-items: start;
+}
+
+.filing {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+}
+
+.filingHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.badge, .staleBadge {
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #193536;
+  color: #a1e0d4;
+  font-size: 11px;
+}
+
+.staleBadge {
+  background: #3b3122;
+  color: #f2cd8c;
+}
+
+.filingMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 115px), 1fr));
+  gap: 8px 10px;
+  padding: 9px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.filingMetrics + .filingMetrics {
+  margin-top: 9px;
+}
+
+.filingMetrics dt {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.filingMetrics dd {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+  .title { padding: 13px 15px; }
+  .body { padding: 12px 14px 15px; }
+  .table th, .table td { padding: 7px 5px; }
+  .filing { padding: 12px; }
+}

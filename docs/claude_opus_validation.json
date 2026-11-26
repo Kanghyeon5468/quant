@@ -1,0 +1,204 @@
+{
+  "checked_at": "2026-11-25T14:47:33.296357+00:00",
+  "provider": "anthropic",
+  "model": "claude-opus-5-5",
+  "api_version": "2026-10-21",
+  "model_lookup": {
+    "status": "connected",
+    "checked_at": "2026-11-25T14:28:08.828220+00:00",
+    "provider": "anthropic",
+    "model": "claude-opus-5-5",
+    "display_name": "Claude Opus 5.5",
+    "http_status": 200,
+    "enabled": true,
+    "generative_requests_in_this_check": 0
+  },
+  "actual_analyses": 12,
+  "by_kind": {
+    "news": 8,
+    "earnings_release": 4
+  },
+  "verified_claims": 57,
+  "request_status_counts": {
+    "ok": 12
+  },
+  "usage_tokens": {
+    "input_tokens": 53150,
+    "output_tokens": 8839
+  },
+  "snapshot_id": "20261125T144428362542Z",
+  "evidence_reverified": true,
+  "analyses": [
+    {
+      "kind": "earnings_release",
+      "symbols": [
+        "AAPL"
+      ],
+      "source_url": "https://www.apple.com/newsroom/2026/07/apple-reports-third-quarter-results/",
+      "source_sha256": "96d6b9f7093eaa8bc5e7ea0588368b79a3d22c828442d1a029a11942b4236991",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 8,
+      "analyzed_at": "2026-11-25T14:28:19.998722+00:00",
+      "available_at": "2026-11-25T14:28:19.998861+00:00"
+    },
+    {
+      "kind": "earnings_release",
+      "symbols": [
+        "AAPL"
+      ],
+      "source_url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/",
+      "source_sha256": "e5259e2a1576342ecfb65c7b9b901174084098ae36bf4804e1849ebf2ba70ef5",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 8,
+      "analyzed_at": "2026-11-25T14:28:34.502713+00:00",
+      "available_at": "2026-11-25T14:28:34.502745+00:00"
+    },
+    {
+      "kind": "earnings_release",
+      "symbols": [
+        "NVDA"
+      ],
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "source_sha256": "977055343b39d5be3dca9c5b3973ea5bb3d7eb8f8bf542b662ecb5b3fb706e98",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 9,
+      "analyzed_at": "2026-11-25T14:28:50.002800+00:00",
+      "available_at": "2026-11-25T14:28:50.002899+00:00"
+    },
+    {
+      "kind": "earnings_release",
+      "symbols": [
+        "NVDA"
+      ],
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+      "source_sha256": "3c059a4fe29572e485989713281fd52b9fa409e435e706214ca09047187f7b4a",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 10,
+      "analyzed_at": "2026-11-25T14:31:21.501469+00:00",
+      "available_at": "2026-11-25T14:31:21.501562+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "AAPL"
+      ],
+      "source_url": "https://www.koreaherald.com/article/10949349",
+      "source_sha256": "33c320a0da5b254780600d53d8fc01f946c153139da857b8c4e6e9429e449378",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 3,
+      "analyzed_at": "2026-11-25T14:31:26.492390+00:00",
+      "available_at": "2026-11-25T14:31:26.492433+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "TSLA"
+      ],
+      "source_url": "https://www.marketscreener.com/news/tesla-faces-delay-to-secure-eu-wide-approval-for-assisted-self-driving-tech-ce7851dbd088f425",
+      "source_sha256": "4763c8d1da68f568b73e276162b8bdb32c70263c6d23e1fcf3ef0a1693b6d88f",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 2,
+      "analyzed_at": "2026-11-25T14:31:30.326366+00:00",
+      "available_at": "2026-11-25T14:31:30.326405+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "MSFT"
+      ],
+      "source_url": "https://aimagazine.com/news/why-the-aa-relies-on-microsoft-ai-for-vehicle-diagnostics",
+      "source_sha256": "a709b046cc56af6097f5e9de74e2a16c8a3e8c3abad8ec1e75d8bea5917797c4",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 4,
+      "analyzed_at": "2026-11-25T14:41:35.241018+00:00",
+      "available_at": "2026-11-25T14:41:35.241083+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "TSLA"
+      ],
+      "source_url": "https://www.moomoo.com/stock/TSLA-CA?chain_id=Name1K9-3FXPhg.1l14fs0&global_content=%7B%22promote_id%22%3A13764,%22sub_promote_id%22%3A107,%22f%22%3A%22www.moomoo.com%2Fetfs%2FEMDV-US%2Fnews%22%7D",
+      "source_sha256": "80031eba5abb90f560048ea997516e676653b4e4d480cf4d11ab3e29abf2f999",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 2,
+      "analyzed_at": "2026-11-25T14:41:39.125133+00:00",
+      "available_at": "2026-11-25T14:41:39.125262+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "NVDA"
+      ],
+      "source_url": "https://www.marketscreener.com/news/nvidia-s-huang-reportedly-apologizes-to-staff-says-he-is-in-therapy-ce7851dbd088f321",
+      "source_sha256": "5dbe2a2c24e0eaf320d6c3231a5428441f37d21199b6a73806ac97c27e545e8a",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 2,
+      "analyzed_at": "2026-11-25T14:41:43.941809+00:00",
+      "available_at": "2026-11-25T14:41:43.941932+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "NVDA"
+      ],
+      "source_url": "https://www.globenewswire.com/news-release/2026/11/23/3408381/0/en/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director.html",
+      "source_sha256": "041105e0e2fce91f92ce91d2bab2db0bd218259aefbef60a6b750607a6c8ed91",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 4,
+      "analyzed_at": "2026-11-25T14:44:17.857273+00:00",
+      "available_at": "2026-11-25T14:44:17.857460+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "MSFT"
+      ],
+      "source_url": "https://www.prnewswire.com/news-releases/v2x-expands-collaboration-with-microsoft-to-advance-the-next-generation-of-ai-powered-mission-operations-302947723.html",
+      "source_sha256": "94d8c1a85b66d60d6439dc759c0c03cd5051bc53f3c8c7145637d613583885f6",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 3,
+      "analyzed_at": "2026-11-25T14:44:23.277112+00:00",
+      "available_at": "2026-11-25T14:44:23.277203+00:00"
+    },
+    {
+      "kind": "news",
+      "symbols": [
+        "TSLA"
+      ],
+      "source_url": "https://www.morningstar.com/news/dow-jones/202611236261/tesla-shares-gain-on-new-self-driving-software-amid-broader-market-rally",
+      "source_sha256": "edd87a82ef2593e46a1a6aa19f855b2daedea91f7c50a29c4cae890572ca4e4d",
+      "model": "claude-opus-5-5",
+      "response_model": "claude-opus-5-5",
+      "claims": 2,
+      "analyzed_at": "2026-11-25T14:44:28.361007+00:00",
+      "available_at": "2026-11-25T14:44:28.361065+00:00"
+    }
+  ],
+  "limits": {
+    "requests_per_refresh": 3,
+    "requests_per_day": 20
+  },
+  "code_sha256": {
+    "quantcore/analysis/worker.py": "11321255266cade3c1d6da113299b1a11e9ed8f3e70389e9162a41900a492225",
+    "quantcore/analysis/__init__.py": "2c460f65b82d7b8b0381e741c2856853ffa1069fbf55e4cdda63dcd1acee6486",
+    "quantcore/analysis/llm.py": "6677faf0a736619aee0600ee39afbc9598fd43c6728f9db7581735e83a16ab84",
+    "quantcore/analysis/anthropic.py": "38b6be8c59b25c2614045307c48e8a801ccdd4c10694d5b4bf5c8f367416650c"
+  },
+  "notes": [
+    "token counts are provider-reported usage, not a billing statement",
+    "model interpretations are not calibrated price probabilities or verified performance improvement",
+    "existing paper session timing, order dedup and risk limits remain in force"
+  ]
+}

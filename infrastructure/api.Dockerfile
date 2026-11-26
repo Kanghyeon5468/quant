@@ -3,6 +3,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 QUANTCORE_DATA_DIR=/data
 WORKDIR /app
 COPY pyproject.toml requirements.lock ./
 COPY quantcore ./quantcore
+COPY configs ./configs
 COPY apps/__init__.py ./apps/__init__.py
 COPY apps/api ./apps/api
 COPY apps/worker ./apps/worker

@@ -1,16 +1,35 @@
+import hashlib
+import json
 import secrets
 import time
 from collections import defaultdict, deque
 
 
 class AccessControl:
-    def __init__(self, token='', limit=180):
+    def __init__(self, token='', limit=180, users_json=''):
         self.token, self.limit = token, limit
+        self.users = json.loads(users_json) if users_json else {}
+        if not isinstance(self.users, dict) or (users_json and not self.users):
+            raise ValueError('configure at least one API user')
+        for digest, role in self.users.items():
+            if len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest) or role not in ('viewer', 'researcher'):
+                raise ValueError('API users require SHA-256 hex digests and viewer/researcher roles')
         self.windows = defaultdict(deque)
         self.tickets = {}
 
+    def role(self, authorization):
+        if self.users:
+            scheme, _, key = (authorization or '').partition(' ')
+            if scheme != 'Bearer' or not key:
+                return None
+            digest = hashlib.sha256(key.encode()).hexdigest()
+            return next((role for expected, role in self.users.items() if secrets.compare_digest(digest, expected)), None)
+        if not self.token or secrets.compare_digest(authorization or '', 'Bearer '+self.token):
+            return 'researcher'
+        return None
+
     def authorized(self, authorization):
-        return not self.token or secrets.compare_digest(authorization or '', 'Bearer '+self.token)
+        return self.role(authorization) is not None
 
     def allow(self, client):
         now = time.monotonic()

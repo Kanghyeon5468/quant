@@ -1,1 +1,1 @@
-{"enabled":true,"sources":["SEC CompanyFacts","SEC 13F-HR","Alpaca News"],"earnings_calls":false,"llm":false}
+{"enabled":true,"sources":["SEC CompanyFacts","SEC 13F-HR","Alpaca News"],"earnings_calls":true,"macro_public":true,"crypto_public":true,"llm_configuration":"local .env opt-in; disabled by default"}

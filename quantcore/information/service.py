@@ -112,6 +112,28 @@ class InformationService:
                 }
                 for m in managers
             ]
+        earnings = self.snapshot("earnings")
+        documents = []
+        if earnings:
+            for row in json.loads((earnings[0] / "documents.json").read_text()):
+                if aware(row["available_at"]) <= cutoff and (not symbol or row["symbol"] == symbol):
+                    documents.append(
+                        {k: v for k, v in row.items() if k not in ("segments", "raw_file", "text_file")}
+                    )
+        analysis = self.snapshot("analysis")
+        analyses = []
+        if analysis:
+            analyses = [
+                r
+                for r in json.loads((analysis[0] / "analyses.json").read_text())
+                if r["status"] == "ok"
+                and aware(r["available_at"]) <= cutoff
+                and (not symbol or symbol in r["symbols"])
+            ]
+        activation_file = self.directory / "information/policy_activation.json"
+        activation = json.loads(activation_file.read_text()) if activation_file.exists() else None
+        if activation and aware(activation["activated_at"]) > cutoff:
+            activation = None
         worker = self.directory / "information/worker_status.json"
         worker_status = json.loads(worker.read_text()) if worker.exists() else {}
         return {
@@ -139,16 +161,47 @@ class InformationService:
                 "snapshot": institutions[1] if institutions else None,
             },
             "earnings_calls": {
-                "status": "unavailable",
-                "reason": "공식 녹취록·허용 음성 수집 연결 없음. 어닝콜 자료는 생성하지 않습니다.",
+                "status": ("available" if any(d["kind"] == "transcript" for d in documents) else "partial")
+                if documents
+                else "unavailable",
+                "documents": documents,
+                "comparisons": [
+                    r
+                    for r in json.loads((earnings[0] / "comparisons.json").read_text())
+                    if (not symbol or r["symbol"] == symbol) and aware(r["available_at"]) <= cutoff
+                ]
+                if earnings and (earnings[0] / "comparisons.json").exists()
+                else [],
+                "coverage": earnings[1].get("coverage", {}) if earnings else {},
+                "reason": "공식 실적 문서 수집본을 제공합니다. 녹취록·음성은 각 자료 유형과 수집 상태를 확인하세요."
+                if documents
+                else "공식 어닝콜·실적 문서 수집본 없음. 모의자료로 대체하지 않습니다.",
+                "failures": earnings[1].get("failures", []) if earnings else [],
             },
             "llm": {
-                "status": "unavailable",
-                "reason": "설정된 분석 모델/API 키 없음. 뉴스는 규칙 기반 키워드·수치 추출만 제공합니다.",
+                "status": "available"
+                if analyses
+                else "pending"
+                if analysis and analysis[1].get("readiness", {}).get("status") == "configured"
+                else "unavailable",
+                "reason": (analysis[1].get("readiness", {}).get("reason") if analysis else None)
+                or (
+                    "원문 근거 검증을 통과한 모델 해석입니다."
+                    if analyses
+                    else "모델 설정 완료; 해당 종목의 실제 분석을 기다립니다."
+                    if analysis and analysis[1].get("readiness", {}).get("status") == "configured"
+                    else "키·모델 설정 후 실제 분석을 실행합니다. 생성한 대체 결과는 없습니다."
+                ),
+                "analyses": analyses[:100],
+                "configuration": analysis[1].get("readiness", {}) if analysis else {},
+                "failures": analysis[1].get("failures", []) if analysis else [],
             },
             "model_integration": {
-                "status": "research_only",
-                "reason": "수집을 시작한 현재 시점 이전의 관측 이력이 없어 기존 매매·백테스트 입력에 소급 반영하지 않습니다.",
+                "status": "active" if activation else "preview",
+                "activation": activation,
+                "reason": "재무·기관·뉴스 증거로 새 paper 주문의 목표 비중을 조정합니다. LLM은 실제 완료된 결과만 사용하며 과거 백테스트에 소급하지 않습니다."
+                if activation
+                else "현재 자료로 주문 비중 조정을 미리 볼 수 있습니다. paper 정책 활성화 상태는 별도로 표시합니다.",
             },
         }
 

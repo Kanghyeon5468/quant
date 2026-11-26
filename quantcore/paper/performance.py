@@ -102,8 +102,10 @@ def execution_rows(records, ledger, models, evidence):
         ev = evidence.get(cid, {})
         safe_evidence = {k: ev[k] for k in ('strategy', 'signal_close', 'sma_60', 'reference_close',
             'signal_available_at', 'target_weight_within_slot', 'risk_rules', 'captured_at', 'evidence_status',
-            'risk_policy_version', 'order_policy_version', 'snapshot_id') if k in ev}
-        revision = int(cid.rsplit('-r', 1)[1]) if re.search(r'-r\d+$', cid) else 0
+            'risk_policy_version', 'order_policy_version', 'snapshot_id', 'information',
+            'execution_reference_type', 'execution_reference_collected_at', 'execution_reference_bar_end') if k in ev}
+        revision_match = re.search(r'-r(\d+)(?:-a[0-9a-f]+)?(?:-m\d+)?$', cid)
+        revision = int(revision_match[1]) if revision_match else 0
         broker_filled = number(remote.get('filled_qty', 0))
         fraction = broker_filled/number(order['qty'])
         result.append({'key': hashlib.sha256(cid.encode()).hexdigest()[:12], 'symbol': symbol,
@@ -156,6 +158,7 @@ def compare_backtest(history, root, since):
 
 
 def _collect(client, root, journal):
+    journal.reconcile(client)
     db = journal.db
     for sql in [
         'CREATE TABLE IF NOT EXISTS performance_meta (id INTEGER PRIMARY KEY, data TEXT)',
@@ -237,7 +240,7 @@ def _collect(client, root, journal):
     stored = [json.loads(r[0]) for r in db.execute('SELECT data FROM performance_activities')]
     reference = load_reference(root)
     corporate_events = reference['actions'] if reference else []
-    ledger = own_fill_ledger(records, stored, positions, corporate_events, now.isoformat())
+    ledger = own_fill_ledger(journal.accounting_records(), stored, positions, corporate_events, now.isoformat())
     if sections['activities'] != 'ok':
         ledger.update(status='incomplete', realized_gross=None, unrealized_gross=None)
     non_trade = [a for a in stored if a.get('activity_type') != 'FILL']
@@ -268,7 +271,7 @@ def _collect(client, root, journal):
         'mode': 'paper', 'currency': 'USD', 'status': 'ok' if not errors and ledger['status'] == 'reconciled' else 'degraded',
         'checked_at': datetime.now(timezone.utc).isoformat(), 'broker_observed_at': now.isoformat(),
         'collection_errors': errors, 'sections': sections,
-        'source': 'Alpaca paper account / portfolio history / FILL activities + own journal',
+        'source': 'Alpaca paper account / FILL activities + own journal + explicitly approved manual closures',
         'tracking_started_at': meta['started_at'], 'history_checked_at': meta.get('history_checked_at'),
         'activities_checked_at': meta.get('activities_checked_at'),
         'history_base_value': meta.get('history_base_value'), 'history_base_value_asof': meta.get('history_base_value_asof'),
@@ -281,10 +284,15 @@ def _collect(client, root, journal):
                 'non_trade_activity_count': len(non_trade), 'cashflow_review_required': bool(flows),
                 'cashflow_net_since_tracking': float(sum((number(a['net_amount']) for a in flows), ZERO)),
                 'unknown_fills': ledger['unknown_fills'],
-                'basis': 'actual own FILL events, average cost, USD gross; fees/corporate actions require review'},
+                'basis': 'own and explicitly approved manual-closure FILL events, average cost, USD gross'},
         'execution': execution_metrics(rows),
         'current_revision_execution': execution_metrics([r for r in rows if r['budget_revision'] == journal.revision()]),
-        'orders': rows, 'positions': safe_positions, 'daily_history': daily, 'observations': observations,
+        'orders': rows, 'approved_manual_closures': [
+            {'symbol': r['payload']['symbol'], 'side': r['payload']['side'],
+             'qty': int(r['payload']['qty']), 'filled_average_price': r['response']['filled_avg_price'],
+             'filled_at': r['response'].get('filled_at'), 'origin': 'user_confirmed_manual_closure'}
+            for r in journal.external_records()],
+        'positions': safe_positions, 'daily_history': daily, 'observations': observations,
         'comparison': comparison, 'latest_decisions': json.loads(decisions[0]) if decisions else None,
         'notes': ['체결률은 제출 주문 기준이며 취소 주문도 포함합니다.',
                   '전일 기준가 대비 변화는 가격 갭을 포함하며 순수 체결 슬리피지가 아닙니다.',

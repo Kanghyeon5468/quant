@@ -222,16 +222,56 @@ def test_liquidity_history_uses_current_split_share_units_without_double_adjustm
     import pandas as pd
 
     from quantcore.paper.corporate import share_unit_histories
-    journal=Journal(tmp_path)
-    journal.db.execute('CREATE TABLE corporate_adjustments (event_id TEXT PRIMARY KEY,data TEXT)')
-    journal.db.execute('INSERT INTO corporate_adjustments VALUES (?,?)',('split',json.dumps({
-        'symbol':'AAPL','type':'split','effective_at':'2026-11-24T14:30:00Z','before_qty':'10','after_qty':'20'})))
-    frame=pd.DataFrame({'timestamp':pd.to_datetime(['2026-11-23T21:00:00Z','2026-11-24T21:00:00Z']),
-        'available_at':pd.to_datetime(['2026-11-23T21:01:00Z','2026-11-24T21:01:00Z']),
-        'close':[100.,50.],'signal_close':[100.,100.],'volume':[100.,200.]})
-    adjusted=share_unit_histories({'AAPL':frame},journal,'2026-11-25T13:00:00Z')['AAPL']
-    assert adjusted.volume.tolist()==[200.,200.]
-    assert frame.volume.tolist()==[100.,200.]
-    before_new_daily=share_unit_histories({'AAPL':frame.iloc[:1]},journal,'2026-11-24T18:00:00Z')['AAPL']
-    assert before_new_daily.volume.tolist()==[200.]
+
+    journal = Journal(tmp_path)
+    journal.db.execute("CREATE TABLE corporate_adjustments (event_id TEXT PRIMARY KEY,data TEXT)")
+    journal.db.execute(
+        "INSERT INTO corporate_adjustments VALUES (?,?)",
+        (
+            "split",
+            json.dumps(
+                {
+                    "symbol": "AAPL",
+                    "type": "split",
+                    "effective_at": "2026-11-24T14:30:00Z",
+                    "before_qty": "10",
+                    "after_qty": "20",
+                }
+            ),
+        ),
+    )
+    frame = pd.DataFrame(
+        {
+            "timestamp": pd.to_datetime(["2026-11-23T21:00:00Z", "2026-11-24T21:00:00Z"]),
+            "available_at": pd.to_datetime(["2026-11-23T21:01:00Z", "2026-11-24T21:01:00Z"]),
+            "close": [100.0, 50.0],
+            "signal_close": [100.0, 100.0],
+            "volume": [100.0, 200.0],
+        }
+    )
+    adjusted = share_unit_histories({"AAPL": frame}, journal, "2026-11-25T13:00:00Z")["AAPL"]
+    assert adjusted.volume.tolist() == [200.0, 200.0]
+    assert frame.volume.tolist() == [100.0, 200.0]
+    before_new_daily = share_unit_histories({"AAPL": frame.iloc[:1]}, journal, "2026-11-24T18:00:00Z")["AAPL"]
+    assert before_new_daily.volume.tolist() == [200.0]
     journal.close()
+
+
+def test_first_fill_refreshes_order_journal_before_corporate_quantity_comparison(setup, monkeypatch):
+    root, client, _, _ = setup
+    journal = Journal(root / "artifacts/paper_trading")
+    try:
+        original = journal.records()[0]
+        remote = {**original["response"], "status": "filled"}
+        journal.save(original["payload"], "new", {**remote, "status": "new", "filled_qty": "0"})
+    finally:
+        journal.close()
+    monkeypatch.setattr(client, "by_client_id", lambda cid: remote)
+    report = reconcile_corporate(client, root, refresh=False)
+    assert report["status"] == "reconciled"
+    journal = Journal(root / "artifacts/paper_trading")
+    try:
+        assert journal.records()[0]["state"] == "filled"
+        assert journal.records()[0]["response"]["filled_qty"] == "10"
+    finally:
+        journal.close()

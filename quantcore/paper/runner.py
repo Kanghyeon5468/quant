@@ -13,11 +13,12 @@ from quantcore.paper.corporate import applied_adjustments, share_unit_histories
 from quantcore.paper.guard import assess, order_policy
 from quantcore.paper.journal import TERMINAL, Journal, check_response, number
 from quantcore.paper.policy import MAX_BUDGET
+from quantcore.strategies.information import decision_context
 from quantcore.strategies.orders import slot_orders
 
 
 def own_inventory(context, journal):
-    records = journal.records()
+    records = journal.accounting_records()
     owned = {s: Decimal(0) for s in SYMBOLS}
     known_ids = {r['client_id'] for r in records}
     for record in records:
@@ -82,7 +83,7 @@ def monitor_risk(client, directory, snapshot):
         journal.close()
 
 
-def make_plan(snapshot, context, journal, strategy='momentum', budget=None):
+def make_plan(snapshot, context, journal, strategy='momentum', budget=None, *, manual_request_id=None):
     budget = number(budget) if budget is not None else journal.budget()
     if strategy not in ('momentum', 'mean_reversion') or not 0 < budget <= MAX_BUDGET:
         raise PaperError('choose an existing strategy and paper budget in (0, $100,000]')
@@ -94,13 +95,17 @@ def make_plan(snapshot, context, journal, strategy='momentum', budget=None):
     if now.tzinfo is None:
         raise PaperError('broker clock has no timezone')
     local_day = now.tz_convert('America/New_York').date()
+    manual = None
+    if manual_request_id is not None:
+        from quantcore.paper.reentry_reference import authorized_reference
+        manual = authorized_reference(journal, manual_request_id, now, clock['is_open'])
     complete = sessions(local_day-pd.Timedelta(days=15), local_day, now)
     if complete.empty or manifest['end'] != complete.index[-1]:
         raise PaperError('snapshot is stale or from the future; collect latest completed regular-session data')
     if clock['is_open']:
         execution_day = str(local_day)
         opening = sessions(local_day, local_day).iloc[0]['open']
-        if now > opening+pd.Timedelta(minutes=5):
+        if now > opening+pd.Timedelta(minutes=5) and manual is None:
             raise PaperError('missed next-open execution window; no intraday catch-up order')
     else:
         execution_day = str(pd.Timestamp(clock['next_open']).tz_convert('America/New_York').date())
@@ -116,29 +121,50 @@ def make_plan(snapshot, context, journal, strategy='momentum', budget=None):
                for row in raw_actions.get(kind, [])):
             raise PaperError('split before execution requires a refreshed reference price')
     fingerprint = journal.configure(str(account['id']), strategy, budget)
+    root = journal.directory.parent.parent
+    information = decision_context(root, SYMBOLS, now)
+    policy_version = information['policy_version'] if information else None
+    if policy_version and journal.configuration().get('decision_policy_version') != policy_version:
+        raise PaperError('information policy changed; activate its audited version before paper execution')
     records = journal.records()
     owned = own_inventory(context, journal)
     pending_orders = pending_records(journal)
     known_ids = {r['client_id'] for r in records}
-    ids = {s: f'qcp1-{fingerprint}-{strategy.replace("_", "")}-{execution_day.replace("-", "")}-{s}'
-           +(f'-r{journal.revision()}' if journal.revision() else '') for s in SYMBOLS}
+    id_strategy = ('mom' if strategy == 'momentum' else 'mr') if policy_version else strategy.replace('_', '')
+    ids = {s: f'qcp1-{fingerprint}-{id_strategy}-{execution_day.replace("-", "")}-{s}'
+           +(f'-r{journal.revision()}' if journal.revision() else '')+(f'-a{policy_version[:6]}' if policy_version else '')
+           +(f'-m{manual["revision"]}' if manual else '') for s in SYMBOLS}
+    if any(len(cid) > 48 for cid in ids.values()):
+        raise PaperError('paper client order ID exceeds broker length limit')
     blocked = {o['symbol'] for o in pending_orders} | {s for s in SYMBOLS if ids[s] in known_ids}
     histories = {s: frame[frame.symbol == s].sort_values('timestamp').copy() for s in SYMBOLS}
     if any(len(g) < 60 or g.iloc[-1].session != manifest['end'] or (g.available_at > now).any()
            for g in histories.values()):
         raise PaperError('signal has insufficient history, missing current session or future data')
     histories = share_unit_histories(histories, journal, now)
+    if manual:
+        # Preserve the completed daily signal and returns. Only execution/sizing marks change.
+        for symbol, history in histories.items():
+            history.loc[history.index[-1], 'close'] = float(manual['references'][symbol]['price'])
     allocation = slot_orders(histories, owned, min(number(account['cash']), number(account['buying_power'])),
-                             budget, strategy, blocked, pending_orders, order_policy(journal.directory))
+                             budget, strategy, blocked, pending_orders, order_policy(journal.directory),
+                             target_multipliers={s:r['multiplier'] for s,r in information['rows'].items()} if information else None)
+    blocked_information = {s for s,r in information['rows'].items() if r['status']=='blocked'} if information else set()
+    allocation['orders'] = [o for o in allocation['orders'] if o['side']=='sell' or o['symbol'] not in blocked_information]
     risk = assess(journal, context, histories, owned, pending_orders, allocation['orders'])
     orders = [{**o, 'client_order_id': ids[o['symbol']]} for o in risk['orders']]
     for order in orders:
         validate_order(order)
     decisions = allocation['decisions']
+    for row in decisions:
+        if row['symbol'] in blocked_information and row['decision'].startswith('buy'):
+            row['decision'] = 'information_data_unavailable'
     for item in risk['rejected']:
         next(d for d in decisions if d['symbol'] == item['symbol'])['decision'] = 'risk_restricted'
     buy_cost = sum((number(o['qty'])*number(o['limit_price']) for o in orders if o['side'] == 'buy'), Decimal(0))
-    return {'mode': 'paper', 'endpoint': 'https://paper-api.alpaca.markets', 'strategy': strategy,
+    return {'manual_request_id': manual_request_id,
+            'execution_reference': manual if manual else None,
+            'decision_policy_version': policy_version, 'information_analysis': information, 'mode': 'paper', 'endpoint': 'https://paper-api.alpaca.markets', 'strategy': strategy,
             'budget_usd': str(budget), 'budget_revision': journal.revision(),
             'max_new_buy_limit_notional_usd': str(buy_cost),
             'snapshot_id': Path(snapshot).name, 'snapshot_hashes': manifest['hashes'],
@@ -148,8 +174,12 @@ def make_plan(snapshot, context, journal, strategy='momentum', budget=None):
             'order_policy_version': allocation['order_policy_version'], 'references': allocation['references'],
             'signal_evidence': {s: {'signal_close': float(f.signal_close.iloc[-1]),
                 'sma_60': float(f.signal_close.tail(60).mean()), 'reference_close': float(f.close.iloc[-1]),
+                'execution_reference_type': 'completed_regular_minute' if manual else 'previous_regular_close',
+                'execution_reference_collected_at': manual['collected_at'] if manual else None,
+                'execution_reference_bar_end': manual['references'][s]['bar_end'] if manual else None,
                 'signal_available_at': str(f.available_at.iloc[-1]),
                 'target_weight_within_slot': next(d['target_weight_within_slot'] for d in decisions if d['symbol'] == s),
+                'information': information['rows'][s] if information else None,
                 'risk_rules': [rule for item in risk['rejected'] if item['symbol'] == s for rule in item['rules']]}
                 for s, f in histories.items()}}
 
@@ -217,6 +247,7 @@ def status(client, directory):
             context = client.context()
             report = {'mode': 'paper', 'checked_at': datetime.now(timezone.utc).isoformat(),
                       'budget_usd': str(journal.budget()), 'budget_revision': journal.revision(),
+                      'decision_policy_version': (journal.configuration() or {}).get('decision_policy_version'),
                       'clock': context['clock'], 'journal': journal.records(),
                       'positions': context['positions'], 'open_orders_count': len(context['open_orders']),
                       'modeled_fill_costs': journal.cost_estimates(),

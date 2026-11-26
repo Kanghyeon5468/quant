@@ -64,9 +64,9 @@ def load_reference(root):
             'actions': json.loads((folder/'actions.json').read_text()), 'directory': str(folder)}
 
 
-def classification_asof(root, cutoff):
+def classification_asof(root, cutoff, *, data_directory=None):
     """Read immutable observations available at the requested time, including older vintages."""
-    directory = Path(root)/'datasets/reference'
+    directory = (Path(data_directory) if data_directory is not None else Path(root)/'datasets')/'reference'
     cutoff = utc(cutoff)
     candidates = []
     for path in directory.glob('*/manifest.json'):

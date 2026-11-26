@@ -76,12 +76,15 @@ def reconcile_corporate(client, root, *, refresh=True, env_file=None):
     journal = Journal(root/'artifacts/paper_trading')
     try:
         with journal.lock():
+            # Orders can fill after the preceding tick. Refresh their quantities before
+            # comparing FILL activities, otherwise a stale zero-fill record halts forever.
+            journal.reconcile(client)
             context = client.context()
             cutoff = pd.Timestamp(context['clock']['timestamp'])
             config = journal.configuration()
             if config and hashlib.sha256(str(context['account']['id']).encode()).hexdigest() != config['account_hash']:
                 raise PaperError('corporate book account identity mismatch')
-            records = journal.records()
+            records = journal.accounting_records()
             dates = [(r['response'] or {}).get('created_at') or (r['response'] or {}).get('submitted_at') for r in records]
             dates = [pd.Timestamp(d) for d in dates if d]
             start = min(dates+[cutoff-pd.Timedelta(days=7)])-pd.Timedelta(days=1)
@@ -138,7 +141,9 @@ def reconcile_corporate(client, root, *, refresh=True, env_file=None):
                 'last_reference_collection': reference['manifest']['collected_at']}
             atomic_json(root/'artifacts/corporate_public/status.json', public)
             if unresolved:
-                raise PaperError('corporate action requires review: '+unresolved[0])
+                transient = set(unresolved) <= {'activity quantities and order reconciliation differ',
+                    'event-adjusted shares do not match broker positions'}
+                raise PaperError('corporate action requires review: '+unresolved[0], retryable=transient)
             return public
     finally:
         journal.close()

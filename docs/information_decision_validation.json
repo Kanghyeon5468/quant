@@ -1,0 +1,268 @@
+{
+  "checked_at": "2026-11-25T14:55:45.576009+00:00",
+  "source": "actual SEC + Alpaca + official issuer IR cached observations",
+  "policy_version": "af3e4b7c3a5c",
+  "policy": {
+    "enabled": true,
+    "weights": {
+      "financials": 0.45,
+      "institutions": 0.2,
+      "news": 0.25,
+      "earnings": 0.1
+    },
+    "minimum_multiplier": 0.5,
+    "neutral_multiplier": 0.75,
+    "news_hours": 48,
+    "max_statement_days": 200,
+    "max_institution_days": 150
+  },
+  "earnings": {
+    "documents": 6,
+    "coverage": {
+      "NVDA": {
+        "documents": 2,
+        "transcripts": 0,
+        "listed_transcripts": 2,
+        "transcript_status": "access_blocked",
+        "reason": "Listed official transcript could not be collected under verified access/robots rules"
+      },
+      "AAPL": {
+        "documents": 4,
+        "transcripts": 0,
+        "listed_transcripts": 0,
+        "transcript_status": "unavailable",
+        "reason": "No official transcript provided in the verified latest IR reports; webcast not downloaded"
+      }
+    },
+    "failures": [
+      {
+        "symbol": "NVDA",
+        "kind": "transcript",
+        "source_url": "https://s201.q4cdn.com/141608511/files/content_files/NVDA-3Q27-Earnings-Transcript.pdf",
+        "reason": "IR robots unavailable HTTP 403; stopped"
+      },
+      {
+        "symbol": "NVDA",
+        "kind": "cfo_commentary",
+        "source_url": "https://s201.q4cdn.com/141608511/files/doc_financials/2027/Q327/Q3FY27-CFO-Commentary.pdf",
+        "reason": "IR robots unavailable HTTP 403; stopped"
+      },
+      {
+        "symbol": "NVDA",
+        "kind": "transcript",
+        "source_url": "https://s201.q4cdn.com/141608511/files/content_files/TRANSCRIPT_-NVIDIA-Corp-NVDA-US-Q2-2027-Earnings-Call-26-August-2026-5_00-PM-ET.pdf",
+        "reason": "IR robots unavailable HTTP 403; stopped"
+      },
+      {
+        "symbol": "NVDA",
+        "kind": "cfo_commentary",
+        "source_url": "https://s201.q4cdn.com/141608511/files/doc_financials/2027/Q227/Q2FY27-CFO-Commentary.pdf",
+        "reason": "IR robots unavailable HTTP 403; stopped"
+      }
+    ],
+    "document_types": {
+      "earnings_release": 4,
+      "financial_statements": 2
+    },
+    "quarters": [
+      {
+        "symbol": "NVDA",
+        "kind": "earnings_release",
+        "fiscal_year": 2027,
+        "quarter": "Third Quarter",
+        "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+        "available_at": "2026-11-25T14:03:20.649045+00:00",
+        "characters": 32493
+      },
+      {
+        "symbol": "NVDA",
+        "kind": "earnings_release",
+        "fiscal_year": 2027,
+        "quarter": "Second Quarter",
+        "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+        "available_at": "2026-11-25T14:03:22.249320+00:00",
+        "characters": 28107
+      },
+      {
+        "symbol": "AAPL",
+        "kind": "earnings_release",
+        "fiscal_year": 2026,
+        "quarter": "Fourth Quarter",
+        "source_url": "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/",
+        "available_at": "2026-11-25T14:03:24.766638+00:00",
+        "characters": 7566
+      },
+      {
+        "symbol": "AAPL",
+        "kind": "financial_statements",
+        "fiscal_year": 2026,
+        "quarter": "Fourth Quarter",
+        "source_url": "https://www.apple.com/newsroom/pdfs/fy2026q4/FY26_Q4_Consolidated_Financial_Statements.pdf",
+        "available_at": "2026-11-25T14:03:24.768093+00:00",
+        "characters": 5300
+      },
+      {
+        "symbol": "AAPL",
+        "kind": "earnings_release",
+        "fiscal_year": 2026,
+        "quarter": "Third Quarter",
+        "source_url": "https://www.apple.com/newsroom/2026/07/apple-reports-third-quarter-results/",
+        "available_at": "2026-11-25T14:03:24.770980+00:00",
+        "characters": 7218
+      },
+      {
+        "symbol": "AAPL",
+        "kind": "financial_statements",
+        "fiscal_year": 2026,
+        "quarter": "Third Quarter",
+        "source_url": "https://www.apple.com/newsroom/pdfs/fy2026q3/FY26_Q3_Consolidated_Financial_Statements.pdf",
+        "available_at": "2026-11-25T14:03:24.772742+00:00",
+        "characters": 5330
+      }
+    ],
+    "comparisons": 2
+  },
+  "llm": {
+    "readiness": {
+      "status": "configured",
+      "provider": "anthropic",
+      "model": "claude-opus-5-5"
+    },
+    "actual_analyses": 12,
+    "actual_requests": 12,
+    "models": [
+      "claude-opus-5-5"
+    ],
+    "real_news_documents_prepared": 20
+  },
+  "allocation": {
+    "AAPL": {
+      "status": "applied",
+      "scores": {
+        "financials": 0.917663276151938,
+        "institutions": 0.0,
+        "news": -0.0,
+        "earnings": 0.8
+      },
+      "combined_score": 0.4929484742683721,
+      "multiplier": 0.8732371185670931,
+      "missing_components": []
+    },
+    "MSFT": {
+      "status": "applied",
+      "scores": {
+        "financials": 0.9652306009738654,
+        "institutions": null,
+        "news": -0.0,
+        "earnings": null
+      },
+      "combined_score": 0.620505386340342,
+      "multiplier": 0.9051263465850855,
+      "missing_components": [
+        "institutions",
+        "earnings"
+      ]
+    },
+    "NVDA": {
+      "status": "applied",
+      "scores": {
+        "financials": 1.0,
+        "institutions": null,
+        "news": -0.0,
+        "earnings": 0.8
+      },
+      "combined_score": 0.6625,
+      "multiplier": 0.915625,
+      "missing_components": [
+        "institutions"
+      ]
+    },
+    "TSLA": {
+      "status": "applied",
+      "scores": {
+        "financials": 0.23364374655483802,
+        "institutions": null,
+        "news": 0.27999999999999997,
+        "earnings": null
+      },
+      "combined_score": 0.2501995513566816,
+      "multiplier": 0.8125498878391704,
+      "missing_components": [
+        "institutions",
+        "earnings"
+      ]
+    },
+    "SPY": {
+      "status": "unavailable",
+      "scores": {
+        "financials": null,
+        "institutions": null,
+        "news": null,
+        "earnings": null
+      },
+      "combined_score": null,
+      "multiplier": 1.0,
+      "missing_components": [
+        "financials",
+        "institutions",
+        "news",
+        "earnings"
+      ]
+    }
+  },
+  "preview": {
+    "assumption": "flat account, same $100000 cash and price strategy; broker risk applied during actual execution",
+    "base_orders": [
+      {
+        "symbol": "AAPL",
+        "side": "buy",
+        "qty": "53",
+        "limit_price": "357.79",
+        "type": "limit",
+        "time_in_force": "day",
+        "extended_hours": false
+      },
+      {
+        "symbol": "TSLA",
+        "side": "buy",
+        "qty": "48",
+        "limit_price": "388.81",
+        "type": "limit",
+        "time_in_force": "day",
+        "extended_hours": false
+      }
+    ],
+    "information_orders": [
+      {
+        "symbol": "AAPL",
+        "side": "buy",
+        "qty": "46",
+        "limit_price": "357.79",
+        "type": "limit",
+        "time_in_force": "day",
+        "extended_hours": false
+      },
+      {
+        "symbol": "TSLA",
+        "side": "buy",
+        "qty": "39",
+        "limit_price": "388.81",
+        "type": "limit",
+        "time_in_force": "day",
+        "extended_hours": false
+      }
+    ]
+  },
+  "checks": [
+    "real sources and manifest hashes verified",
+    "no mock LLM/transcript data",
+    "previous-day cutoff has no later-collected information",
+    "only completed current-quarter evidence can supply earnings sentiment",
+    "allocation never exceeds base price-strategy exposure",
+    "official transcript access failure is visible"
+  ],
+  "limitations": [
+    "allocation formula is a predefined heuristic, not a trained predictor or validated performance improvement",
+    "no retrospective financial/news feature backfill; only current forward observations are eligible"
+  ]
+}

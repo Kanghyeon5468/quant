@@ -253,7 +253,15 @@ def refresh(root, env_file=None, force=False, reuse_probe=False):
         with lock.lock():
             state_path = root / "artifacts/information_worker/state.json"
             state = json.loads(state_path.read_text()) if state_path.exists() else {}
-            for kind, ttl in [("financials", 24 * 60), ("institutions", 24 * 60), ("news", 15)]:
+            jobs = [("financials", 24 * 60), ("institutions", 24 * 60), ("news", 15)]
+            configured = root / "configs/information.json"
+            if configured.exists() and json.loads(configured.read_text()).get("earnings_calls"):
+                jobs += [("earnings", 24 * 60), ("llm_analysis", 15)]
+            if configured.exists() and json.loads(configured.read_text()).get("macro_public"):
+                jobs.append(("macro", 6 * 60))
+            if configured.exists() and json.loads(configured.read_text()).get("crypto_public"):
+                jobs.append(("crypto", 6 * 60))
+            for kind, ttl in jobs:
                 last = state.get(kind, {})
                 if (
                     not force
@@ -263,7 +271,24 @@ def refresh(root, env_file=None, force=False, reuse_probe=False):
                     results[kind] = last
                     continue
                 try:
-                    if kind == "news":
+                    if kind == "earnings":
+                        from quantcore.earnings.collector import collect
+
+                        result = collect(root)
+                    elif kind == "llm_analysis":
+                        from quantcore.analysis.worker import run
+
+                        result = run(root)
+                    elif kind == "macro":
+                        from quantcore.macro.public import collect
+
+                        result = collect(root / "datasets")
+                        result = {k: result[k] for k in ("status", "checked_at", "failures")}
+                    elif kind == "crypto":
+                        from quantcore.data.providers.coinbase_public import collect
+
+                        result = {"status": "ok", **collect(root / "datasets")}
+                    elif kind == "news":
                         result = news(root, env_file)
                     else:
                         sec = SECData(root)
@@ -276,7 +301,11 @@ def refresh(root, env_file=None, force=False, reuse_probe=False):
                         finally:
                             sec.close()
                     results[kind] = {
-                        "status": "partial" if result.get("failures") else "ok",
+                        "status": "partial"
+                        if result.get("failures")
+                        else result["status"]
+                        if result.get("status") in ("unavailable", "pending")
+                        else "ok",
                         "completed_at": now(),
                         "result": result,
                         "next_attempt_at": (

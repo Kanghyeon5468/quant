@@ -92,8 +92,10 @@ def test_actual_values_and_missing_financial_data_are_honest(actual):
     assert client.get('/api/assets/QALPHA/prices').status_code == 404
 
 
-def test_paper_update_refreshes_analysis_and_preserves_frozen_history(actual):
+def test_paper_update_refreshes_analysis_and_preserves_frozen_history(actual, monkeypatch):
     client, root, base_path, _, frame, schedule = actual
+    observed_at = schedule['close'].iloc[-1] + pd.Timedelta(minutes=10)
+    monkeypatch.setattr(pd.Timestamp, 'now', classmethod(lambda cls, tz=None: observed_at.tz_convert(tz)))
     old = client.get('/api/assets/AAPL/indicators').json()
     old_bytes = (base_path/'prices.parquet').read_bytes()
     window = sorted(frame.session.unique())[-100:]

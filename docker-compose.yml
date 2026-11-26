@@ -6,6 +6,7 @@ services:
       dockerfile: infrastructure/api.Dockerfile
     environment:
       QUANTCORE_MODE: demo
+      QUANTCORE_API_USERS_JSON: ${QUANTCORE_API_USERS_JSON:-}
       QUANTCORE_API_TOKEN: ${QUANTCORE_API_TOKEN:-}
       QUANTCORE_ALLOWED_ORIGINS: http://localhost:3100,http://127.0.0.1:3100
     ports: ["127.0.0.1:8100:8000"]
@@ -22,6 +23,7 @@ services:
       dockerfile: infrastructure/web.Dockerfile
     environment:
       API_BASE_URL: http://api:8000
+      QUANTCORE_WEB_SIGN_IN: ${QUANTCORE_WEB_SIGN_IN:-false}
       QUANTCORE_API_TOKEN: ${QUANTCORE_API_TOKEN:-}
     ports: ["127.0.0.1:3100:3000"]
     depends_on:

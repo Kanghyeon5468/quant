@@ -65,6 +65,10 @@ def tick(root, env_file, strategy='momentum', budget=None):
                     state['paper_account_equity_change'] = str(number(equity)-number(state['initial_account_equity']))
                 task = session_task(observed['clock'])
                 key = (task['execution_session']+(f':r{revision}' if revision else '')) if task else None
+                policy_version = observed.get('decision_policy_version')
+                if key and policy_version:
+                    key += ':a'+policy_version[:6]
+                state['decision_policy_version'] = policy_version
                 state['next_task'] = task
                 now = pd.Timestamp(observed['clock']['timestamp'])
                 if (directory/'STOP').exists():
@@ -129,8 +133,8 @@ def tick(root, env_file, strategy='momentum', budget=None):
             if configuration.exists() and json.loads(configuration.read_text()).get('enabled'):
                 # Research refresh follows the critical order/risk/performance path and cannot clear a halt.
                 try:
-                    from quantcore.information.collector import refresh
-                    state['information'] = refresh(root, env_file)
+                    from quantcore.information.background import trigger
+                    state['information'] = trigger(root, env_file)
                 except Exception as error:
                     state['information'] = {'status':'failed','reason':str(error)[:180]}
             state['finished_at'] = datetime.now(timezone.utc).isoformat()

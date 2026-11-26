@@ -1,0 +1,15 @@
+services:
+  telemetry:
+    image: python:3.12-slim
+    user: "${QUANTCORE_MARKET_UID:-501}:${QUANTCORE_MARKET_GID:-20}"
+    command: ["python", "/collector/research_monitor.py"]
+    environment:
+      QUANTCORE_API_TOKEN: ${QUANTCORE_API_TOKEN:-}
+      QUANTCORE_MONITOR_TOKEN: ${QUANTCORE_MONITOR_TOKEN:-}
+    volumes:
+      - ./infrastructure/research_monitor.py:/collector/research_monitor.py:ro
+      - ./artifacts/research_telemetry:/state
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

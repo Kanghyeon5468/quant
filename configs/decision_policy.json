@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "weights": {"financials":0.45,"institutions":0.20,"news":0.25,"earnings":0.10},
+  "minimum_multiplier":0.5,
+  "neutral_multiplier":0.75,
+  "news_hours":48,
+  "max_statement_days":200,
+  "max_institution_days":150
+}

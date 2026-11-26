@@ -61,6 +61,7 @@ class PaperClient:
         allowed_get = path in ('/v2/account', '/v2/clock', '/v2/positions', '/v2/orders',
                                 '/v2/orders:by_client_order_id', '/v2/account/portfolio/history', '/v2/account/activities')
         allowed_get |= path.startswith('/v2/assets/') and path.removeprefix('/v2/assets/') in SYMBOLS
+        allowed_get |= bool(re.fullmatch(r'/v2/orders/[0-9a-fA-F-]{36}', path))
         if method == 'GET' and allowed_get:
             pass
         elif method == 'POST' and path == '/v2/orders':

@@ -7,7 +7,7 @@ from typing import Literal
 
 from fastapi import FastAPI, Query, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, Field, FiniteFloat
 
 from quantcore.data.errors import DataUnavailable
@@ -36,7 +36,8 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
     directory = directory or os.getenv('QUANTCORE_DATA_DIR', 'datasets')
     data_source = data_source or os.getenv('QUANTCORE_DATA_SOURCE', 'demo')
     market_directory = market_directory or os.getenv('QUANTCORE_MARKET_DATA_DIR', 'datasets')
-    access = AccessControl(os.getenv('QUANTCORE_API_TOKEN', '') if token is None else token)
+    access = AccessControl(os.getenv('QUANTCORE_API_TOKEN', '') if token is None else token,
+                           users_json=os.getenv('QUANTCORE_API_USERS_JSON', '') if token is None else '')
     origins = os.getenv('QUANTCORE_ALLOWED_ORIGINS', 'http://localhost:3100,http://127.0.0.1:3100,http://localhost:3000,http://127.0.0.1:3000').split(',')
 
     @asynccontextmanager
@@ -60,14 +61,24 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
 
     app = FastAPI(title='QuantCore', version='0.1.0', lifespan=lifespan)
     app.state.access = access
+    app.state.market_data_dir = market_directory
+    from apps.api.extended import router as extended_router
+
+    app.include_router(extended_router)
     app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=['GET', 'POST'],
                        allow_headers=['Authorization', 'Content-Type'])
 
     @app.middleware('http')
     async def guard(request: Request, call_next):
         if request.url.path.startswith('/api/'):
-            if not access.authorized(request.headers.get('authorization')):
+            role = access.role(request.headers.get('authorization'))
+            if role is None:
                 return JSONResponse({'detail': 'authentication required'}, status_code=401)
+            private = request.url.path in {'/api/paper-performance', '/api/paper-risk', '/api/corporate-actions'}
+            writes = request.method != 'GET' and request.url.path != '/api/ws-ticket'
+            if role == 'viewer' and (private or writes):
+                return JSONResponse({'detail': 'researcher role required'}, status_code=403)
+            request.state.role = role
             client = request.client.host if request.client else 'unknown'
             if not access.allow(client):
                 return JSONResponse({'detail': 'rate limit exceeded'}, status_code=429)
@@ -100,6 +111,12 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
             service.view()
         return {'status': 'ok', 'execution_mode': 'research',
                 'data_mode': getattr(service, 'mode', 'synthetic'), 'data_source': data_source}
+
+    @app.get('/api/session-role')
+    def session_role(request: Request):
+        if not access.users:
+            return JSONResponse({'detail': 'individual research accounts are not configured'}, status_code=409)
+        return {'role': request.state.role}
 
     @app.get('/api/overview')
     def overview():
@@ -160,10 +177,14 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
 
     @app.get('/api/paper-performance')
     def paper_performance():
-        from quantcore.paper.reports import read_performance
+        from quantcore.analysis.usage import read_usage
+        from quantcore.paper.reports import read_performance, read_report
         if data_source != 'alpaca':
             return respond({'status': 'unavailable', 'reason': 'paper 실적은 Alpaca 모드에서 제공합니다.'})
-        return respond(read_performance(os.getenv('QUANTCORE_PAPER_PERFORMANCE_DIR', 'artifacts/paper_performance_public')))
+        performance = read_performance(os.getenv('QUANTCORE_PAPER_PERFORMANCE_DIR', 'artifacts/paper_performance_public'))
+        risk = read_report(os.getenv('QUANTCORE_PAPER_RISK_DIR', 'artifacts/paper_risk_public'), 'risk')
+        return respond({**performance, 'llm_usage': read_usage(market_directory),
+                        'risk': {k: risk[k] for k in ('status', 'checked_at', 'stale', 'halt_rules') if k in risk}})
 
     @app.get('/api/walk-forward')
     def walk_forward():
@@ -200,6 +221,10 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
     def options(payload: OptionRequest):
         return respond(black_scholes(**payload.model_dump()))
 
+    @app.get('/api/metrics', response_class=PlainTextResponse)
+    def prometheus_metrics():
+        return PlainTextResponse(app.state.service.metrics.prometheus(), media_type='text/plain; version=0.0.4')
+
     @app.get('/api/monitoring')
     def monitoring():
         return respond(app.state.service.monitoring())
@@ -227,7 +252,7 @@ def create_app(directory=None, token=None, data_source=None, market_directory=No
                 except DataUnavailable as error:
                     payload = {'kind': 'data_error', 'mode': 'historical', 'detail': str(error)}
                 await websocket.send_json(json_safe(payload))
-                app.state.service.metrics.samples['websocket_send'].append((time.perf_counter()-start)*1000)
+                app.state.service.metrics.observe('websocket_send', (time.perf_counter()-start)*1000)
                 await asyncio.sleep(5)
         except WebSocketDisconnect:
             pass

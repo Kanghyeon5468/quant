@@ -37,3 +37,10 @@ Chronological rule selection, two subsequent test windows and a retrospective fi
 
 ### Actual information update — 2026-11-25
 The earlier absence of SEC fundamentals/13F/news is superseded by [ACTUAL_INFORMATION.md](ACTUAL_INFORMATION.md). Current real coverage is partial: 49/68 financial metrics, two managers/four filings, 69 news articles. Earnings transcripts, LLM, SNS, current GICS, unverified ticker migration and fractional settlement remain unavailable. Existing historical performance has no retroactively injected current information.
+
+### Information integration follow-up — 2026-11-25
+Actual source inputs now influence paper allocation through a predefined audited heuristic. Model adapters are implemented but model/key configuration is deliberately deferred. Official earnings releases/statements were collected; NVIDIA transcript/CFO CDN robots access is403 and Apple latest reports lack a transcript. Full call sentiment/Q&A output remains absent, and no source-based improvement in historical profitability has been verified. Details: INFORMATION_DECISIONS_AND_LLM.md.
+
+### Claude Opus and current paper follow-up — 2026-11-25 23:57 KST
+The prior model/key deferral is superseded: native Anthropic Claude Opus5.5 actually analyzed8news/4earnings releases with57reverified literal claims. Actual full transcripts, audio/Q&A and measured information-driven predictive improvement remain unavailable. Current observations are not historical inputs. Native remote inference is capped at3requests/refresh and20perUTCday.
+The paper account workflow now verifies broker-simulated fills and explicitly confirmed manual closing orders. Account and fill details are retained in the ignored local validation archive. No multi-day forward profitability claim. Unsupported/unconfirmed external trades still block execution, and incomplete manual requests require review rather than automatic POST retries. Expanded transitive mypy still reports pre-existing dynamic-module annotations/types; repository-configured and new native/manual module scope passes.

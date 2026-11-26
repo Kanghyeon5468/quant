@@ -1,15 +1,24 @@
 import { NextRequest } from 'next/server';
+import {sameOrigin} from '../request-origin';
 export const dynamic = 'force-dynamic';
 async function proxy(request: NextRequest, context: {params: Promise<{path: string[]}>}) {
   const {path} = await context.params;
-  if (path.some(p => !/^[A-Za-z0-9_-]+$/.test(p))) return Response.json({detail:'Invalid path'}, {status:400});
+  if (path.some(p => !/^[A-Za-z0-9_.-]+$/.test(p) || p === "." || p === "..")) return Response.json({detail:'Invalid path'}, {status:400});
   const target = new URL('/api/'+path.join('/'), process.env.API_BASE_URL || 'http://127.0.0.1:8100');
   target.search = request.nextUrl.search;
   const headers: Record<string,string> = {'Content-Type':'application/json'};
-  if (process.env.QUANTCORE_API_TOKEN) headers.Authorization = 'Bearer '+process.env.QUANTCORE_API_TOKEN;
+  const session = request.cookies.get('quantcore-session')?.value;
+  if (process.env.QUANTCORE_WEB_SIGN_IN === 'true') {
+    if (session) headers.Authorization = 'Bearer '+session;
+    if (request.method === 'POST' && !sameOrigin(request)) {
+      return Response.json({detail:'Invalid origin'}, {status:403});
+    }
+  } else if (process.env.QUANTCORE_API_TOKEN) {
+    headers.Authorization = 'Bearer '+process.env.QUANTCORE_API_TOKEN;
+  }
   try {
     const response = await fetch(target, {method:request.method, headers, body:request.method==='POST'?await request.text():undefined, cache:'no-store', signal:AbortSignal.timeout(30000)});
-    return new Response(await response.text(), {status:response.status, headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
+    return new Response(await response.text(), {status:response.status, headers:{'Content-Type':response.headers.get('Content-Type') || 'application/json','Cache-Control':'no-store'}});
   } catch {
     return Response.json({detail:'QuantCore API unavailable. Start the API service on port 8100.'}, {status:503});
   }

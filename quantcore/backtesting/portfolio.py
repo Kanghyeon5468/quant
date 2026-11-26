@@ -90,7 +90,7 @@ def match_limit(order, bar, policy, adv, cash, inventory):
 
 
 def replay(daily, minutes, strategy='momentum', budget=100000, evaluation_sessions=252,
-           policy=None, limits=None, risk_enabled=True, strategy_by_day=None):
+           policy=None, limits=None, risk_enabled=True, strategy_by_day=None, *, allocation=None):
     policy, limits = policy or OrderPolicy(), limits or RiskLimits()
     budget = money(budget)
     if budget <= 0:
@@ -145,7 +145,8 @@ def replay(daily, minutes, strategy='momentum', budget=100000, evaluation_sessio
         marks = {s: float(f.close.iloc[-1]) for s, f in histories.items()}
         feature = features(histories, clock['open'])
         chosen_strategy = strategy_by_day[day] if strategy_by_day is not None else strategy
-        allocation = slot_orders(histories, inventory, cash, budget, chosen_strategy, policy=policy)
+        orders = slot_orders(histories, inventory, cash, budget, chosen_strategy, policy=policy,
+                             target_multipliers=allocation(histories) if allocation else None)
         state = account_state(state, previous_equity, previous_equity, float(budget), day, 'portfolio-replay')
         def risk_check(stamp, pending, candidates):
             nav = float(cash+sum((money(marks[s])*q for s, q in inventory.items()), Decimal(0)))
@@ -167,13 +168,13 @@ def replay(daily, minutes, strategy='momentum', budget=100000, evaluation_sessio
                         risk_log.append({'timestamp': str(stamp), 'session': day, 'rule': rule, 'symbol': rejection['symbol']})
             return report
         seen = set()
-        selected = allocation['orders']
+        selected = orders['orders']
         if risk_enabled:
             selected = risk_check(clock['open'], [], selected)['orders']
         pending = []
         for n, order in enumerate(selected):
             record = {**order, 'client_order_id': f'replay-{day}-{n}-{order["symbol"]}',
-                'remaining': int(order['qty']), 'reference': allocation['references'][order['symbol']]['reference_close'],
+                'remaining': int(order['qty']), 'reference': orders['references'][order['symbol']]['reference_close'],
                 'signal_at': str(histories[order['symbol']].available_at.iloc[-1]),
                 'created_at': str(clock['open']), 'session': day, 'status': 'accepted', 'filled_qty': 0}
             orders_log.append(record)

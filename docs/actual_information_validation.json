@@ -1,5 +1,5 @@
 {
-  "executed_at": "2026-11-25T06:29:34.157024+00:00",
+  "executed_at": "2026-11-25T14:14:58.114579+00:00",
   "mode": "actual cached observations",
   "financials": {
     "AAPL": {
@@ -82,7 +82,7 @@
     "13F/news absent before actual availability",
     "news carries actual source links and no generated sentiment",
     "stale Vanguard report not labeled current 2026 holdings",
-    "earnings calls and LLM stay unavailable"
+    "official earnings releases distinct from unavailable transcripts; LLM remains disabled"
   ],
   "institutions": [
     {
@@ -108,12 +108,12 @@
   ],
   "13f_filings_verified": 4,
   "news": {
-    "article_versions": 69,
-    "unique_articles": 69,
-    "content_present": 69,
+    "article_versions": 72,
+    "unique_articles": 72,
+    "content_present": 72,
     "metadata_only": 0,
     "llm_status": "unavailable",
-    "earnings_calls": "unavailable"
+    "earnings_calls": "partial"
   },
   "factor_ranks": [
     {
@@ -171,14 +171,15 @@
       "report.json": "c28ca0a79c13b8668688a177142b62b24fe102ef7ea4b00cf37df05e0dd4dedf"
     },
     "news": {
-      "raw_news_000.json": "33899052276fcfbdec4edf8e7cf9979453b637f95c5684cfff02baf1bbbca6bb",
-      "articles.json": "4f6ff7f71c4a2ad3ac0f5cdfeb0bbdbf615ae0033bd68ac2b1d6e60827085456"
+      "raw_news_000.json": "3f17ab0b99c323769001f018912ed090ab25591c787405f8f957e299e58cbc81",
+      "articles.json": "3f7de9479bdfbcd16a3b2bec0ff8b9098f80c5b23e2ea64184eff209ce377608"
     }
   },
   "source_code_sha256": {
     "quantcore/information/store.py": "4fa928dea7775eb51b503905e764eee217de805f9ed0156817e3d3390e594874",
-    "quantcore/information/service.py": "81bcf599c9d5b32bfb3034c2c20898812f94f88f178f5c7e0cea98f7a5274550",
-    "quantcore/information/collector.py": "b0c41947d1ad575a3ab89816192fe82683701f2f1e9e1f6a7e766ba8ecdea7eb",
+    "quantcore/information/service.py": "a1a1eb82ca699a1da8a7474e75fca6ab610b369d2cef7fbc990a36a4cd08370d",
+    "quantcore/information/collector.py": "605814b4b69a78ee0205411566eca8103ff2f29bc715e927069116da991ecd80",
+    "quantcore/information/background.py": "238a9bdb3654c6706724a41c0b50ea6c3eeac51d2f3086e0e9c123e815b86fb6",
     "quantcore/information/__init__.py": "57d91bfaae6e02b696749371a83d13974216d29399d0569ddde52957b3d552d9",
     "quantcore/information/institutions.py": "4b5cc76043b002216aa389e7e35115ffb8ffc1301f240069b05e35405c871d1a",
     "quantcore/information/news.py": "a67fd6f3027b6ea48bfcf413865649a7f49641b7b269aaa0c11bf68570436497",

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "executed_at": "2026-11-25T06:25:01.017395+00:00",
+    "executed_at": "2026-11-25T14:09:23.371883+00:00",
     "source": "Alpaca IEX frozen actual minutes",
     "snapshot_id": "20261125T013853Z",
     "snapshot_hashes": {
@@ -29,7 +29,7 @@
       "deployment": "research only; never changes the live paper strategy automatically"
     },
     "plan_sha256": "4fbe11514b1509901efdce69eec537956ef7ec771fb0ea6d7b00553fa599ff4a",
-    "code_sha256": "222c84deb1816701cc87a3e1c8575f05d3fddddac95ea73f621214097a6a6c89",
+    "code_sha256": "83ea8051d0dfa4d51fee3655ad6c6409673454cd685a570c52dabaaf43b6a253",
     "oos_period": [
       "2026-05-28",
       "2026-11-24"

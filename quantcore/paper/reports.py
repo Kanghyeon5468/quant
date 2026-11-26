@@ -22,7 +22,7 @@ def read_report(directory, name):
         age = (datetime.now(timezone.utc)-at).total_seconds()
         public.update(age_seconds=age, stale=age > 600 or age < -60, mode='paper')
         return public
-    except (ValueError, KeyError, TypeError):
+    except (OSError, ValueError, KeyError, TypeError):
         return {'status': 'unavailable', 'reason': 'invalid report; no successful risk status assumed'}
 
 
@@ -35,7 +35,7 @@ def read_performance(directory):
         keys = ('mode', 'currency', 'status', 'checked_at', 'broker_observed_at', 'source', 'tracking_started_at', 'history_checked_at',
                 'activities_checked_at', 'history_base_value', 'history_base_value_asof', 'unfunded_points_excluded',
                 'collection_errors', 'sections', 'account', 'pnl', 'execution', 'current_revision_execution',
-                'orders', 'positions', 'corporate_actions', 'daily_history', 'observations', 'comparison', 'latest_decisions', 'notes')
+                'orders', 'approved_manual_closures', 'positions', 'corporate_actions', 'daily_history', 'observations', 'comparison', 'latest_decisions', 'notes')
         public = redact_private({k: value[k] for k in keys if k in value})
         age = (datetime.now(timezone.utc)-datetime.fromisoformat(public['checked_at'])).total_seconds()
         public.update(age_seconds=age, stale=age > 600 or age < -60)

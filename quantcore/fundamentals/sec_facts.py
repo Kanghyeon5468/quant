@@ -56,6 +56,20 @@ STOCK_TAGS = {
 }
 
 
+ADVANCED_FLOWS = {
+    "cost_of_revenue": ["CostOfRevenue", "CostOfGoodsAndServicesSold", "CostOfGoodsSold"],
+    "sga": ["SellingGeneralAndAdministrativeExpense"],
+    "common_stock_issuance": ["ProceedsFromIssuanceOfCommonStock"],
+}
+ADVANCED_STOCKS = {
+    "inventory": ["InventoryNet"],
+    "receivables": ["AccountsReceivableNetCurrent"],
+    "payables": ["AccountsPayableCurrent"],
+    "retained_earnings": ["RetainedEarningsAccumulatedDeficit"],
+    "ppe_net": ["PropertyPlantAndEquipmentNet"],
+}
+
+
 def aware(value):
     stamp = pd.Timestamp(value)
     if stamp.tzinfo is None:
@@ -160,12 +174,14 @@ def standalone_quarters(rows, additive=True):
     return by_end
 
 
-def normalize(payload, collected_at, acceptance=None, cutoff=None):
+def normalize(payload, collected_at, acceptance=None, cutoff=None, *, advanced=False):
     cutoff = aware(cutoff or pd.Timestamp.now(tz="UTC"))
     acceptance = acceptance or {}
+    flow_tags = {**FLOW_TAGS, **ADVANCED_FLOWS} if advanced else FLOW_TAGS
+    stock_tags = {**STOCK_TAGS, **ADVANCED_STOCKS} if advanced else STOCK_TAGS
     flows = {
         key: standalone_quarters(field_facts(payload, tags, "USD", acceptance, collected_at, cutoff))
-        for key, tags in FLOW_TAGS.items()
+        for key, tags in flow_tags.items()
     }
     eps = standalone_quarters(
         field_facts(payload, ["EarningsPerShareDiluted"], "USD/shares", acceptance, collected_at, cutoff),
@@ -175,7 +191,7 @@ def normalize(payload, collected_at, acceptance=None, cutoff=None):
         key: field_facts(
             payload, tags, "shares" if key == "shares" else "USD", acceptance, collected_at, cutoff
         )
-        for key, tags in STOCK_TAGS.items()
+        for key, tags in stock_tags.items()
     }
     dei = field_facts(
         payload,

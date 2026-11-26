@@ -1,0 +1,14 @@
+.body { display:grid; gap:14px; padding:16px 20px 20px; min-width:0; }
+.body > * { min-width:0; }
+.inline, .form { display:flex; flex-wrap:wrap; align-items:end; gap:12px; }
+.inline { align-items:center; }
+.form { margin:0 0 14px; }
+.form label { display:flex; flex-direction:column; gap:6px; }
+.form input[type=number] { width:145px; }
+.body h3 { font-size:14px; font-weight:650; }
+.link { color:var(--accent); text-decoration:underline; }
+.card { padding:14px; border:1px solid var(--border); border-radius:8px; line-height:1.6; }
+.card blockquote { margin-top:9px; padding:7px 10px; border-left:2px solid var(--border); overflow-wrap:anywhere; }
+.body summary { cursor:pointer; color:var(--accent); }
+.widget { margin-bottom:10px; }
+.widget > summary { cursor:pointer; color:var(--accent); padding:8px 0; }

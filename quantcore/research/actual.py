@@ -6,6 +6,7 @@ import pandas as pd
 from quantcore.backtesting.engine import ExecutionConfig, backtest
 from quantcore.data.calendar import sessions
 from quantcore.data.storage.market import MarketRepository
+from quantcore.incremental.moments import RollingCovariance
 from quantcore.indicators.technical import technical
 from quantcore.information.service import InformationService, real_factors
 from quantcore.machine_learning.validation import walk_forward
@@ -14,6 +15,7 @@ from quantcore.portfolio.optimization import optimize
 from quantcore.risk.analytics import risk_report
 from quantcore.statistics.research import statistical_report
 from quantcore.strategies.base import STRATEGIES, Momentum
+from quantcore.strategies.information import decision_context
 
 NAMES = {'AAPL': 'Apple', 'MSFT': 'Microsoft', 'NVDA': 'NVIDIA', 'TSLA': 'Tesla', 'SPY': 'SPDR S&P 500 ETF'}
 
@@ -25,6 +27,7 @@ class ActualResearchService:
         self.repository, self.metrics = MarketRepository(directory), Metrics()
         self._version, self._cache = None, {}
         self.information = InformationService(directory)
+        self.portfolio_covariance = RollingCovariance()
 
     async def bootstrap(self):
         await asyncio.to_thread(self.repository.load)
@@ -79,7 +82,7 @@ class ActualResearchService:
             'stale': bool(len(expected) and expected.index[-1] > max(f.session.iloc[-1] for f in view.frames.values())),
             'incremental': {'nodes': 0, 'computations': 0, 'cache_hits': 0},
             'limitations': ['completed regular-session bars, not streaming quotes', 'IEX single exchange',
-                            'SEC financials and news are separately timed observations; LLM/earnings transcripts unavailable', 'analysis API never submits orders']}
+                            'SEC financials, news and model evidence have separate availability times', 'analysis API never submits orders']}
 
     def prices(self, symbol, limit=252, as_of=None):
         view = self.view()
@@ -147,7 +150,8 @@ class ActualResearchService:
         view = self.view()
         def compute():
             returns = pd.DataFrame({s: f.signal_close.pct_change() for s, f in view.frames.items()}).dropna().tail(252)
-            result = optimize(returns, method, max_weight)
+            covariance = self.portfolio_covariance.update(returns, view.version)
+            result = optimize(returns, method, max_weight, observed_covariance=covariance)
             risk = risk_report(returns, list(result['weights'].values()))
             risk.update(mode='historical', horizon='one XNYS regular session')
             return {**result, **view.metadata, 'risk': risk,
@@ -175,7 +179,14 @@ class ActualResearchService:
         frame['close'] = frame.signal_close
         target = float(Momentum().targets(frame).iloc[-1])
         current_factor = frame.signal_close.iloc[-1]/self.frame(view, symbol).close.iloc[-1]
+        from pathlib import Path
+        information = decision_context(Path(__file__).resolve().parents[2], [symbol], pd.Timestamp.now(tz='UTC'), self.repository.directory)
+        overlay = information['rows'][symbol] if information else None
+        effective = target*(overlay['multiplier'] if overlay else 1.)
         return {**view.metadata, 'symbol': symbol, 'strategy': 'momentum',
+                'information_analysis': overlay, 'effective_target_weight_within_slot': effective,
+                'decision_policy_version': information['policy_version'] if information else None,
+                'decision_mode': 'read-only preview; broker risk and inventory checks follow separately',
                 'signal': 'buy' if target else 'cash', 'target_weight_within_slot': target,
                 'reference_close': float(self.frame(view, symbol).close.iloc[-1]),
                 'sma_60': float(frame.close.rolling(60).mean().iloc[-1]/current_factor),
@@ -183,11 +194,12 @@ class ActualResearchService:
 
     def research_report(self, symbol):
         return {**self.signal(symbol), 'kind': 'deterministic_calculation_report', 'llm_enabled': False,
-                'financial_status': self.information.financials(symbol)['status'], 'limitations': ['price-based signal; no news/filings/earnings model']}
+                'financial_status': self.information.financials(symbol)['status'], 'limitations': ['predefined information allocation overlay; no learned causal improvement claim; missing LLM remains absent']}
 
     def monitoring(self):
         view = self.view()
         return {**self.metrics.report(), **view.metadata, 'cache_entries': len(self._cache),
+            'incremental_portfolio_covariance': self.portfolio_covariance.report(),
             'capabilities': {'actual_market_data': True, 'streaming_quotes': False, 'exchange_calendar': True,
-                             'actual_fundamentals': bool(self.information.snapshot('financials')), 'actual_13f': bool(self.information.snapshot('institutions')), 'actual_news': bool(self.information.snapshot('news')), 'earnings_calls': False, 'order_routing': False, 'llm': False,
+                             'actual_fundamentals': bool(self.information.snapshot('financials')), 'actual_13f': bool(self.information.snapshot('institutions')), 'actual_news': bool(self.information.snapshot('news')), 'official_earnings_materials': bool(self.information.snapshot('earnings')), 'earnings_calls': any(d['kind']=='transcript' for d in self.information.report()['earnings_calls']['documents']), 'order_routing': False, 'llm': bool(self.information.snapshot('analysis') and self.information.snapshot('analysis')[1].get('analyses')),
                              'usd': True, 'krw_conversion': False}}

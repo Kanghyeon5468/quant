@@ -47,7 +47,7 @@ def modeled_cost(reference, quantity, volume, policy):
             'modeled_total_cost': float(commission+friction), 'adverse_bps': float(bps)}
 
 
-def slot_orders(histories, inventory, cash, budget, strategy, blocked=(), pending=(), policy=None):
+def slot_orders(histories, inventory, cash, budget, strategy, blocked=(), pending=(), policy=None, target_multipliers=None):
     policy = policy or OrderPolicy()
     symbols = list(histories)
     decisions, candidates, prices, references = [], [], {}, {}
@@ -61,7 +61,10 @@ def slot_orders(histories, inventory, cash, budget, strategy, blocked=(), pendin
         if target not in (0., .95):
             raise ValueError('unexpected strategy target')
         limit = limit_price(reference, 'buy', policy)
-        desired = (money(budget)/len(symbols)*money(policy.target_fraction if target else 0)/limit).to_integral_value(rounding=ROUND_FLOOR)
+        multiplier = money((target_multipliers or {}).get(symbol, 1))
+        if not 0 <= multiplier <= 1:
+            raise ValueError('information multiplier must be in [0,1]')
+        desired = (money(budget)/len(symbols)*money(policy.target_fraction if target else 0)*multiplier/limit).to_integral_value(rounding=ROUND_FLOOR)
         delta = desired-money(inventory[symbol])
         decision = 'hold'
         if symbol in blocked:
@@ -75,7 +78,7 @@ def slot_orders(histories, inventory, cash, budget, strategy, blocked=(), pendin
         prices[symbol] = reference
         references[symbol] = {'reference_close': float(reference),
             'average_volume_20': float(history.volume.tail(20).mean()) if 'volume' in history else None}
-        decisions.append({'symbol': symbol, 'target_weight_within_slot': str(target),
+        decisions.append({'symbol': symbol, 'target_weight_within_slot': str(money(target)*multiplier), 'base_target_weight_within_slot': str(target), 'information_multiplier': str(multiplier),
             'signal_available_at': str(history.available_at.iloc[-1]), 'held_qty': str(inventory[symbol]),
             'desired_qty': str(desired), 'decision': decision})
     reserved = sum((money(o['remaining_qty'])*money(o['limit_price'])*(1+money(policy.commission_bps)/10000)

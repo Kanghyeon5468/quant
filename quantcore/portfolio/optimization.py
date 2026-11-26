@@ -2,13 +2,16 @@ import numpy as np
 from scipy.optimize import minimize
 
 
-def optimize(returns, method='minimum_variance', max_weight=.4):
+def optimize(returns, method='minimum_variance', max_weight=.4, *, observed_covariance=None):
     if not 0 < max_weight <= 1 or returns.shape[1]*max_weight < 1-1e-10:
         raise ValueError('infeasible maximum weight')
     if len(returns) < 3 or not np.isfinite(returns.to_numpy()).all():
         raise ValueError('finite aligned return history required')
     n = returns.shape[1]
-    covariance = np.atleast_2d(returns.cov().to_numpy())*252+np.eye(n)*1e-10
+    observed = returns.cov().to_numpy() if observed_covariance is None else np.asarray(observed_covariance)
+    if observed.shape != (n, n) or not np.isfinite(observed).all():
+        raise ValueError('finite covariance matrix required')
+    covariance = observed*252+np.eye(n)*1e-10
     initial = np.full(n, 1/n)
     if method == 'equal_weight':
         weights = initial

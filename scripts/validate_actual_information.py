@@ -78,7 +78,7 @@ def run(root):
         "13F/news absent before actual availability",
         "news carries actual source links and no generated sentiment",
         "stale Vanguard report not labeled current 2026 holdings",
-        "earnings calls and LLM stay unavailable",
+        "official earnings materials distinct from unavailable transcripts; model results retain actual availability",
     ]
     with TestClient(
         create_app(data_source="alpaca", market_directory=root / "datasets", token="local-validation"),

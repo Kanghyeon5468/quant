@@ -14,3 +14,9 @@
 - Update docs/progress.md and README.md with executed checks and measured results; label synthetic data explicitly.
 - Prefer a modular monolith. Add dependencies only with a recorded reason.
 - Run pytest, Ruff and the frontend build for relevant changes. Never describe unexecuted checks as passing.
+
+- Subsequent authorization on 2026-11-25: integrate actual financial/13F/news evidence into paper allocation and prepare source-grounded news/earnings LLM analysis. Keep the same $100,000 ceiling, Momentum base signal, audit trail and risk limits. Audited policy activation may cancel/replace only own pending paper orders; do not delete history. The user chose to configure the model/key later: no actual paid-model call or model download is authorized now; do not fabricate substitute analysis.
+
+- Latest authorization on 2026-11-25 supersedes the model deferral: the user requested connection of their existing LLM API key with Claude Opus. Native Anthropic model lookup and bounded real-source paid inference are now authorized under the existing 3-request refresh/20-request daily cap. Keep the key local/in memory; never send other-provider keys or use an unapproved proxy, and preserve paper execution timing and risk limits.
+
+- Subsequent explicit request on 2026-11-25: rerun actual Claude analysis and paper trading. The user confirmed specific manual closing sales and authorized recording those actual fills followed by re-entry. Use the ignored local approval record for the exact scope. Keep the original orders, realized loss and risk latches. A separately audited one-off manual request may use fresh completed regular-session IEX minute execution references outside the daily opening window; the normal automation timing, daily signal, $100000 cash ceiling and all risk limits remain unchanged. Unknown/unconfirmed external trades still block execution.
